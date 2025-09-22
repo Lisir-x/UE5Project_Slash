@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Items/Item.h"
@@ -11,156 +11,157 @@
 
 AItem::AItem()
 {
- 	//µ±ÉèÎªfalseÊ±½«Í£Ö¹TickÊÂ¼ş
+ 	//å½“è®¾ä¸ºfalseæ—¶å°†åœæ­¢Tickäº‹ä»¶
 	PrimaryActorTick.bCanEverTick = true;
 
-	//´´½¨»ù±¾×é¼ş
+	//åˆ›å»ºåŸºæœ¬ç»„ä»¶
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 
-	//´´½¨¾²Ì¬Íø¸ñÌå×é¼ş
+	//åˆ›å»ºé™æ€ç½‘æ ¼ä½“ç»„ä»¶
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
 	ItemMesh->SetupAttachment(RootComponent);
-	//ÉèÖÃ¾²Ì¬Íø¸ñÌåÅö×²ÊôĞÔ
-	ItemMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);//ºöÂÔËùÓĞÍ¨µÀ
-	ItemMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);//ÎŞÅö×²
+	//è®¾ç½®é™æ€ç½‘æ ¼ä½“ç¢°æ’å±æ€§
+	ItemMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);//å¿½ç•¥æ‰€æœ‰é€šé“
+	ItemMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);//æ— ç¢°æ’
 
-	//´´½¨Åö×²ÇòÌå×é¼ş
+	//åˆ›å»ºç¢°æ’çƒä½“ç»„ä»¶
 	Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere"));
 	Sphere->SetupAttachment(RootComponent);
 
-	//´´½¨Á£×ÓÏµÍ³×é¼ş
+	//åˆ›å»ºç²’å­ç³»ç»Ÿç»„ä»¶
 	ItemEffect = CreateDefaultSubobject<UNiagaraComponent>(TEXT("Embers"));
 	ItemEffect->SetupAttachment(RootComponent);
 
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	//°ó¶¨»Øµ÷º¯Êıµ½»ù±¾×é¼şÎ¯ÍĞ
-	//ÖØµşÊÂ¼ş
+	//ç»‘å®šå›è°ƒå‡½æ•°åˆ°åŸºæœ¬ç»„ä»¶å§”æ‰˜
+	//é‡å äº‹ä»¶
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSphereOverlap);
-	//ÖØµş½áÊøÊÂ¼ş
+	//é‡å ç»“æŸäº‹ä»¶
 	Sphere->OnComponentEndOverlap.AddDynamic(this, &AItem::OnSphereEndOverlap);
 
 }
 
-//¼ÆËãÕıÏÒÁ¿
+//è®¡ç®—æ­£å¼¦é‡
 float AItem::SinFunction()
 {
 	return Amplitude * FMath::Sin(RunningTime * Frequency);
 }
 
-//¼ÆËãÓàÏÒÁ¿
+//è®¡ç®—ä½™å¼¦é‡
 float AItem::CosFunction()
 {
 	return Amplitude * FMath::Cos(RunningTime * Frequency);
 }
 
-//ÖØµşÊÂ¼ş
+//é‡å äº‹ä»¶
 void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 	bool bFromSweep, const FHitResult& SweepResult)
 {
-	//³¢ÊÔ½«ÖØµşÎïÌå×ª»»ÎªÊ°È¡½Ó¿Ú
+	//å°è¯•å°†é‡å ç‰©ä½“è½¬æ¢ä¸ºæ‹¾å–æ¥å£
 	IPickupInterface* PickupInterface = Cast<IPickupInterface>(OtherActor);
 	if (PickupInterface)
 	{
-		//µ÷ÓÃ½Ó¿Úº¯Êı£¬ÉèÖÃµ±Ç°ÖØµşµÄÎïÆ·
+		//è°ƒç”¨æ¥å£å‡½æ•°ï¼Œè®¾ç½®å½“å‰é‡å çš„ç‰©å“
 		PickupInterface->SetOverlappingItem(this);
 	}
 
 	//const FString OtherActorName = OtherActor ? OtherActor->GetName() : FString("None");
-	//if (GEngine)	//µ÷ÊÔ´òÓ¡ÖØµşÎïÌåÃû³Æ
+	//if (GEngine)	//è°ƒè¯•æ‰“å°é‡å ç‰©ä½“åç§°
 	//{
 	//	GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, OtherActorName);
 	//}
 }
 
-//ÖØµş½áÊøÊÂ¼ş
+//é‡å ç»“æŸäº‹ä»¶
 void AItem::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	//³¢ÊÔ½«ÖØµşÎïÌå×ª»»ÎªÊ°È¡½Ó¿Ú
+	//å°è¯•å°†é‡å ç‰©ä½“è½¬æ¢ä¸ºæ‹¾å–æ¥å£
 	IPickupInterface* PickupInterface = Cast<IPickupInterface>(OtherActor);
 	if (PickupInterface)
 	{
-		//µ÷ÓÃ½Ó¿Úº¯Êı£¬Çå³ıµ±Ç°ÖØµşµÄÎïÆ·
+		//è°ƒç”¨æ¥å£å‡½æ•°ï¼Œæ¸…é™¤å½“å‰é‡å çš„ç‰©å“
 		PickupInterface->SetOverlappingItem(nullptr);
 	}
 
 	//const FString OtherActorName = OtherActor ? OtherActor->GetName() : FString("None");
-	//if (GEngine)	//µ÷ÊÔ´òÓ¡ÖØµşÎïÌåÃû³Æ
+	//if (GEngine)	//è°ƒè¯•æ‰“å°é‡å ç‰©ä½“åç§°
 	//{
 	//	GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Blue, OtherActorName + FString(" End Overlap"));
 	//}
 }
 
-//Éú³ÉÊ°È¡ÌØĞ§
+//ç”Ÿæˆæ‹¾å–ç‰¹æ•ˆ
 void AItem::SpawnPickupSystem()
 {
 	if (PickupEffect)
 	{
 		UNiagaraFunctionLibrary::SpawnSystemAtLocation(
-			this,		//ÊÀ½çÉÏÏÂÎÄ¶ÔÏó
-			PickupEffect, //Á£×ÓÏµÍ³
-			GetActorLocation() //Î»ÖÃ
+			this,		//ä¸–ç•Œä¸Šä¸‹æ–‡å¯¹è±¡
+			PickupEffect, //ç²’å­ç³»ç»Ÿ
+			GetActorLocation() //ä½ç½®
 		);
 	}
 }
 
-//²¥·ÅÊ°È¡ÒôĞ§
+//æ’­æ”¾æ‹¾å–éŸ³æ•ˆ
 void AItem::SpawnPickupSound()
 {
 	if (PickupSound)
 	{
 		UGameplayStatics::SpawnSoundAtLocation(
-			this,		//ÊÀ½çÉÏÏÂÎÄ¶ÔÏó
-			PickupSound, //ÒôĞ§
-			GetActorLocation() //Î»ÖÃ
+			this,		//ä¸–ç•Œä¸Šä¸‹æ–‡å¯¹è±¡
+			PickupSound, //éŸ³æ•ˆ
+			GetActorLocation() //ä½ç½®
 		);
 	}
 }
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//ÉèÖÃÔËĞĞÊ±¼ä
+	//è®¾ç½®è¿è¡Œæ—¶é—´
 	RunningTime += DeltaTime;
 
-	//ÎïÆ·¸¡¶¯
+	//ç‰©å“æµ®åŠ¨
 	if (ItemState == EItemState::EIS_Hovering)
 	{
-		//ÉèÖÃÎïÌåÊÀ½çÆ«ÒÆÁ¿
+		//è®¾ç½®ç‰©ä½“ä¸–ç•Œåç§»é‡
 		AddActorLocalOffset(FVector(0.f, 0.f, SinFunction()));
 	}
 
-	////ÒÆ¶¯ËÙ¶È
+	////ç§»åŠ¨é€Ÿåº¦
 	//float MovementSpeed = 50.f;
-	////Ğı×ªËÙ¶È
+	////æ—‹è½¬é€Ÿåº¦
 	//float RotationSpeed = 30.f;
-	////ÉèÖÃ½ÇÉ«ÊÀ½çÆ«ÒÆÁ¿
+	////è®¾ç½®è§’è‰²ä¸–ç•Œåç§»é‡
 	//AddActorWorldOffset(FVector(MovementSpeed * DeltaTime, 0.f, 0.f));
-	////ÉèÖÃ½ÇÉ«ÊÀ½çĞı×ªÁ¿
+	////è®¾ç½®è§’è‰²ä¸–ç•Œæ—‹è½¬é‡
 	//AddActorWorldRotation(FRotator(0.f, RotationSpeed * DeltaTime, 0.f));
 	
-	////¼ÆËãÕıÏÒÁ¿
+	////è®¡ç®—æ­£å¼¦é‡
 	//float DeltaZ = Amplitude * FMath::Sin(RunningTime * Frequency);
-	////ÉèÖÃ½ÇÉ«ÊÀ½çÆ«ÒÆÁ¿
+	////è®¾ç½®è§’è‰²ä¸–ç•Œåç§»é‡
 	//AddActorLocalOffset(FVector(0.f, 0.f, DeltaZ));
 
-	////»æÖÆµ÷ÊÔÇò
+	////ç»˜åˆ¶è°ƒè¯•çƒ
 	//DRAW_SPHERE_SingleFrame(GetActorLocation());
-	////»æÖÆµ÷ÊÔÏòÁ¿
+	////ç»˜åˆ¶è°ƒè¯•å‘é‡
 	//DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation()+GetActorForwardVector()*100.f);
 
-	////¼ÆËãÎ»ÖÃÏòÁ¿ÖĞµã
+	////è®¡ç®—ä½ç½®å‘é‡ä¸­ç‚¹
 	//FVector AvgVector = AVG<FVector>(GetActorLocation(), FVector::Zero);
-	////»æÖÆÎ»ÖÃÏòÁ¿ÖĞµã
+	////ç»˜åˆ¶ä½ç½®å‘é‡ä¸­ç‚¹
 	//DRAW_POINT_SingleFrame(AvgVector);
 }
+
 

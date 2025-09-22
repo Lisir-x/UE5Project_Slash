@@ -1,4 +1,4 @@
-
+ï»¿
 #pragma once
 
 #include "CoreMinimal.h"
@@ -26,149 +26,149 @@ class A2_API APlayerCharacter : public ABaseCharacter, public IPickupInterface
 public:
 	APlayerCharacter();
 
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void Tick(float DeltaTime) override;
 
-	//ÓÃÓÚ°ó¶¨ÊäÈë
+	//ç”¨äºç»‘å®šè¾“å…¥
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	//ÌøÔ¾º¯Êı
+	//è·³è·ƒå‡½æ•°
 	virtual void Jump() override;
 
-	//ÊÜÉËº¯Êı
+	//å—ä¼¤å‡½æ•°
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, 
 		class AController* EventInstigator, AActor* DamageCauser) override;
 
-	//ÃüÖĞº¯Êı£¬ÊÜµ½ÉËº¦Ê±µ÷ÓÃ
+	//å‘½ä¸­å‡½æ•°ï¼Œå—åˆ°ä¼¤å®³æ—¶è°ƒç”¨
 	virtual void GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter) override;
 
-	//ÉèÖÃµ±Ç°ÖØµşµÄÎïÆ·
+	//è®¾ç½®å½“å‰é‡å çš„ç‰©å“
 	virtual void SetOverlappingItem(AItem* Item) override;
 
-	//Ìí¼ÓÁé»ê
+	//æ·»åŠ çµé­‚
 	virtual void AddSouls(ASoul* Soul) override;
 
-	//Ìí¼Ó»Æ½ğ
+	//æ·»åŠ é»„é‡‘
 	virtual void AddGold(ATreasure* Treasure) override;
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
-	/*----------ÊäÈë´¦Àíº¯Êı----------*/
-	//ÒÆ¶¯ÊäÈë´¦Àí
+	/*----------è¾“å…¥å¤„ç†å‡½æ•°----------*/
+	//ç§»åŠ¨è¾“å…¥å¤„ç†
 	void Move(const FInputActionValue& Value);
-	//ÊÓ½ÇÊäÈë´¦Àí
+	//è§†è§’è¾“å…¥å¤„ç†
 	void Look(const FInputActionValue& Value);
-	////ÌøÔ¾
+	////è·³è·ƒ
 	//void Jump();
-	//F¼üÊäÈë´¦Àí
+	//Fé”®è¾“å…¥å¤„ç†
 	void FKeyPressed();
-	//¹¥»÷
+	//æ”»å‡»
 	virtual void Attack() override;
-	//ÉÁ±Ü
+	//é—ªé¿
 	void Dodge();
 	/*--------------------------------*/
 
-	/*----------Õ½¶·Ïà¹Ø----------*/
-	//×°±¸ÎäÆ÷
+	/*----------æˆ˜æ–—ç›¸å…³----------*/
+	//è£…å¤‡æ­¦å™¨
 	void EquipWeapon(ABaseWeapon* Weapon);
-	//¹¥»÷½áÊø
+	//æ”»å‡»ç»“æŸ
 	virtual void AttackEnd() override;
-	//ÉÁ±Ü½áÊø
+	//é—ªé¿ç»“æŸ
 	virtual void DodgeEnd() override;
-	//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ¹¥»÷
+	//åˆ¤æ–­æ˜¯å¦å¯ä»¥æ”»å‡»
 	virtual bool CanAttack() override;
-	//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔĞ¶×°
+	//åˆ¤æ–­æ˜¯å¦å¯ä»¥å¸è£…
 	bool CanDisarm();
-	//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ×°±¸
+	//åˆ¤æ–­æ˜¯å¦å¯ä»¥è£…å¤‡
 	bool CanArm();
-	//ÅĞ¶ÏÊÇ·ñÓĞ×ã¹»ÌåÁ¦
+	//åˆ¤æ–­æ˜¯å¦æœ‰è¶³å¤Ÿä½“åŠ›
 	bool HasEnoughStamina();
-	//ÅĞ¶Ïµ±Ç°ÊÇ·ñ¿ÕÏĞ×´Ì¬
+	//åˆ¤æ–­å½“å‰æ˜¯å¦ç©ºé—²çŠ¶æ€
 	bool IsUnoccupied();
-	//Ğ¶×°
+	//å¸è£…
 	void Disarm();
-	//×°±¸
+	//è£…å¤‡
 	void Arm();
-	//²¥·Å×°±¸ÃÉÌ«Ææ
+	//æ’­æ”¾è£…å¤‡è’™å¤ªå¥‡
 	void PlayEquipMontage(const FName& SectionName);
-	//ËÀÍöÂß¼­º¯Êı
+	//æ­»äº¡é€»è¾‘å‡½æ•°
 	virtual void Die_Implementation() override;
 
-	//Ğ¶×°(¸½ÔÚ±³ÉÏ)
+	//å¸è£…(é™„åœ¨èƒŒä¸Š)
 	UFUNCTION(BlueprintCallable)
 	void AttachWeaponToBack();
 
-	//×°±¸(¸½ÔÚÊÖÉÏ)
+	//è£…å¤‡(é™„åœ¨æ‰‹ä¸Š)
 	UFUNCTION(BlueprintCallable)
 	void AttachWeaponToHand();
 
-	//Íê³É×°±¸
+	//å®Œæˆè£…å¤‡
 	UFUNCTION(BlueprintCallable)
 	void FinishEquipping();
 
-	//ÊÜ»÷½áÊø
+	//å—å‡»ç»“æŸ
 	UFUNCTION(BlueprintCallable)
 	void HitReactEnd();
 	/*----------------------------*/
 
 private:
-	/*----------UIÏà¹Ø----------*/
-	//³õÊ¼»¯Íæ¼ÒUI
+	/*----------UIç›¸å…³----------*/
+	//åˆå§‹åŒ–ç©å®¶UI
 	void InitializePlayerOverlay();
-	//ÉèÖÃÑªÁ¿µ½UI
+	//è®¾ç½®è¡€é‡åˆ°UI
 	void SetHUDHealth();
 	/*--------------------------*/
 
-	/*----------×é¼ş----------*/
-	//µ¯»É±Û×é¼ş
+	/*----------ç»„ä»¶----------*/
+	//å¼¹ç°§è‡‚ç»„ä»¶
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	TObjectPtr<USpringArmComponent> CameraBoom;
 
-	//ÉãÏñ»ú×é¼ş
+	//æ‘„åƒæœºç»„ä»¶
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	TObjectPtr<UCameraComponent> Camera;
 	/*------------------------*/
 
-	/*----------ÊäÈëÏà¹Ø----------*/
-	//ÊäÈëÓ³Éä
+	/*----------è¾“å…¥ç›¸å…³----------*/
+	//è¾“å…¥æ˜ å°„
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> IMC_Player;
-	//ÒÆ¶¯
+	//ç§»åŠ¨
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Move;
-	//ÊÓ½Ç
+	//è§†è§’
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Look;
-	//ÌøÔ¾
+	//è·³è·ƒ
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Jump;
-	//Ê°È¡»ò×°±¸
+	//æ‹¾å–æˆ–è£…å¤‡
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Equip;
-	//¹¥»÷
+	//æ”»å‡»
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Attack;
-	//ÉÁ±Ü
+	//é—ªé¿
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_Dodge;
 	/*----------------------------*/
 
-	//ÎäÆ÷»òÎïÆ·
+	//æ­¦å™¨æˆ–ç‰©å“
 	UPROPERTY(VisibleInstanceOnly)
 	TObjectPtr<AItem> OverlappingItem;
 
-	/*----------¶¯»­ÃÉÌ«Ææ----------*/
-	//×°±¸ÃÉÌ«Ææ
+	/*----------åŠ¨ç”»è’™å¤ªå¥‡----------*/
+	//è£…å¤‡è’™å¤ªå¥‡
 	UPROPERTY(EditDefaultsOnly, Category = "Montage")
 	TObjectPtr<UAnimMontage> EquipMontage;
 	/*------------------------------*/
 	
-	//½ÇÉ«×´Ì¬
+	//è§’è‰²çŠ¶æ€
 	ECharacterState CharacterState = ECharacterState::ECS_Unequipped;
 
-	//¶¯×÷×´Ì¬
+	//åŠ¨ä½œçŠ¶æ€
 	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	EActionState ActionState = EActionState::EAS_Unoccupied;
 
@@ -177,9 +177,10 @@ private:
 	TObjectPtr<UPlayerOverlay> PlayerOverlay;
 
 public:
-	//»ñÈ¡½ÇÉ«×´Ì¬
+	//è·å–è§’è‰²çŠ¶æ€
 	FORCEINLINE ECharacterState GetCharacterState() const { return CharacterState; }
 
-	//»ñÈ¡¶¯×÷×´Ì¬
+	//è·å–åŠ¨ä½œçŠ¶æ€
 	FORCEINLINE EActionState GetActionState() const { return ActionState; }
 };
+

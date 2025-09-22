@@ -1,11 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "HUD/PlayerOverlay.h"
 #include "Components/ProgressBar.h"
 #include "Components/TextBlock.h"
 
-//ÉèÖÃÑªÌõ°Ù·Ö±È
+//è®¾ç½®è¡€æ¡ç™¾åˆ†æ¯”
 void UPlayerOverlay::SetHealthBarPercent(float Percent)
 {
 
@@ -15,7 +15,7 @@ void UPlayerOverlay::SetHealthBarPercent(float Percent)
 	}
 }
 
-//ÉèÖÃÌåÁ¦Ìõ°Ù·Ö±È
+//è®¾ç½®ä½“åŠ›æ¡ç™¾åˆ†æ¯”
 void UPlayerOverlay::SetStaminaBarPercent(float Percent)
 {
 	if (StaminaBar)
@@ -24,24 +24,25 @@ void UPlayerOverlay::SetStaminaBarPercent(float Percent)
 	}
 }
 
-//ÉèÖÃ½ð±ÒÊýÁ¿
+//è®¾ç½®é‡‘å¸æ•°é‡
 void UPlayerOverlay::SetGold(int32 Gold)
 {
 	if (GoldText)
 	{
 		const FString String = FString::Printf(TEXT("%d"), Gold);
-		const FText Text = FText::FromString(String); //FString×ª»»ÎªFText
-		GoldText->SetText(Text);	//ÉèÖÃÎÄ±¾
+		const FText Text = FText::FromString(String); //FStringè½¬æ¢ä¸ºFText
+		GoldText->SetText(Text);	//è®¾ç½®æ–‡æœ¬
 	}
 }
 
-//ÉèÖÃÁé»êÊýÁ¿
+//è®¾ç½®çµé­‚æ•°é‡
 void UPlayerOverlay::SetSouls(int32 Souls)
 {
 	if (SoulsText)
 	{
 		const FString String = FString::Printf(TEXT("%d"), Souls);
-		const FText Text = FText::FromString(String); //FString×ª»»ÎªFText
-		SoulsText->SetText(Text);	//ÉèÖÃÎÄ±¾
+		const FText Text = FText::FromString(String); //FStringè½¬æ¢ä¸ºFText
+		SoulsText->SetText(Text);	//è®¾ç½®æ–‡æœ¬
 	}
 }
+

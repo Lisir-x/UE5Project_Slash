@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/FloatingPawnMovement.h"
@@ -16,19 +16,20 @@ protected:
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 public:
-	//Ğı×ªËÙÂÊ£¨Ã¿Ãë×î´óĞı×ª½Ç¶È£©
+	//æ—‹è½¬é€Ÿç‡ï¼ˆæ¯ç§’æœ€å¤§æ—‹è½¬è§’åº¦ï¼‰
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
 	FRotator RotationRate = FRotator(180.f, 500.f, 500.f); //Pitch, Yaw, Roll
 
-	//ÊÇ·ñÊ¹ÓÃ¿ØÖÆÆ÷µÄĞı×ª
+	//æ˜¯å¦ä½¿ç”¨æ§åˆ¶å™¨çš„æ—‹è½¬
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
 	bool bUseControllerDesiredRotation = false;
 
-	//ÊÇ·ñ½«Ğı×ª³¯ÏòÔË¶¯·½Ïò
+	//æ˜¯å¦å°†æ—‹è½¬æœå‘è¿åŠ¨æ–¹å‘
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
 	bool bOrientRotationToMovement = true;
 
-	//ÊÇ·ñÔÊĞíPitchĞı×ª
+	//æ˜¯å¦å…è®¸Pitchæ—‹è½¬
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
 	bool bAllowPitchRotation = true;
 };
+

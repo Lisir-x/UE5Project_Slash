@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "HUD/HealthbarComponent.h"
@@ -7,14 +7,15 @@
 
 void UHealthbarComponent::SetHealthPercent(float Percent)
 {
-	//½«UUserWidgetÀàÖ¸Õë×ª»»³ÉUHealthBarÀàÖ¸Õë
-	if (!HealthBarWidget)	//Ö»½øĞĞÒ»´Î×ª»»
+	//å°†UUserWidgetç±»æŒ‡é’ˆè½¬æ¢æˆUHealthBarç±»æŒ‡é’ˆ
+	if (!HealthBarWidget)	//åªè¿›è¡Œä¸€æ¬¡è½¬æ¢
 	{
 		HealthBarWidget = Cast<UHealthBar>(GetUserWidgetObject());
 	}
 	if (HealthBarWidget && HealthBarWidget->HealthBar)
 	{
-		//ÉèÖÃÑªÁ¿°Ù·Ö±È
+		//è®¾ç½®è¡€é‡ç™¾åˆ†æ¯”
 		HealthBarWidget->HealthBar->SetPercent(Percent);
 	}
 }
+

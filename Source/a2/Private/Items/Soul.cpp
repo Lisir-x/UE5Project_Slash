@@ -1,72 +1,73 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Items/Soul.h"
 #include "Interfaces/PickupInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void ASoul::Tick(float DeltaTime)
 {
 
 	Super::Tick(DeltaTime);
 
-	//¸ù¾İËÙ¶ÈºÍÊ±¼ä¼ÆËãÏÂÒ»Ö¡Î»ÖÃ
-	const double LocationZ = GetActorLocation().Z; //»ñÈ¡µ±Ç°Î»ÖÃµÄZ×ø±ê
-	if (LocationZ > DesiredZ) //Èç¹ûµ±Ç°Î»ÖÃµÄZ×ø±ê´óÓÚÄ¿±êÎ»ÖÃµÄZ×ø±ê
+	//æ ¹æ®é€Ÿåº¦å’Œæ—¶é—´è®¡ç®—ä¸‹ä¸€å¸§ä½ç½®
+	const double LocationZ = GetActorLocation().Z; //è·å–å½“å‰ä½ç½®çš„Zåæ ‡
+	if (LocationZ > DesiredZ) //å¦‚æœå½“å‰ä½ç½®çš„Zåæ ‡å¤§äºç›®æ ‡ä½ç½®çš„Zåæ ‡
 	{
-		//ÏòÏÂÒÆ¶¯
+		//å‘ä¸‹ç§»åŠ¨
 		const FVector DeltaLocation = FVector(0.f, 0.f, DriftRate * DeltaTime);
 		AddActorWorldOffset(DeltaLocation);
 	}
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void ASoul::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//»ñÈ¡Ä¿±êÎ»ÖÃºÍ½áÊøÎ»ÖÃ×÷ÎªÉäÏßµÄÆğµãºÍÖÕµã
+	//è·å–ç›®æ ‡ä½ç½®å’Œç»“æŸä½ç½®ä½œä¸ºå°„çº¿çš„èµ·ç‚¹å’Œç»ˆç‚¹
 	const FVector Start = GetActorLocation();
 	const FVector End = Start - FVector(0.f, 0.f, 2000.f);
 
-	//Ìí¼ÓĞèÒª¼ì²âµÄÎïÌåÀàĞÍ
+	//æ·»åŠ éœ€è¦æ£€æµ‹çš„ç‰©ä½“ç±»å‹
 	TArray<TEnumAsByte<EObjectTypeQuery>> ObjectTypes;
 	ObjectTypes.Add(EObjectTypeQuery::ObjectTypeQuery1);
-	//Ìí¼ÓĞèÒªºöÂÔµÄÎïÌå
+	//æ·»åŠ éœ€è¦å¿½ç•¥çš„ç‰©ä½“
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(GetOwner());
-	//ÓÃÓÚ´æ´¢ÉäÏß¼ì²â½á¹û
+	//ç”¨äºå­˜å‚¨å°„çº¿æ£€æµ‹ç»“æœ
 	FHitResult HitResult;
 
 	UKismetSystemLibrary::LineTraceSingleForObjects(
-		this, Start, End,	//¶ÔÏó¡¢Æğµã¡¢ÖÕµã
-		ObjectTypes,		//ĞèÒª¼ì²âµÄÎïÌåÀàĞÍ
-		false,				//²»Ê¹ÓÃ¸´ÔÓÅö×²
-		ActorsToIgnore,		//ĞèÒªºöÂÔµÄActorÊı×é
-		EDrawDebugTrace::None, //µ÷ÊÔ»æÖÆÄ£Ê½
-		HitResult,			//´æ´¢ÉäÏß¼ì²â½á¹û
-		true				//ÊÇ·ñºöÂÔ×ÔÉí
+		this, Start, End,	//å¯¹è±¡ã€èµ·ç‚¹ã€ç»ˆç‚¹
+		ObjectTypes,		//éœ€è¦æ£€æµ‹çš„ç‰©ä½“ç±»å‹
+		false,				//ä¸ä½¿ç”¨å¤æ‚ç¢°æ’
+		ActorsToIgnore,		//éœ€è¦å¿½ç•¥çš„Actoræ•°ç»„
+		EDrawDebugTrace::None, //è°ƒè¯•ç»˜åˆ¶æ¨¡å¼
+		HitResult,			//å­˜å‚¨å°„çº¿æ£€æµ‹ç»“æœ
+		true				//æ˜¯å¦å¿½ç•¥è‡ªèº«
 	);
-	//»ñÈ¡ÉäÏß¼ì²â½á¹ûµÄÎ»ÖÃ
+	//è·å–å°„çº¿æ£€æµ‹ç»“æœçš„ä½ç½®
 	DesiredZ = HitResult.ImpactPoint.Z + 50.f;
 }
 
-//ÖØµşÊÂ¼ş
+//é‡å äº‹ä»¶
 void ASoul::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	//½«ÖØµşÎïÌå×ª»»ÎªÊ°È¡½Ó¿Ú
+	//å°†é‡å ç‰©ä½“è½¬æ¢ä¸ºæ‹¾å–æ¥å£
 	IPickupInterface* PickupInterface = Cast<IPickupInterface>(OtherActor);
 	if (PickupInterface)
 	{
-		//µ÷ÓÃ½Ó¿Úº¯Êı£¬Ìí¼ÓÁé»ê
+		//è°ƒç”¨æ¥å£å‡½æ•°ï¼Œæ·»åŠ çµé­‚
 		PickupInterface->AddSouls(this);
-		//Éú³ÉÊ°È¡ÌØĞ§
+		//ç”Ÿæˆæ‹¾å–ç‰¹æ•ˆ
 		SpawnPickupSystem();
-		//²¥·ÅÊ°È¡ÒôĞ§
+		//æ’­æ”¾æ‹¾å–éŸ³æ•ˆ
 		SpawnPickupSound();
-		//Ïú»ÙÁé»ê
+		//é”€æ¯çµé­‚
 		Destroy();
 	}
 
 }
+

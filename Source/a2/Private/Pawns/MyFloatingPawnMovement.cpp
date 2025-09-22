@@ -1,4 +1,4 @@
-#include "Pawns/MyFloatingPawnMovement.h"
+ï»¿#include "Pawns/MyFloatingPawnMovement.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/Pawn.h"
 
@@ -17,7 +17,7 @@ void UMyFloatingPawnMovement::TickComponent(float DeltaTime, ELevelTick TickType
 	FRotator CurrentRotation = PawnOwner->GetActorRotation();
 	FRotator TargetRotation = CurrentRotation;
 
-	//¿ØÖÆÆ÷Ðý×ª
+	//æŽ§åˆ¶å™¨æ—‹è½¬
 	if (bUseControllerDesiredRotation && PawnOwner->GetController())
 	{
 		TargetRotation = PawnOwner->GetController()->GetControlRotation();
@@ -25,7 +25,7 @@ void UMyFloatingPawnMovement::TickComponent(float DeltaTime, ELevelTick TickType
 		if (!bAllowPitchRotation) TargetRotation.Pitch = 0.f;
 		TargetRotation.Roll = 0.f;
 	}
-	//ÔË¶¯·½ÏòÐý×ª
+	//è¿åŠ¨æ–¹å‘æ—‹è½¬
 	else if (bOrientRotationToMovement && !Velocity.IsNearlyZero())
 	{
 		TargetRotation = Velocity.GetSafeNormal().Rotation();
@@ -34,7 +34,7 @@ void UMyFloatingPawnMovement::TickComponent(float DeltaTime, ELevelTick TickType
 		TargetRotation.Roll = 0.f;
 	}
 
-	//²åÖµÐý×ª
+	//æ’å€¼æ—‹è½¬
 	if (!TargetRotation.Equals(CurrentRotation))
 	{
 		FRotator NewRotation;
@@ -45,4 +45,5 @@ void UMyFloatingPawnMovement::TickComponent(float DeltaTime, ELevelTick TickType
 		PawnOwner->SetActorRotation(NewRotation);
 	}
 }
+
 

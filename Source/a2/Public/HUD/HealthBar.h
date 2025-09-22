@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -14,8 +14,9 @@ class A2_API UHealthBar : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	//°ó¶¨À¶Í¼¿Ø¼şµÄHealthBar(½ø¶ÈÌõÊôĞÔ)
+	//ç»‘å®šè“å›¾æ§ä»¶çš„HealthBar(è¿›åº¦æ¡å±æ€§)
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UProgressBar> HealthBar;
 
 };
+

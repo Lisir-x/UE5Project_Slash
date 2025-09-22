@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -22,52 +22,53 @@ class A2_API ABird : public APawn
 
 public:
 	ABird();
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void Tick(float DeltaTime) override;
 
-	//ÓÃÓÚ°ó¶¨ÊäÈë
+	//ç”¨äºç»‘å®šè¾“å…¥
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
-	//ÒÆ¶¯ÊäÈë´¦Àí
+	//ç§»åŠ¨è¾“å…¥å¤„ç†
 	void BirdMove(const FInputActionValue& Value);
 
-	//ÊÓ½ÇÊäÈë´¦Àí
+	//è§†è§’è¾“å…¥å¤„ç†
 	void BirdLook(const FInputActionValue& Value);
 
 private:
-	//½ºÄÒ×é¼ş
+	//èƒ¶å›Šç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCapsuleComponent> Capsule;
 
-	//¹Ç÷ÀÍø¸ñÌå×é¼ş
+	//éª¨éª¼ç½‘æ ¼ä½“ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USkeletalMeshComponent> BirdMesh;
 
-	//µ¯»É±Û×é¼ş
+	//å¼¹ç°§è‡‚ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> CameraBoom;
 
-	//ÉãÏñ»ú×é¼ş
+	//æ‘„åƒæœºç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> Camera;
 
-	//ÒÆ¶¯×é¼ş
+	//ç§»åŠ¨ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UMyFloatingPawnMovement> PawnMovement;
 
-	//ÊäÈëÓ³Éä
+	//è¾“å…¥æ˜ å°„
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> IMC_Bird;
 
-	//ÒÆ¶¯
+	//ç§»åŠ¨
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_BirdMove;
 
-	//ÊÓ½Ç
+	//è§†è§’
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> IA_BirdLook;
 };
+

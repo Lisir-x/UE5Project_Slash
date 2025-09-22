@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -22,12 +22,13 @@ class A2_API IPickupInterface
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	//ÉèÖÃµ±Ç°ÖØµşµÄÎïÆ·
+	//è®¾ç½®å½“å‰é‡å çš„ç‰©å“
 	virtual void SetOverlappingItem(class AItem* Item);
 
-	//Ìí¼ÓÁé»ê
+	//æ·»åŠ çµé­‚
 	virtual void AddSouls(class ASoul* Soul);
 
-	//Ìí¼Ó»Æ½ğ
+	//æ·»åŠ é»„é‡‘
 	virtual void AddGold(class ATreasure* Treasure);
 };
+

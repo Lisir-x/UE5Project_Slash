@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,80 +15,81 @@ class A2_API UAttributeComponent : public UActorComponent
 public:	
 	UAttributeComponent();
 
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
-	//ÄÍÁ¦»Ö¸´
+	//è€åŠ›æ¢å¤
 	void RegenStamina(float DeltaTime);
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
 private:
-	//µ±Ç°ÉúÃüÖµ
+	//å½“å‰ç”Ÿå‘½å€¼
 	UPROPERTY(EditAnywhere, Category = "Actor Attribute")
 	float Health;
 	
-	//×î´óÉúÃüÖµ
+	//æœ€å¤§ç”Ÿå‘½å€¼
 	UPROPERTY(EditAnywhere, Category = "Actor Attribute")
 	float MaxHealth;
 
-	//µ±Ç°ÄÍÁ¦Öµ
+	//å½“å‰è€åŠ›å€¼
 	UPROPERTY(EditAnywhere, Category = "Actor Attributes")
 	float Stamina;
 
-	//×î´óÄÍÁ¦Öµ
+	//æœ€å¤§è€åŠ›å€¼
 	UPROPERTY(EditAnywhere, Category = "Actor Attributes")
 	float MaxStamina;
 
-	//»Æ½ğÊıÁ¿
+	//é»„é‡‘æ•°é‡
 	UPROPERTY(EditAnywhere, Category = "Actor Attributes")
 	int32 Gold;
 
-	//Áé»êÊıÁ¿
+	//çµé­‚æ•°é‡
 	UPROPERTY(EditAnywhere, Category = "Actor Attributes")
 	int32 Souls;
 
-	//ÉÁ±ÜÏûºÄµÄÄÍÁ¦Öµ
+	//é—ªé¿æ¶ˆè€—çš„è€åŠ›å€¼
 	UPROPERTY(EditAnywhere, Category = "Actor Attributes")
 	float DodgeCost;
 
-	//ÄÍÁ¦Öµ»Ö¸´ËÙÂÊ
+	//è€åŠ›å€¼æ¢å¤é€Ÿç‡
 	UPROPERTY(EditAnywhere, Category = "Actor Attributes")
 	float StaminaRegenRate;
 
 public:
-	//ÊÜµ½ÉËº¦
+	//å—åˆ°ä¼¤å®³
 	void ReceiveDamage(float Damage);
 
-	//ÏûºÄÄÍÁ¦
+	//æ¶ˆè€—è€åŠ›
 	void UseStamina(float StaminaCost);
 
-	//»ñÈ¡ÉúÃü°Ù·Ö±È
+	//è·å–ç”Ÿå‘½ç™¾åˆ†æ¯”
 	float GetHealthPercent();
 
-	//»ñÈ¡ÄÍÁ¦°Ù·Ö±È
+	//è·å–è€åŠ›ç™¾åˆ†æ¯”
 	float GetStaminaPercent();
 
-	//ÅĞ¶ÏÊÇ·ñ´æ»î
+	//åˆ¤æ–­æ˜¯å¦å­˜æ´»
 	bool IsAlive() const { return Health > 0.f; }
 
-	//Ìí¼ÓÁé»ê
+	//æ·»åŠ çµé­‚
 	void AddSouls(int32 NumberOfSouls);
 
-	//Ìí¼Ó»Æ½ğ
+	//æ·»åŠ é»„é‡‘
 	void AddGold(int32 AmountOfGold);
 
-	//»ñÈ¡»Æ½ğÊıÁ¿
+	//è·å–é»„é‡‘æ•°é‡
 	FORCEINLINE int32 GetGold() const { return Gold; }
 
-	//»ñÈ¡Áé»êÊıÁ¿
+	//è·å–çµé­‚æ•°é‡
 	FORCEINLINE int32 GetSouls() const { return Souls; }
 
-	//»ñÈ¡ÉÁ±ÜÏûºÄµÄÄÍÁ¦Öµ
+	//è·å–é—ªé¿æ¶ˆè€—çš„è€åŠ›å€¼
 	FORCEINLINE float GetDodgeCost() const { return DodgeCost; }
 
-	//»ñÈ¡µ±Ç°ÄÍÁ¦Öµ
+	//è·å–å½“å‰è€åŠ›å€¼
 	FORCEINLINE float GetStamina() const { return Stamina; }
 };
+

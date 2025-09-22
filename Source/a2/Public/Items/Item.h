@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,32 +23,32 @@ class A2_API AItem : public AActor
 	
 public:	
 	AItem();
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void Tick(float DeltaTime) override;
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
-	//Õñ·ù
+	//æŒ¯å¹…
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Amplitude = 0.2f;
-	//ÆµÂÊ
+	//é¢‘ç‡
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Frequency = 5.f;
-	//¼ÆËãÕıÏÒÁ¿
+	//è®¡ç®—æ­£å¼¦é‡
 	UFUNCTION(BlueprintPure)
 	float SinFunction();
-	//¼ÆËãÓàÏÒÁ¿
+	//è®¡ç®—ä½™å¼¦é‡
 	UFUNCTION(BlueprintPure)
 	float CosFunction();
 
-	//Ä£°åº¯Êı
+	//æ¨¡æ¿å‡½æ•°
 	template<typename T>
 	T AVG(T a, T b);
 
-	/*-----°ó¶¨µ½»ù±¾×é¼şÎ¯ÍĞµÄ»Øµ÷º¯Êı-----*/
-	//ÖØµşÊÂ¼ş
+	/*-----ç»‘å®šåˆ°åŸºæœ¬ç»„ä»¶å§”æ‰˜çš„å›è°ƒå‡½æ•°-----*/
+	//é‡å äº‹ä»¶
 	UFUNCTION()
 	virtual void OnSphereOverlap(
 		UPrimitiveComponent* OverlappedComponent,
@@ -58,7 +58,7 @@ protected:
 		bool bFromSweep,
 		const FHitResult& SweepResult
 	);
-	//ÖØµş½áÊøÊÂ¼ş
+	//é‡å ç»“æŸäº‹ä»¶
 	UFUNCTION()
 	virtual void OnSphereEndOverlap(
 		UPrimitiveComponent* OverlappedComponent,
@@ -68,38 +68,38 @@ protected:
 	);
 	/*--------------------------------------*/
 
-	//Éú³ÉÊ°È¡ÌØĞ§
+	//ç”Ÿæˆæ‹¾å–ç‰¹æ•ˆ
 	virtual void SpawnPickupSystem();
 
-	//²¥·ÅÊ°È¡ÒôĞ§
+	//æ’­æ”¾æ‹¾å–éŸ³æ•ˆ
 	virtual void SpawnPickupSound();
 
-	//¾²Ì¬Íø¸ñÌå×é¼ş
+	//é™æ€ç½‘æ ¼ä½“ç»„ä»¶
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> ItemMesh;
 
-	//Åö×²ÇòÌå×é¼ş
+	//ç¢°æ’çƒä½“ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USphereComponent> Sphere;
 
-	//ÎïÆ·×´Ì¬
+	//ç‰©å“çŠ¶æ€
 	EItemState ItemState = EItemState::EIS_Hovering;
 
-	//NigaraÁ£×ÓÏµÍ³×é¼ş
+	//Nigaraç²’å­ç³»ç»Ÿç»„ä»¶
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UNiagaraComponent> ItemEffect;
 
-	//Ê°È¡ÒôĞ§
+	//æ‹¾å–éŸ³æ•ˆ
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<USoundBase> PickupSound;
 
 
 private:
-	//ÔËĞĞÊ±¼ä
+	//è¿è¡Œæ—¶é—´
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Meta = (AllowPrivateAccess = "true"))
 	float RunningTime;
 
-	//Ê°È¡ÌØĞ§
+	//æ‹¾å–ç‰¹æ•ˆ
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UNiagaraSystem> PickupEffect;
 };
@@ -109,3 +109,4 @@ inline T AItem::AVG(T a, T b)
 {
 	return (a + b) / 2;
 }
+

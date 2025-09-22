@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Pawns/Bird.h"
@@ -13,60 +13,60 @@
 // Sets default values
 ABird::ABird()
 {
- 	//µ±ÉèÎªfalseÊ±½«Í£Ö¹TickÊÂ¼ş
+ 	//å½“è®¾ä¸ºfalseæ—¶å°†åœæ­¢Tickäº‹ä»¶
 	PrimaryActorTick.bCanEverTick = true;
 
-	//´´½¨½ºÄÒÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºèƒ¶å›Šé»˜è®¤å­å¯¹è±¡
 	Capsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
 	//Capsule->SetupAttachment(RootComponent);
 	SetRootComponent(Capsule);
-	//ÉèÖÃ½ºÄÒ°ë¸ßºÍ°ë¾¶
+	//è®¾ç½®èƒ¶å›ŠåŠé«˜å’ŒåŠå¾„
 	Capsule->SetCapsuleHalfHeight(20.f);
 	Capsule->SetCapsuleRadius(15.f);
 
-	//´´½¨¹Ç÷ÀÍø¸ñÌåÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºéª¨éª¼ç½‘æ ¼ä½“é»˜è®¤å­å¯¹è±¡
 	BirdMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("BirdMesh"));
-	BirdMesh->SetupAttachment(Capsule);//RootComponent,GetRoomComponent()Ğ§¹ûÒ»Ñù
+	BirdMesh->SetupAttachment(Capsule);//RootComponent,GetRoomComponent()æ•ˆæœä¸€æ ·
 
-	//´´½¨µ¯»É±ÛÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºå¼¹ç°§è‡‚é»˜è®¤å­å¯¹è±¡
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(Capsule);
-	//µ¯»É±ÛÏà¹Ø²ÎÊıÉèÖÃ
-	CameraBoom->TargetArmLength = 300.0f;//±Û³¤
-	CameraBoom->bUsePawnControlRotation = true; //ÔÊĞíµ¯»É±Û¸úËæ¿ØÖÆÆ÷Ğı×ª
+	//å¼¹ç°§è‡‚ç›¸å…³å‚æ•°è®¾ç½®
+	CameraBoom->TargetArmLength = 300.0f;//è‡‚é•¿
+	CameraBoom->bUsePawnControlRotation = true; //å…è®¸å¼¹ç°§è‡‚è·Ÿéšæ§åˆ¶å™¨æ—‹è½¬
 
-	//´´½¨ÉãÏñ»úÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºæ‘„åƒæœºé»˜è®¤å­å¯¹è±¡
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	Camera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 
-	//´´½¨½ÇÉ«ÒÆ¶¯×é¼şÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºè§’è‰²ç§»åŠ¨ç»„ä»¶é»˜è®¤å­å¯¹è±¡
 	PawnMovement = CreateDefaultSubobject<UMyFloatingPawnMovement>(TEXT("PawnMovement"));
 
-	//½ÇÉ«²»¸úËæ¿ØÖÆÆ÷Ğı×ª
+	//è§’è‰²ä¸è·Ÿéšæ§åˆ¶å™¨æ—‹è½¬
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
-	//½ÇÉ«³¯ÏòÒÆ¶¯·½Ïò
+	//è§’è‰²æœå‘ç§»åŠ¨æ–¹å‘
 	PawnMovement->bOrientRotationToMovement = true;
-	//Ã¿ÃëĞı×ª500¶È
+	//æ¯ç§’æ—‹è½¬500åº¦
 	PawnMovement->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void ABird::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	// »ñÈ¡µ±Ç°½ÇÉ«µÄ¿ØÖÆÆ÷£¬²¢³¢ÊÔ½«Æä×ª»»ÎªÍæ¼Ò¿ØÖÆÆ÷
+	// è·å–å½“å‰è§’è‰²çš„æ§åˆ¶å™¨ï¼Œå¹¶å°è¯•å°†å…¶è½¬æ¢ä¸ºç©å®¶æ§åˆ¶å™¨
 	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
 	{
-		// Í¨¹ıÍæ¼Ò¿ØÖÆÆ÷»ñÈ¡±¾µØÍæ¼Ò£¬²¢»ñÈ¡ÔöÇ¿ÊäÈë×ÓÏµÍ³
+		// é€šè¿‡ç©å®¶æ§åˆ¶å™¨è·å–æœ¬åœ°ç©å®¶ï¼Œå¹¶è·å–å¢å¼ºè¾“å…¥å­ç³»ç»Ÿ
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem =
 ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
-			// ½«ÊäÈëÓ³ÉäÉÏÏÂÎÄÌí¼Óµ½×ÓÏµÍ³ÖĞ£¬ÓÅÏÈ¼¶Îª0
+			// å°†è¾“å…¥æ˜ å°„ä¸Šä¸‹æ–‡æ·»åŠ åˆ°å­ç³»ç»Ÿä¸­ï¼Œä¼˜å…ˆçº§ä¸º0
 			Subsystem->AddMappingContext(IMC_Bird, 0);
 		}
 	}
@@ -75,17 +75,17 @@ ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController-
 
 void ABird::BirdMove(const FInputActionValue& Value)
 {
-	//»ñÈ¡ÊäÈëµÄÈıÎ¬ÏòÁ¿
+	//è·å–è¾“å…¥çš„ä¸‰ç»´å‘é‡
 	FVector MoveVector = Value.Get<FVector>();
-	if (Controller)	//Èç¹ûÓĞ¿ØÖÆÆ÷
+	if (Controller)	//å¦‚æœæœ‰æ§åˆ¶å™¨
 	{
-		//»ñÈ¡¿ØÖÆÆ÷µÄĞı×ª
+		//è·å–æ§åˆ¶å™¨çš„æ—‹è½¬
 		const FRotator ControlRotation = Controller->GetControlRotation();
-		//¼ÆËãÈıÎ¬·½ÏòÏòÁ¿
-		const FVector Forward = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::Y);//Ç°ºó
-		const FVector Right = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::X);//×óÓÒ
-		const FVector Up = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::Z);//Éı½µ
-		//Ó¦ÓÃÈıÎ¬ÏòÁ¿
+		//è®¡ç®—ä¸‰ç»´æ–¹å‘å‘é‡
+		const FVector Forward = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::Y);//å‰å
+		const FVector Right = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::X);//å·¦å³
+		const FVector Up = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::Z);//å‡é™
+		//åº”ç”¨ä¸‰ç»´å‘é‡
 		AddMovementInput(Forward, MoveVector.Y);
 		AddMovementInput(Right, MoveVector.X);
 		AddMovementInput(Up, MoveVector.Z);
@@ -94,24 +94,24 @@ void ABird::BirdMove(const FInputActionValue& Value)
 
 void ABird::BirdLook(const FInputActionValue& Value)
 {
-	//»ñÈ¡ÊäÈëµÄ¶şÎ¬ÏòÁ¿
+	//è·å–è¾“å…¥çš„äºŒç»´å‘é‡
 	FVector2D LookVector = Value.Get<FVector2D>();
-	if (Controller)	//Èç¹ûÓĞ¿ØÖÆÆ÷
+	if (Controller)	//å¦‚æœæœ‰æ§åˆ¶å™¨
 	{
-		//Ìí¼Ó¿ØÖÆÆ÷µÄÆ«º½(X)ºÍ¸©Ñö(Y)ÊäÈë
+		//æ·»åŠ æ§åˆ¶å™¨çš„åèˆª(X)å’Œä¿¯ä»°(Y)è¾“å…¥
 		AddControllerYawInput(LookVector.X);
 		AddControllerPitchInput(-LookVector.Y);
 	}
 }
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void ABird::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
-//ÓÃÓÚ°ó¶¨ÊäÈë
+//ç”¨äºç»‘å®šè¾“å…¥
 void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -119,13 +119,14 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	if (UEnhancedInputComponent* EnhancedInputComponent =
 		CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		//°ó¶¨ÒÆ¶¯
+		//ç»‘å®šç§»åŠ¨
 		EnhancedInputComponent->BindAction(IA_BirdMove,
 			ETriggerEvent::Triggered, this, &ABird::BirdMove);
-		//°ó¶¨ÊÓ½Ç
+		//ç»‘å®šè§†è§’
 		EnhancedInputComponent->BindAction(IA_BirdLook,
 			ETriggerEvent::Triggered, this, &ABird::BirdLook);
 	}
 
 }
+
 

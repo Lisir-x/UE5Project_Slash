@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Player/BaseCharacter.h"
@@ -11,93 +11,93 @@
 // Sets default values
 ABaseCharacter::ABaseCharacter()
 {
- 	//µ±ÉèÎªfalseÊ±½«Í£Ö¹TickÊÂ¼ş
+ 	//å½“è®¾ä¸ºfalseæ—¶å°†åœæ­¢Tickäº‹ä»¶
 	PrimaryActorTick.bCanEverTick = true;
 
-	//´´½¨ÊôĞÔ×é¼ş
+	//åˆ›å»ºå±æ€§ç»„ä»¶
 	Attributes = CreateDefaultSubobject<UAttributeComponent>(TEXT("Attribute"));
 
-	//ÉèÖÃ½ºÄÒÌåÅö×²ÊôĞÔ
-	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);//ºöÂÔCameraÍ¨µÀ
+	//è®¾ç½®èƒ¶å›Šä½“ç¢°æ’å±æ€§
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);//å¿½ç•¥Cameraé€šé“
 
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-//ÃüÖĞº¯Êı£¬ÊÜµ½ÉËº¦Ê±µ÷ÓÃ
+//å‘½ä¸­å‡½æ•°ï¼Œå—åˆ°ä¼¤å®³æ—¶è°ƒç”¨
 void ABaseCharacter::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
 {
-	//Èç¹û´æ»î£¬µ÷ÓÃÊÜ»÷·´Ó¦
+	//å¦‚æœå­˜æ´»ï¼Œè°ƒç”¨å—å‡»ååº”
 	if (IsAlive() && Hitter)
 	{
 		DirectionalHitReact(Hitter->GetActorLocation());
 	}
-	else Die();	//·ñÔòµ÷ÓÃËÀÍöÂß¼­
+	else Die();	//å¦åˆ™è°ƒç”¨æ­»äº¡é€»è¾‘
 
-	//²¥·ÅÊÜ»÷ÒôĞ§ºÍÁ£×ÓĞ§¹û
+	//æ’­æ”¾å—å‡»éŸ³æ•ˆå’Œç²’å­æ•ˆæœ
 	PlayHitSound(ImpactPoint);
 	SpawnHitParticles(ImpactPoint);
 }
 
-//¹¥»÷Âß¼­
+//æ”»å‡»é€»è¾‘
 void ABaseCharacter::Attack()
 {
-	//Èç¹ûÕ½¶·Ä¿±êÒÑËÀÍöÔòÖÃ¿ÕÕ½¶·Ä¿±ê
+	//å¦‚æœæˆ˜æ–—ç›®æ ‡å·²æ­»äº¡åˆ™ç½®ç©ºæˆ˜æ–—ç›®æ ‡
 	if (CombatTarget && CombatTarget->ActorHasTag(FName("Dead"))) CombatTarget = nullptr;
 }
 
-//ËÀÍöÂß¼­
+//æ­»äº¡é€»è¾‘
 void ABaseCharacter::Die_Implementation()
 {
-	//Ìí¼ÓËÀÍö±êÇ©
+	//æ·»åŠ æ­»äº¡æ ‡ç­¾
 	Tags.Add(FName("Dead"));
-	//²¥·ÅËÀÍöÃÉÌ«Ææ
+	//æ’­æ”¾æ­»äº¡è’™å¤ªå¥‡
 	PlayDeathMontage();
 }
 
-//²¥·ÅÊÜ»÷ÃÉÌ«Ææ
+//æ’­æ”¾å—å‡»è’™å¤ªå¥‡
 void ABaseCharacter::PlayHitReactMontage(const FName& SectionName)
 {
-	//»ñÈ¡¶¯»­ÊµÀı
+	//è·å–åŠ¨ç”»å®ä¾‹
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (AnimInstance && HitReactMontage)
 	{
-		//²¥·Å×°±¸¶¯»­
+		//æ’­æ”¾è£…å¤‡åŠ¨ç”»
 		AnimInstance->Montage_Play(HitReactMontage);
-		AnimInstance->Montage_JumpToSection(SectionName, HitReactMontage);//Ìø×ªµ½Ö¸¶¨¶Î
+		AnimInstance->Montage_JumpToSection(SectionName, HitReactMontage);//è·³è½¬åˆ°æŒ‡å®šæ®µ
 	}
 }
 
-//·½ÏòĞÔÊÜ»÷·´Ó¦
+//æ–¹å‘æ€§å—å‡»ååº”
 void ABaseCharacter::DirectionalHitReact(const FVector& ImpactPoint)
 {
-	//»ñÈ¡Ç°ÏòÏòÁ¿
+	//è·å–å‰å‘å‘é‡
 	const FVector Forward = GetActorForwardVector();
-	//¼ÆËãÊÜ»÷Ë®Æ½·½ÏòÏòÁ¿²¢¹éÒ»»¯
+	//è®¡ç®—å—å‡»æ°´å¹³æ–¹å‘å‘é‡å¹¶å½’ä¸€åŒ–
 	const FVector ToHit = (ImpactPoint - GetActorLocation()).GetSafeNormal2D();
-	//¼ÆËã½Ç¶È
+	//è®¡ç®—è§’åº¦
 	float Angle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(Forward, ToHit)));
-	//¼ÆËãÏòÁ¿²æ³Ë£¬ÓÃÀ´ÅĞ¶Ï×óÓÒ
+	//è®¡ç®—å‘é‡å‰ä¹˜ï¼Œç”¨æ¥åˆ¤æ–­å·¦å³
 	const FVector Cross = FVector::CrossProduct(Forward, ToHit);
-	//¸ù¾İUE5×óÊÖ¶¨Ôò£¬Cross´óÓÚ0ÔòÎªÓÒÊÖ£¬·ñÔòÎª×óÊÖ
+	//æ ¹æ®UE5å·¦æ‰‹å®šåˆ™ï¼ŒCrosså¤§äº0åˆ™ä¸ºå³æ‰‹ï¼Œå¦åˆ™ä¸ºå·¦æ‰‹
 	if (Cross.Z < 0) Angle *= -1.f;
 
-	//¸ù¾İ½Ç¶ÈÅĞ¶Ï´ÓÄÄ¸ö·½ÏòÊÜ»÷
-	FName Sction("FromBack");	//Ä¬ÈÏ´Óºó·½ÊÜ»÷
+	//æ ¹æ®è§’åº¦åˆ¤æ–­ä»å“ªä¸ªæ–¹å‘å—å‡»
+	FName Sction("FromBack");	//é»˜è®¤ä»åæ–¹å—å‡»
 	if (Angle >= -45.f && Angle < 45.f) Sction = "FromFront";
 	else if (Angle <= -135.f && Angle < -45.f) Sction = "FromLeft";
 	else if (Angle >= 45.f && Angle < 135.f) Sction = "FromRight";
-	//²¥·ÅÊÜ»÷¶¯»­
+	//æ’­æ”¾å—å‡»åŠ¨ç”»
 	PlayHitReactMontage(Sction);
 
 }
 
-//²¥·ÅÊÜ»÷ÒôĞ§
+//æ’­æ”¾å—å‡»éŸ³æ•ˆ
 void ABaseCharacter::PlayHitSound(const FVector& ImpactPoint)
 {
 	if (HitSound)
@@ -110,7 +110,7 @@ void ABaseCharacter::PlayHitSound(const FVector& ImpactPoint)
 	}
 }
 
-//²¥·ÅÊÜ»÷Á£×ÓĞ§¹û
+//æ’­æ”¾å—å‡»ç²’å­æ•ˆæœ
 void ABaseCharacter::SpawnHitParticles(const FVector& ImpactPoint)
 {
 
@@ -124,17 +124,17 @@ void ABaseCharacter::SpawnHitParticles(const FVector& ImpactPoint)
 	}
 }
 
-//´¦ÀíÉËº¦
+//å¤„ç†ä¼¤å®³
 void ABaseCharacter::HandleDamage(float DamageAmount)
 {
 	if (Attributes)
 	{
-		//µ÷ÓÃÊÜÉË½Ó¿Úº¯Êı
+		//è°ƒç”¨å—ä¼¤æ¥å£å‡½æ•°
 		Attributes->ReceiveDamage(DamageAmount);
 	}
 }
 
-//²¥·ÅÖ¸¶¨ÃÉÌ«ÆæµÄÖ¸¶¨¶Î
+//æ’­æ”¾æŒ‡å®šè’™å¤ªå¥‡çš„æŒ‡å®šæ®µ
 void ABaseCharacter::PlayMontageSection(UAnimMontage* Montage, const FName& SectionName)
 {
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
@@ -145,74 +145,74 @@ void ABaseCharacter::PlayMontageSection(UAnimMontage* Montage, const FName& Sect
 	}
 }
 
-//Ëæ»ú²¥·ÅÃÉÌ«Ææ¶Î
+//éšæœºæ’­æ”¾è’™å¤ªå¥‡æ®µ
 int32 ABaseCharacter::PlayRandomMontageSection(UAnimMontage* Montage, const TArray<FName>& SectionNames)
 {
-	if (SectionNames.Num() <= 0) return -1;	//Ã»ÓĞ¶ÎÃû³ÆÔò·µ»Ø-1
-	const int32 MaxSectionIndex = SectionNames.Num() - 1;	//×î´ó¶ÎË÷Òı
-	const int32 Selection = FMath::RandRange(0, MaxSectionIndex);//Ëæ»úÑ¡ÔñÒ»¸ö¶ÎË÷Òı
-	PlayMontageSection(Montage, SectionNames[Selection]);	//²¥·ÅÑ¡ÔñµÄ¶Î
+	if (SectionNames.Num() <= 0) return -1;	//æ²¡æœ‰æ®µåç§°åˆ™è¿”å›-1
+	const int32 MaxSectionIndex = SectionNames.Num() - 1;	//æœ€å¤§æ®µç´¢å¼•
+	const int32 Selection = FMath::RandRange(0, MaxSectionIndex);//éšæœºé€‰æ‹©ä¸€ä¸ªæ®µç´¢å¼•
+	PlayMontageSection(Montage, SectionNames[Selection]);	//æ’­æ”¾é€‰æ‹©çš„æ®µ
 	return Selection;
 }
 
-//²¥·Å¹¥»÷ÃÉÌ«Ææ
+//æ’­æ”¾æ”»å‡»è’™å¤ªå¥‡
 int32 ABaseCharacter::PlayAttackMontage()
 {
 	return PlayRandomMontageSection(AttackMontage, AttackMontageSections);
 }
 
-//²¥·ÅËÀÍöÃÉÌ«Ææ
+//æ’­æ”¾æ­»äº¡è’™å¤ªå¥‡
 int32 ABaseCharacter::PlayDeathMontage()
 {
-	//Ëæ»ú²¥·ÅËÀÍöÃÉÌ«Ææ¶Î²¢ÉèÖÃËÀÍö×ËÊÆ
+	//éšæœºæ’­æ”¾æ­»äº¡è’™å¤ªå¥‡æ®µå¹¶è®¾ç½®æ­»äº¡å§¿åŠ¿
 	const int32 Selection = PlayRandomMontageSection(DeathMontage, DeathMontageSections);
 	TEnumAsByte<EDeathPose> Pose(Selection);
-	//È·±£×ËÊÆÔÚÃ¶¾Ù·¶Î§ÄÚ
+	//ç¡®ä¿å§¿åŠ¿åœ¨æšä¸¾èŒƒå›´å†…
 	if (Pose < EDeathPose::EDP_MAX)
 	{
 		DeathPose = Pose;
 	}
-	//·µ»ØÑ¡ÔñµÄ¶ÎË÷Òı
+	//è¿”å›é€‰æ‹©çš„æ®µç´¢å¼•
 	return Selection;
 }
 
-//ÖĞ¶Ï¹¥»÷ÃÉÌ«Ææ
+//ä¸­æ–­æ”»å‡»è’™å¤ªå¥‡
 void ABaseCharacter::StopAttackMontage()
 {
-	//»ñÈ¡¶¯»­ÊµÀı
+	//è·å–åŠ¨ç”»å®ä¾‹
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (AnimInstance && AttackMontage)
 	{
-		//Í£Ö¹¹¥»÷¶¯»­
+		//åœæ­¢æ”»å‡»åŠ¨ç”»
 		AnimInstance->Montage_Stop(0.2f, AttackMontage);
 	}
 }
 
-//²¥·ÅÉÁ±ÜÃÉÌ«Ææ
+//æ’­æ”¾é—ªé¿è’™å¤ªå¥‡
 void ABaseCharacter::PlayDodgeMontage()
 {
 	PlayMontageSection(DodgeMontage, FName("Default"));
 }
 
-//»ñÈ¡Å¤ÇúÄ¿±êÎ»ÒÆ
+//è·å–æ‰­æ›²ç›®æ ‡ä½ç§»
 FVector ABaseCharacter::GetTranslationWarpTarget()
 {
-	//Èç¹ûÃ»ÓĞÕ½¶·Ä¿±êÔò·µ»ØÁãÏòÁ¿
+	//å¦‚æœæ²¡æœ‰æˆ˜æ–—ç›®æ ‡åˆ™è¿”å›é›¶å‘é‡
 	if (CombatTarget == nullptr) return FVector();
-	//»ñÈ¡Ä¿±êµãºÍ×ÔÉíÎ»ÖÃ
+	//è·å–ç›®æ ‡ç‚¹å’Œè‡ªèº«ä½ç½®
 	const FVector CombatTargetLocation = CombatTarget->GetActorLocation();
 	const FVector Location = GetActorLocation();
-	//¼ÆËãÄ¿±êµãµ½×ÔÉíµÄ·½ÏòÏòÁ¿²¢¹éÒ»»¯£¬È»ºó³ËÒÔÅ¤Çú¾àÀë
+	//è®¡ç®—ç›®æ ‡ç‚¹åˆ°è‡ªèº«çš„æ–¹å‘å‘é‡å¹¶å½’ä¸€åŒ–ï¼Œç„¶åä¹˜ä»¥æ‰­æ›²è·ç¦»
 	FVector TargetToMe = (Location - CombatTargetLocation).GetSafeNormal();
 	TargetToMe *= WarpTargetDistance;
-	//·µ»ØÄ¿±êµã¼ÓÉÏ·½ÏòÏòÁ¿
+	//è¿”å›ç›®æ ‡ç‚¹åŠ ä¸Šæ–¹å‘å‘é‡
 	return CombatTargetLocation + TargetToMe;
 }
 
-//»ñÈ¡Å¤ÇúÄ¿±êĞı×ª
+//è·å–æ‰­æ›²ç›®æ ‡æ—‹è½¬
 FVector ABaseCharacter::GetRotationWarpTarget()
 {
-	//Èô´æÔÚÕ½¶·Ä¿±êÔò·µ»ØÆäÎ»ÖÃ£¬·ñÔò·µ»ØÁãÏòÁ¿
+	//è‹¥å­˜åœ¨æˆ˜æ–—ç›®æ ‡åˆ™è¿”å›å…¶ä½ç½®ï¼Œå¦åˆ™è¿”å›é›¶å‘é‡
 	if (CombatTarget)
 	{
 		return CombatTarget->GetActorLocation();
@@ -220,19 +220,19 @@ FVector ABaseCharacter::GetRotationWarpTarget()
 	return FVector();
 }
 
-//½ûÓÃ½ºÄÒÌåÅö×²
+//ç¦ç”¨èƒ¶å›Šä½“ç¢°æ’
 void ABaseCharacter::DisableCapsule()
 {
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ¹¥»÷
+//åˆ¤æ–­æ˜¯å¦å¯ä»¥æ”»å‡»
 bool ABaseCharacter::CanAttack()
 {
 	return false;
 }
 
-//ÅĞ¶ÏÊÇ·ñ´æ»î
+//åˆ¤æ–­æ˜¯å¦å­˜æ´»
 bool ABaseCharacter::IsAlive()
 {
 	return Attributes && Attributes->IsAlive();
@@ -243,46 +243,47 @@ void ABaseCharacter::DisableMeshCollision()
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
-//¹¥»÷½áÊø
+//æ”»å‡»ç»“æŸ
 void ABaseCharacter::AttackEnd()
 {
 }
 
-//ÉÁ±Ü½áÊø
+//é—ªé¿ç»“æŸ
 void ABaseCharacter::DodgeEnd()
 {
 }
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void ABaseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
-//ÉèÖÃÎäÆ÷Åö×²ÀàĞÍ
+//è®¾ç½®æ­¦å™¨ç¢°æ’ç±»å‹
 void ABaseCharacter::SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnable)
 {
 	if (EquippedWeapon && EquippedWeapon->GetWeaponBox())
 	{
-		//ÉèÖÃÎäÆ÷Åö×²ÌåµÄÅö×²ÏìÓ¦ÀàĞÍ
+		//è®¾ç½®æ­¦å™¨ç¢°æ’ä½“çš„ç¢°æ’å“åº”ç±»å‹
 		EquippedWeapon->GetWeaponBox()->SetCollisionEnabled(CollisionEnable);
-		//Çå¿ÕºöÂÔÁĞ±í
+		//æ¸…ç©ºå¿½ç•¥åˆ—è¡¨
 		EquippedWeapon->IgnoreActors.Empty();
 	}
 }
 
-//ÉèÖÃ¹Ç÷ÀÍø¸ñÌåÅö×²ÊôĞÔ
+//è®¾ç½®éª¨éª¼ç½‘æ ¼ä½“ç¢°æ’å±æ€§
 void ABaseCharacter::SetMeshCollisionResponses(
 	const TMap<TEnumAsByte<ECollisionChannel>, TEnumAsByte<ECollisionResponse>>& Responses)
 {
 	for (const auto& Elem : Responses)
 	{
-		//ÉèÖÃ¹Ç÷ÀÍø¸ñÌåµÄÅö×²ÏìÓ¦ÀàĞÍ
-		ECollisionChannel Channel = Elem.Key;	//Åö×²Í¨µÀ
-		ECollisionResponse Response = Elem.Value; //Åö×²ÏìÓ¦ÀàĞÍ
+		//è®¾ç½®éª¨éª¼ç½‘æ ¼ä½“çš„ç¢°æ’å“åº”ç±»å‹
+		ECollisionChannel Channel = Elem.Key;	//ç¢°æ’é€šé“
+		ECollisionResponse Response = Elem.Value; //ç¢°æ’å“åº”ç±»å‹
 		GetMesh()->SetCollisionResponseToChannel(Channel, Response);
 	}
 }
+
 
 

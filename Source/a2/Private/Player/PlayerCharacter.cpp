@@ -1,4 +1,4 @@
-
+ï»¿
 
 #include "Player/PlayerCharacter.h"
 #include "EnhancedInputComponent.h"
@@ -19,56 +19,56 @@
 
 APlayerCharacter::APlayerCharacter()
 {
- 	//µ±ÉèÎªfalseÊ±½«Í£Ö¹TickÊÂ¼ş
+ 	//å½“è®¾ä¸ºfalseæ—¶å°†åœæ­¢Tickäº‹ä»¶
 	PrimaryActorTick.bCanEverTick = true;
 
-	//´´½¨µ¯»É±Û×é¼ş
+	//åˆ›å»ºå¼¹ç°§è‡‚ç»„ä»¶
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(RootComponent);
-	//ÉèÖÃµ¯»É±Û×é¼şÊôĞÔ
-	CameraBoom->bUsePawnControlRotation = true; //ÔÊĞíµ¯»É±Û¸úËæ¿ØÖÆÆ÷Ğı×ª
-	CameraBoom->TargetArmLength = 300.0f;	//µ¯»É±Û³¤¶È
-	CameraBoom->SetRelativeRotation(FRotator(-30.0f, 0.0f, 0.0f)); //µ¯»É±ÛÏà¶ÔĞı×ª
+	//è®¾ç½®å¼¹ç°§è‡‚ç»„ä»¶å±æ€§
+	CameraBoom->bUsePawnControlRotation = true; //å…è®¸å¼¹ç°§è‡‚è·Ÿéšæ§åˆ¶å™¨æ—‹è½¬
+	CameraBoom->TargetArmLength = 300.0f;	//å¼¹ç°§è‡‚é•¿åº¦
+	CameraBoom->SetRelativeRotation(FRotator(-30.0f, 0.0f, 0.0f)); //å¼¹ç°§è‡‚ç›¸å¯¹æ—‹è½¬
 
-	//´´½¨ÉãÏñ»ú×é¼ş
+	//åˆ›å»ºæ‘„åƒæœºç»„ä»¶
 	Camera = CreateDefaultSubobject<UCameraComponent>("PlayerCamera");
 	Camera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
-	//ÉèÖÃÉãÏñ»ú×é¼şÊôĞÔ
-	//½ÇÉ«²»¸úËæ¿ØÖÆÆ÷Ğı×ª
+	//è®¾ç½®æ‘„åƒæœºç»„ä»¶å±æ€§
+	//è§’è‰²ä¸è·Ÿéšæ§åˆ¶å™¨æ—‹è½¬
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 
-	//ÉèÖÃ½ÇÉ«ÒÆ¶¯×é¼şÊôĞÔ
-	GetCharacterMovement()->bOrientRotationToMovement = true; //½ÇÉ«³¯ÏòÒÆ¶¯·½Ïò
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); //Ã¿ÃëĞı×ªËÙÂÊ
-	GetCharacterMovement()->MaxWalkSpeed = 600.0f;	//½ÇÉ«×î´óĞĞ×ßËÙ¶È
-	GetCharacterMovement()->MinAnalogWalkSpeed = 20.0f; //½ÇÉ«×îĞ¡Ä£ÄâĞĞ×ßËÙ¶È
+	//è®¾ç½®è§’è‰²ç§»åŠ¨ç»„ä»¶å±æ€§
+	GetCharacterMovement()->bOrientRotationToMovement = true; //è§’è‰²æœå‘ç§»åŠ¨æ–¹å‘
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f); //æ¯ç§’æ—‹è½¬é€Ÿç‡
+	GetCharacterMovement()->MaxWalkSpeed = 600.0f;	//è§’è‰²æœ€å¤§è¡Œèµ°é€Ÿåº¦
+	GetCharacterMovement()->MinAnalogWalkSpeed = 20.0f; //è§’è‰²æœ€å°æ¨¡æ‹Ÿè¡Œèµ°é€Ÿåº¦
 
-	//ÉèÖÃÍø¸ñÌåÅö×²ÊôĞÔ
-	GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);	//½«Íø¸ñÌåÉèÖÃÎª¶¯Ì¬ÎïÌå
-	GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore); //ºöÂÔËùÓĞÅö×²
-	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);//×èµ²¿É¼ûĞÔÍ¨µÀ
-	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);//ÖØµş¶¯Ì¬ÎïÌåÍ¨µÀ
-	GetMesh()->SetGenerateOverlapEvents(true);	//¿ÉÉú³ÉÖØµşÊÂ¼ş
+	//è®¾ç½®ç½‘æ ¼ä½“ç¢°æ’å±æ€§
+	GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);	//å°†ç½‘æ ¼ä½“è®¾ç½®ä¸ºåŠ¨æ€ç‰©ä½“
+	GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore); //å¿½ç•¥æ‰€æœ‰ç¢°æ’
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);//é˜»æŒ¡å¯è§æ€§é€šé“
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldDynamic, ECollisionResponse::ECR_Overlap);//é‡å åŠ¨æ€ç‰©ä½“é€šé“
+	GetMesh()->SetGenerateOverlapEvents(true);	//å¯ç”Ÿæˆé‡å äº‹ä»¶
 
 }
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 	if (Attributes && PlayerOverlay)
 	{
-		//µ÷ÓÃÄÍÁ¦»Ö¸´º¯Êı
+		//è°ƒç”¨è€åŠ›æ¢å¤å‡½æ•°
 		Attributes->RegenStamina(DeltaTime);
-		//ÉèÖÃUIÌåÁ¦°Ù·Ö±È
+		//è®¾ç½®UIä½“åŠ›ç™¾åˆ†æ¯”
 		PlayerOverlay->SetStaminaBarPercent(Attributes->GetStaminaPercent());
 	}
 }
 
-//ÓÃÓÚ°ó¶¨ÊäÈë
+//ç”¨äºç»‘å®šè¾“å…¥
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
@@ -76,258 +76,258 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	if (UEnhancedInputComponent* EnhancedInputComponent =
 		CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		//°ó¶¨ÒÆ¶¯
+		//ç»‘å®šç§»åŠ¨
 		EnhancedInputComponent->BindAction(IA_Move,
 			ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
-		//°ó¶¨ÊÓ½Ç
+		//ç»‘å®šè§†è§’
 		EnhancedInputComponent->BindAction(IA_Look,
 			ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
-		//°ó¶¨ÌøÔ¾
+		//ç»‘å®šè·³è·ƒ
 		EnhancedInputComponent->BindAction(IA_Jump,
 			ETriggerEvent::Started, this, &APlayerCharacter::Jump);
-		//°ó¶¨Ê°È¡»ò×°±¸
+		//ç»‘å®šæ‹¾å–æˆ–è£…å¤‡
 		EnhancedInputComponent->BindAction(IA_Equip,
 			ETriggerEvent::Started, this, &APlayerCharacter::FKeyPressed);
-		//°ó¶¨¹¥»÷
+		//ç»‘å®šæ”»å‡»
 		EnhancedInputComponent->BindAction(IA_Attack,
 			ETriggerEvent::Started, this, &APlayerCharacter::Attack);
-		//°ó¶¨ÉÁ±Ü
+		//ç»‘å®šé—ªé¿
 		EnhancedInputComponent->BindAction(IA_Dodge,
 			ETriggerEvent::Started, this, &APlayerCharacter::Dodge);
 
 	}
 }
 
-//ÌøÔ¾º¯Êı
+//è·³è·ƒå‡½æ•°
 void APlayerCharacter::Jump()
 {
-	//Ö»ÓĞÔÚ¿ÕÏĞ×´Ì¬ÏÂ²ÅÄÜÌøÔ¾
+	//åªæœ‰åœ¨ç©ºé—²çŠ¶æ€ä¸‹æ‰èƒ½è·³è·ƒ
 	if (IsUnoccupied())
 	{
 		Super::Jump();
 	}
 }
 
-//ÊÜÉËº¯Êı
+//å—ä¼¤å‡½æ•°
 float APlayerCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, 
 	AController* EventInstigator, AActor* DamageCauser)
 {
-	//µ÷ÓÃ´¦ÀíÉËº¦º¯Êı
+	//è°ƒç”¨å¤„ç†ä¼¤å®³å‡½æ•°
 	HandleDamage(DamageAmount);
-	//¸üĞÂUIÑªÁ¿
+	//æ›´æ–°UIè¡€é‡
 	SetHUDHealth();
 
 	return DamageAmount;
 }
 
-//ÃüÖĞº¯Êı£¬ÊÜµ½ÉËº¦Ê±µ÷ÓÃ
+//å‘½ä¸­å‡½æ•°ï¼Œå—åˆ°ä¼¤å®³æ—¶è°ƒç”¨
 void APlayerCharacter::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
 {
 	Super::GetHit_Implementation(ImpactPoint, Hitter);
-	//½ûÓÃÎäÆ÷Åö×²
+	//ç¦ç”¨æ­¦å™¨ç¢°æ’
 	SetWeaponCollisionEnabled(ECollisionEnabled::NoCollision);
-	//ÈôÊôĞÔ×é¼ş´æÔÚÇÒÑªÁ¿´óÓÚ0
+	//è‹¥å±æ€§ç»„ä»¶å­˜åœ¨ä¸”è¡€é‡å¤§äº0
 	if (Attributes && Attributes->GetHealthPercent() > 0.f)
 	{
-		//ÉèÖÃµ±Ç°¶¯×÷×´Ì¬ÎªÊÜ»÷·´Ó¦
+		//è®¾ç½®å½“å‰åŠ¨ä½œçŠ¶æ€ä¸ºå—å‡»ååº”
 		ActionState = EActionState::EAS_HitReaction;
 	}
 
 }
 
-//ÉèÖÃµ±Ç°ÖØµşµÄÎïÆ·
+//è®¾ç½®å½“å‰é‡å çš„ç‰©å“
 void APlayerCharacter::SetOverlappingItem(AItem* Item)
 {
 	OverlappingItem = Item;
 }
 
-//Ìí¼ÓÁé»ê
+//æ·»åŠ çµé­‚
 void APlayerCharacter::AddSouls(ASoul* Soul)
 {
 	if (Attributes && PlayerOverlay)
 	{
-		//Ìí¼ÓÁé»êµ½ÊôĞÔ×é¼ş
+		//æ·»åŠ çµé­‚åˆ°å±æ€§ç»„ä»¶
 		Attributes->AddSouls(Soul->GetSouls());
-		//ÉèÖÃUIÁé»êÊıÁ¿
+		//è®¾ç½®UIçµé­‚æ•°é‡
 		PlayerOverlay->SetSouls(Attributes->GetSouls());
 	}
 }
 
-//Ìí¼Ó»Æ½ğ
+//æ·»åŠ é»„é‡‘
 void APlayerCharacter::AddGold(ATreasure* Treasure)
 {
 	if (Attributes && PlayerOverlay)
 	{
-		//Ìí¼Ó»Æ½ğµ½ÊôĞÔ×é¼ş
+		//æ·»åŠ é»„é‡‘åˆ°å±æ€§ç»„ä»¶
 		Attributes->AddGold(Treasure->GetGold());
-		//ÉèÖÃUI»Æ½ğÊıÁ¿
+		//è®¾ç½®UIé»„é‡‘æ•°é‡
 		PlayerOverlay->SetGold(Attributes->GetGold());
 	}
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// »ñÈ¡µ±Ç°½ÇÉ«µÄ¿ØÖÆÆ÷£¬²¢³¢ÊÔ½«Æä×ª»»ÎªÍæ¼Ò¿ØÖÆÆ÷
+	// è·å–å½“å‰è§’è‰²çš„æ§åˆ¶å™¨ï¼Œå¹¶å°è¯•å°†å…¶è½¬æ¢ä¸ºç©å®¶æ§åˆ¶å™¨
 	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
 	{
-		// Í¨¹ıÍæ¼Ò¿ØÖÆÆ÷»ñÈ¡±¾µØÍæ¼Ò£¬²¢»ñÈ¡ÔöÇ¿ÊäÈë×ÓÏµÍ³
+		// é€šè¿‡ç©å®¶æ§åˆ¶å™¨è·å–æœ¬åœ°ç©å®¶ï¼Œå¹¶è·å–å¢å¼ºè¾“å…¥å­ç³»ç»Ÿ
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = 
 			ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
-			// ½«ÊäÈëÓ³ÉäÉÏÏÂÎÄÌí¼Óµ½×ÓÏµÍ³ÖĞ£¬ÓÅÏÈ¼¶Îª0
+			// å°†è¾“å…¥æ˜ å°„ä¸Šä¸‹æ–‡æ·»åŠ åˆ°å­ç³»ç»Ÿä¸­ï¼Œä¼˜å…ˆçº§ä¸º0
 			Subsystem->AddMappingContext(IMC_Player, 0);
 		}
 	}
 
-	//Îª½ÇÉ«Ìí¼Ó±êÇ©
+	//ä¸ºè§’è‰²æ·»åŠ æ ‡ç­¾
 	Tags.Add(FName("EngageableTarget"));
-	//³õÊ¼»¯Íæ¼ÒUI
+	//åˆå§‹åŒ–ç©å®¶UI
 	InitializePlayerOverlay();
 
 }
 
-//ÒÆ¶¯ÊäÈë´¦Àí
+//ç§»åŠ¨è¾“å…¥å¤„ç†
 void APlayerCharacter::Move(const FInputActionValue& Value)
 {
-	//»ñÈ¡ÊäÈëµÄ¶şÎ¬ÏòÁ¿
+	//è·å–è¾“å…¥çš„äºŒç»´å‘é‡
 	FVector2D MoveVector = Value.Get<FVector2D>();
-	//Èç¹û´¦ÓÚ·Ç¿ÕÏĞ×´Ì¬Ôò²»ÒÆ¶¯
+	//å¦‚æœå¤„äºéç©ºé—²çŠ¶æ€åˆ™ä¸ç§»åŠ¨
 	if (!IsUnoccupied()) return;
-	if (Controller)	//Èç¹ûÓĞ¿ØÖÆÆ÷
+	if (Controller)	//å¦‚æœæœ‰æ§åˆ¶å™¨
 	{
-		//»ñÈ¡¿ØÖÆÆ÷µÄĞı×ª
+		//è·å–æ§åˆ¶å™¨çš„æ—‹è½¬
 		const FRotator ControlRotation = Controller->GetControlRotation();
-		//Ö»»ñÈ¡Æ«º½½Ç(Yaw)
+		//åªè·å–åèˆªè§’(Yaw)
 		const FRotator YawRotation(0.f, ControlRotation.Yaw, 0.f);
-		//¸ù¾İÆ«º½½Ç»ñÈ¡Ç°·½Ïò(Y)ºÍÓÒ·½Ïò(X)
+		//æ ¹æ®åèˆªè§’è·å–å‰æ–¹å‘(Y)å’Œå³æ–¹å‘(X)
 		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		//¸ù¾İÊäÈëÏòÁ¿µÄXºÍY·ÖÁ¿·Ö±ğÑØÇ°·½Ïò(Y)ºÍÓÒ·½Ïò(X)ÒÆ¶¯½ÇÉ«
+		//æ ¹æ®è¾“å…¥å‘é‡çš„Xå’ŒYåˆ†é‡åˆ†åˆ«æ²¿å‰æ–¹å‘(Y)å’Œå³æ–¹å‘(X)ç§»åŠ¨è§’è‰²
 		AddMovementInput(ForwardDirection, MoveVector.Y);
 		AddMovementInput(RightDirection, MoveVector.X);
-		//ÖĞ¶Ï¹¥»÷¶¯»­
+		//ä¸­æ–­æ”»å‡»åŠ¨ç”»
 		StopAttackMontage();
 	}
 	//FVector InputVector = FVector(MoveVector, 0.0f);
 	//GetPawn()->AddMovementInput(InputVector);
 }
 
-//ÊÓ½ÇÊäÈë´¦Àí
+//è§†è§’è¾“å…¥å¤„ç†
 void APlayerCharacter::Look(const FInputActionValue& Value)
 {
-	//»ñÈ¡ÊäÈëµÄ¶şÎ¬ÏòÁ¿
+	//è·å–è¾“å…¥çš„äºŒç»´å‘é‡
 	FVector2D LookVector = Value.Get<FVector2D>();
-	if (Controller)	//Èç¹ûÓĞ¿ØÖÆÆ÷
+	if (Controller)	//å¦‚æœæœ‰æ§åˆ¶å™¨
 	{
-		//Ìí¼Ó¿ØÖÆÆ÷µÄÆ«º½(X)ºÍ¸©Ñö(Y)ÊäÈë
+		//æ·»åŠ æ§åˆ¶å™¨çš„åèˆª(X)å’Œä¿¯ä»°(Y)è¾“å…¥
 		AddControllerYawInput(LookVector.X);
 		AddControllerPitchInput(-LookVector.Y);
 	}
 }
 
-//F¼üÊäÈë´¦Àí
+//Fé”®è¾“å…¥å¤„ç†
 void APlayerCharacter::FKeyPressed()
 {
-	//³¢ÊÔ½«µ±Ç°¿ÉÊ°È¡µÄÎïÆ·×ª»»ÎªÎäÆ÷
+	//å°è¯•å°†å½“å‰å¯æ‹¾å–çš„ç‰©å“è½¬æ¢ä¸ºæ­¦å™¨
 	ABaseWeapon* OverlappingWeapon = Cast<ABaseWeapon>(OverlappingItem);
 	if (OverlappingWeapon)
 	{
 		if (EquippedWeapon)
 		{
-			//Èç¹ûÓĞ×°±¸ÎäÆ÷£¬ÔòÏú»Ù
+			//å¦‚æœæœ‰è£…å¤‡æ­¦å™¨ï¼Œåˆ™é”€æ¯
 			EquippedWeapon->Destroy();
 		}
-		EquipWeapon(OverlappingWeapon); //×°±¸ÎäÆ÷
+		EquipWeapon(OverlappingWeapon); //è£…å¤‡æ­¦å™¨
 	}
-	else //ÈôÃ»ÓĞ¿ÉÊ°È¡µÄÎïÆ·£¬ÔòÖ´ĞĞĞ¶×°»ò×°±¸²Ù×÷
+	else //è‹¥æ²¡æœ‰å¯æ‹¾å–çš„ç‰©å“ï¼Œåˆ™æ‰§è¡Œå¸è£…æˆ–è£…å¤‡æ“ä½œ
 	{
 		if (CanDisarm())
 		{
-			Disarm(); //Ğ¶×°
+			Disarm(); //å¸è£…
 		}
 		else if (CanArm())
 		{
-			Arm(); //×°±¸
+			Arm(); //è£…å¤‡
 		}
 	}
 }
 
-//¹¥»÷
+//æ”»å‡»
 void APlayerCharacter::Attack()
 {
 	Super::Attack();
 
-	//Èôµ±Ç°¶¯×÷×´Ì¬Îª¿ÕÏĞ£¬Ôò²¥·Å¹¥»÷¶¯»­
+	//è‹¥å½“å‰åŠ¨ä½œçŠ¶æ€ä¸ºç©ºé—²ï¼Œåˆ™æ’­æ”¾æ”»å‡»åŠ¨ç”»
 	if (CanAttack())
 	{
 		PlayAttackMontage();
-		//ÉèÖÃµ±Ç°¶¯×÷×´Ì¬Îª¹¥»÷ÖĞ
+		//è®¾ç½®å½“å‰åŠ¨ä½œçŠ¶æ€ä¸ºæ”»å‡»ä¸­
 		ActionState = EActionState::EAS_Attacking;
 	}
 }
 
-//ÉÁ±Ü
+//é—ªé¿
 void APlayerCharacter::Dodge()
 {
-	//Èôµ±Ç°¶¯×÷×´Ì¬²»Îª¿ÕÏĞ»òÌåÁ¦²»×ã£¬Ôò²»Ö´ĞĞÉÁ±Ü
+	//è‹¥å½“å‰åŠ¨ä½œçŠ¶æ€ä¸ä¸ºç©ºé—²æˆ–ä½“åŠ›ä¸è¶³ï¼Œåˆ™ä¸æ‰§è¡Œé—ªé¿
 	if (!IsUnoccupied() || !HasEnoughStamina()) return;
-	//²¥·ÅÉÁ±Ü¶¯»­
+	//æ’­æ”¾é—ªé¿åŠ¨ç”»
 	PlayDodgeMontage();
-	//ÉèÖÃµ±Ç°¶¯×÷×´Ì¬ÎªÉÁ±Ü
+	//è®¾ç½®å½“å‰åŠ¨ä½œçŠ¶æ€ä¸ºé—ªé¿
 	ActionState = EActionState::EAS_Dodge;
 
 	if (Attributes && PlayerOverlay)
 	{
-		//µ÷ÓÃÏûºÄÌåÁ¦º¯Êı
+		//è°ƒç”¨æ¶ˆè€—ä½“åŠ›å‡½æ•°
 		Attributes->UseStamina(Attributes->GetDodgeCost());
-		//ÉèÖÃUIÌåÁ¦°Ù·Ö±È
+		//è®¾ç½®UIä½“åŠ›ç™¾åˆ†æ¯”
 		PlayerOverlay->SetStaminaBarPercent(Attributes->GetStaminaPercent());
 	}
 }
 
-//×°±¸ÎäÆ÷
+//è£…å¤‡æ­¦å™¨
 void APlayerCharacter::EquipWeapon(ABaseWeapon* Weapon)
 {
-	//ÈôÓĞ¿ÉÊ°È¡µÄÎäÆ÷£¬Ôò×°±¸¸ÃÎäÆ÷
+	//è‹¥æœ‰å¯æ‹¾å–çš„æ­¦å™¨ï¼Œåˆ™è£…å¤‡è¯¥æ­¦å™¨
 	Weapon->Equip(GetMesh(), FName("RHSocket"), this, this);
-	//½ÇÉ«×´Ì¬ÉèÎªµ¥ÊÖ×°±¸
+	//è§’è‰²çŠ¶æ€è®¾ä¸ºå•æ‰‹è£…å¤‡
 	CharacterState = ECharacterState::ECS_EquippedOneHanded;
-	//½«µ±Ç°¿ÉÊ°È¡µÄÎäÆ÷ÉèÎªÒÑ×°±¸ÎäÆ÷
+	//å°†å½“å‰å¯æ‹¾å–çš„æ­¦å™¨è®¾ä¸ºå·²è£…å¤‡æ­¦å™¨
 	EquippedWeapon = Weapon;
 }
 
-//¹¥»÷½áÊø
+//æ”»å‡»ç»“æŸ
 void APlayerCharacter::AttackEnd()
 {
-	//¹¥»÷½áÊøºó½«¶¯×÷×´Ì¬ÉèÖÃÎª¿ÕÏĞ
+	//æ”»å‡»ç»“æŸåå°†åŠ¨ä½œçŠ¶æ€è®¾ç½®ä¸ºç©ºé—²
 	ActionState = EActionState::EAS_Unoccupied;
 }
 
-//ÉÁ±Ü½áÊø
+//é—ªé¿ç»“æŸ
 void APlayerCharacter::DodgeEnd()
 {
-	//ÉÁ±Ü½áÊøºó½«¶¯×÷×´Ì¬ÉèÖÃÎª¿ÕÏĞ
+	//é—ªé¿ç»“æŸåå°†åŠ¨ä½œçŠ¶æ€è®¾ç½®ä¸ºç©ºé—²
 	ActionState = EActionState::EAS_Unoccupied;
 }
 
-//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ¹¥»÷
+//åˆ¤æ–­æ˜¯å¦å¯ä»¥æ”»å‡»
 bool APlayerCharacter::CanAttack()
 {
 	return ActionState == EActionState::EAS_Unoccupied && 
 		CharacterState != ECharacterState::ECS_Unequipped;
 }
 
-//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔĞ¶×°
+//åˆ¤æ–­æ˜¯å¦å¯ä»¥å¸è£…
 bool APlayerCharacter::CanDisarm()
 {
 	return ActionState == EActionState::EAS_Unoccupied &&
 		CharacterState != ECharacterState::ECS_Unequipped;
 }
 
-//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ×°±¸
+//åˆ¤æ–­æ˜¯å¦å¯ä»¥è£…å¤‡
 bool APlayerCharacter::CanArm()
 {
 	return ActionState == EActionState::EAS_Unoccupied &&
@@ -335,131 +335,132 @@ bool APlayerCharacter::CanArm()
 		EquippedWeapon;
 }
 
-//ÅĞ¶ÏÊÇ·ñÓĞ×ã¹»ÌåÁ¦
+//åˆ¤æ–­æ˜¯å¦æœ‰è¶³å¤Ÿä½“åŠ›
 bool APlayerCharacter::HasEnoughStamina()
 {
 	return Attributes && Attributes->GetStamina() > Attributes->GetDodgeCost();
 }
 
-//ÅĞ¶Ïµ±Ç°ÊÇ·ñ¿ÕÏĞ×´Ì¬
+//åˆ¤æ–­å½“å‰æ˜¯å¦ç©ºé—²çŠ¶æ€
 bool APlayerCharacter::IsUnoccupied()
 {
 	return ActionState == EActionState::EAS_Unoccupied;
 }
 
-//Ğ¶×°
+//å¸è£…
 void APlayerCharacter::Disarm()
 {
-	//Èç¹ûµ±Ç°×´Ì¬Îª¿ÉĞ¶×°£¬ÔòĞ¶×°£¬²¥·ÅĞ¶×°¶¯»­
+	//å¦‚æœå½“å‰çŠ¶æ€ä¸ºå¯å¸è£…ï¼Œåˆ™å¸è£…ï¼Œæ’­æ”¾å¸è£…åŠ¨ç”»
 	PlayEquipMontage(FName("Unequip"));
-	//Ğ¶×°ºó½ÇÉ«×´Ì¬ÉèÎªÎ´×°±¸
+	//å¸è£…åè§’è‰²çŠ¶æ€è®¾ä¸ºæœªè£…å¤‡
 	CharacterState = ECharacterState::ECS_Unequipped;
-	//ÉèÖÃµ±Ç°¶¯×÷×´Ì¬Îª×°±¸ÖĞ
+	//è®¾ç½®å½“å‰åŠ¨ä½œçŠ¶æ€ä¸ºè£…å¤‡ä¸­
 	ActionState = EActionState::EAS_Equipping;
 }
 
-//×°±¸
+//è£…å¤‡
 void APlayerCharacter::Arm()
 {
-	//Èç¹ûµ±Ç°×´Ì¬Îª¿É×°±¸£¬Ôò×°±¸£¬²¥·Å×°±¸¶¯»­
+	//å¦‚æœå½“å‰çŠ¶æ€ä¸ºå¯è£…å¤‡ï¼Œåˆ™è£…å¤‡ï¼Œæ’­æ”¾è£…å¤‡åŠ¨ç”»
 	PlayEquipMontage(FName("Equip"));
-	//×°±¸ºó½ÇÉ«×´Ì¬ÉèÎªµ¥ÊÖ×°±¸
+	//è£…å¤‡åè§’è‰²çŠ¶æ€è®¾ä¸ºå•æ‰‹è£…å¤‡
 	CharacterState = ECharacterState::ECS_EquippedOneHanded;
-	//ÉèÖÃµ±Ç°¶¯×÷×´Ì¬Îª×°±¸ÖĞ
+	//è®¾ç½®å½“å‰åŠ¨ä½œçŠ¶æ€ä¸ºè£…å¤‡ä¸­
 	ActionState = EActionState::EAS_Equipping;
 }
 
-//²¥·Å×°±¸ÃÉÌ«Ææ
+//æ’­æ”¾è£…å¤‡è’™å¤ªå¥‡
 void APlayerCharacter::PlayEquipMontage(const FName& SectionName)
 {
-	//»ñÈ¡¶¯»­ÊµÀı
+	//è·å–åŠ¨ç”»å®ä¾‹
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
 	if (AnimInstance && EquipMontage)
 	{
-		//²¥·Å×°±¸¶¯»­
+		//æ’­æ”¾è£…å¤‡åŠ¨ç”»
 		AnimInstance->Montage_Play(EquipMontage);
-		AnimInstance->Montage_JumpToSection(SectionName, EquipMontage);//Ìø×ªµ½Ö¸¶¨¶Î
+		AnimInstance->Montage_JumpToSection(SectionName, EquipMontage);//è·³è½¬åˆ°æŒ‡å®šæ®µ
 	}
 }
 
-//ËÀÍöÂß¼­º¯Êı
+//æ­»äº¡é€»è¾‘å‡½æ•°
 void APlayerCharacter::Die_Implementation()
 {
 	Super::Die_Implementation();
-	//½ÇÉ«×´Ì¬ÉèÎªËÀÍö
+	//è§’è‰²çŠ¶æ€è®¾ä¸ºæ­»äº¡
 	ActionState = EActionState::EAS_Dead;
-	//½ûÓÃÍø¸ñÌåÅö×²
+	//ç¦ç”¨ç½‘æ ¼ä½“ç¢°æ’
 	DisableMeshCollision();
 }
 
-//Ğ¶×°(¸½ÔÚ±³ÉÏ)
+//å¸è£…(é™„åœ¨èƒŒä¸Š)
 void APlayerCharacter::AttachWeaponToBack()
 {
 	if (EquippedWeapon)
 	{
-		//½«ÒÑ×°±¸ÎäÆ÷¸½¼Óµ½½ÇÉ«¹Ç÷ÀµÄ±³²¿²å²Û
+		//å°†å·²è£…å¤‡æ­¦å™¨é™„åŠ åˆ°è§’è‰²éª¨éª¼çš„èƒŒéƒ¨æ’æ§½
 		EquippedWeapon->AttachMeshToSocket(GetMesh(), FName("SpineSocket"));
 	}
 }
 
-//×°±¸(¸½ÔÚÊÖÉÏ)
+//è£…å¤‡(é™„åœ¨æ‰‹ä¸Š)
 void APlayerCharacter::AttachWeaponToHand()
 {
 	if (EquippedWeapon)
 	{
-		//½«ÒÑ×°±¸ÎäÆ÷¸½¼Óµ½½ÇÉ«¹Ç÷ÀµÄÓÒÊÖ²å²Û
+		//å°†å·²è£…å¤‡æ­¦å™¨é™„åŠ åˆ°è§’è‰²éª¨éª¼çš„å³æ‰‹æ’æ§½
 		EquippedWeapon->AttachMeshToSocket(GetMesh(), FName("RHSocket"));
 	}
 }
 
-//Íê³É×°±¸
+//å®Œæˆè£…å¤‡
 void APlayerCharacter::FinishEquipping()
 {
-	//Íê³É×°±¸ºó½«µ±Ç°¶¯×÷×´Ì¬ÉèÖÃÎª¿ÕÏĞ
+	//å®Œæˆè£…å¤‡åå°†å½“å‰åŠ¨ä½œçŠ¶æ€è®¾ç½®ä¸ºç©ºé—²
 	ActionState = EActionState::EAS_Unoccupied;
 }
 
-//ÊÜ»÷½áÊø
+//å—å‡»ç»“æŸ
 void APlayerCharacter::HitReactEnd()
 {
-	//ÊÜ»÷½áÊøºó½«µ±Ç°¶¯×÷×´Ì¬ÉèÖÃÎª¿ÕÏĞ
+	//å—å‡»ç»“æŸåå°†å½“å‰åŠ¨ä½œçŠ¶æ€è®¾ç½®ä¸ºç©ºé—²
 	ActionState = EActionState::EAS_Unoccupied;
 }
 
-//³õÊ¼»¯Íæ¼ÒUI
+//åˆå§‹åŒ–ç©å®¶UI
 void APlayerCharacter::InitializePlayerOverlay()
 {
-	//»ñÈ¡Íæ¼Ò¿ØÖÆÆ÷
+	//è·å–ç©å®¶æ§åˆ¶å™¨
 	APlayerController* PlayerController = Cast<APlayerController>(GetController());
 	if (PlayerController)
 	{
-		//»ñÈ¡Íæ¼ÒHUD
+		//è·å–ç©å®¶HUD
 		APlayerHUD* PlayerHUD = Cast<APlayerHUD>(PlayerController->GetHUD());
 		if (PlayerHUD)
 		{
-			//´´½¨Íæ¼Ò¸²¸ÇUI
+			//åˆ›å»ºç©å®¶è¦†ç›–UI
 			PlayerOverlay = PlayerHUD->GetPlayerOverlay();
-			if (PlayerOverlay && Attributes) //Èç¹ûÍæ¼Ò¸²¸ÇUIºÍÊôĞÔ×é¼ş¶¼´æÔÚ
+			if (PlayerOverlay && Attributes) //å¦‚æœç©å®¶è¦†ç›–UIå’Œå±æ€§ç»„ä»¶éƒ½å­˜åœ¨
 			{
-				//ÉèÖÃÑªÌõ°Ù·Ö±È
+				//è®¾ç½®è¡€æ¡ç™¾åˆ†æ¯”
 				PlayerOverlay->SetHealthBarPercent(Attributes->GetHealthPercent());
-				//ÉèÖÃÌåÁ¦Ìõ°Ù·Ö±È
+				//è®¾ç½®ä½“åŠ›æ¡ç™¾åˆ†æ¯”
 				PlayerOverlay->SetStaminaBarPercent(1.0f);
-				//ÉèÖÃ½ğ±ÒÊıÁ¿
+				//è®¾ç½®é‡‘å¸æ•°é‡
 				PlayerOverlay->SetGold(0);
-				//ÉèÖÃÁé»êÊıÁ¿
+				//è®¾ç½®çµé­‚æ•°é‡
 				PlayerOverlay->SetSouls(0);
 			}
 		}
 	}
 }
 
-//¸üĞÂÍæ¼ÒUIµÄÑªÁ¿ÏÔÊ¾
+//æ›´æ–°ç©å®¶UIçš„è¡€é‡æ˜¾ç¤º
 void APlayerCharacter::SetHUDHealth()
 {
-	if (PlayerOverlay && Attributes) //Èç¹ûÍæ¼Ò¸²¸ÇUIºÍÊôĞÔ×é¼ş¶¼´æÔÚ
+	if (PlayerOverlay && Attributes) //å¦‚æœç©å®¶è¦†ç›–UIå’Œå±æ€§ç»„ä»¶éƒ½å­˜åœ¨
 	{
-		//ÉèÖÃÑªÌõ°Ù·Ö±È
+		//è®¾ç½®è¡€æ¡ç™¾åˆ†æ¯”
 		PlayerOverlay->SetHealthBarPercent(Attributes->GetHealthPercent());
 	}
 }
+

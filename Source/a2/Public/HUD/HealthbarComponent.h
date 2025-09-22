@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -14,11 +14,12 @@ class A2_API UHealthbarComponent : public UWidgetComponent
 	GENERATED_BODY()
 	
 public:
-	//ÉèÖÃÉúÃü°Ù·Ö±È
+	//è®¾ç½®ç”Ÿå‘½ç™¾åˆ†æ¯”
 	void SetHealthPercent(float Percent);
 
-	//ÑªÌõ
+	//è¡€æ¡
 	UPROPERTY()
 	TObjectPtr<UHealthBar> HealthBarWidget;
 
 };
+

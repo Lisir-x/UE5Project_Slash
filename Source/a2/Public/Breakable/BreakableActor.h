@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
@@ -17,34 +17,35 @@ class A2_API ABreakableActor : public AActor, public IHitInterface
 public:	
 	ABreakableActor();
 
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void Tick(float DeltaTime) override;
 
-	//ÃüÖĞº¯Êı
+	//å‘½ä¸­å‡½æ•°
 	virtual void GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter) override;
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
-	//¼¸ºÎ¼¯ºÏ×é¼ş
+	//å‡ ä½•é›†åˆç»„ä»¶
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UGeometryCollectionComponent> GeometryCollection;
 
-	//½ºÄÒ×é¼ş
+	//èƒ¶å›Šç»„ä»¶
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UCapsuleComponent> Capsule;
 
 private:
-	////ÆÆÁÑÒôĞ§
+	////ç ´è£‚éŸ³æ•ˆ
 	//UPROPERTY(EditAnywhere, Category = "Sound")
 	//TObjectPtr<USoundBase> BreakSound;
 
-	//±¦²ØÀà(µôÂäÎï)
+	//å®è—ç±»(æ‰è½ç‰©)
 	UPROPERTY(EditAnywhere)
 	TArray<TSubclassOf<ATreasure>> TreasureClasses;
 
-	//ÊÇ·ñÒÑÆÆÁÑ
+	//æ˜¯å¦å·²ç ´è£‚
 	bool bBroken = false;
 
 };
+

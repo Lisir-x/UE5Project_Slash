@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Component/AttributeComponent.h"
@@ -6,64 +6,65 @@
 
 UAttributeComponent::UAttributeComponent()
 {
-	//µ±ÉèÎªfalseÊ±½«Í£Ö¹TickÊÂ¼ş
+	//å½“è®¾ä¸ºfalseæ—¶å°†åœæ­¢Tickäº‹ä»¶
 	PrimaryComponentTick.bCanEverTick = false;
 	
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void UAttributeComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
 }
 
-//ÊÜµ½ÉËº¦
+//å—åˆ°ä¼¤å®³
 void UAttributeComponent::ReceiveDamage(float Damage)
 {
 	Health = FMath::Clamp(Health - Damage, 0.f, MaxHealth);
 }
 
-//ÏûºÄÄÍÁ¦
+//æ¶ˆè€—è€åŠ›
 void UAttributeComponent::UseStamina(float StaminaCost)
 {
 	Stamina = FMath::Clamp(Stamina - StaminaCost, 0.f, MaxStamina);
 }
 
-//»ñÈ¡ÉúÃü°Ù·Ö±È
+//è·å–ç”Ÿå‘½ç™¾åˆ†æ¯”
 float UAttributeComponent::GetHealthPercent()
 {
 	return Health / MaxHealth;
 }
 
-//»ñÈ¡ÄÍÁ¦°Ù·Ö±È
+//è·å–è€åŠ›ç™¾åˆ†æ¯”
 float UAttributeComponent::GetStaminaPercent()
 {
 	return Stamina / MaxStamina;
 }
 
-//Ìí¼ÓÁé»ê
+//æ·»åŠ çµé­‚
 void UAttributeComponent::AddSouls(int32 NumberOfSouls)
 {
 	Souls += NumberOfSouls;
 }
 
-//Ìí¼Ó»Æ½ğ
+//æ·»åŠ é»„é‡‘
 void UAttributeComponent::AddGold(int32 AmountOfGold)
 {
 	Gold += AmountOfGold;
 }
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void UAttributeComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 }
 
-//ÄÍÁ¦»Ö¸´
+//è€åŠ›æ¢å¤
 void UAttributeComponent::RegenStamina(float DeltaTime)
 {
 	Stamina = FMath::Clamp(Stamina + StaminaRegenRate * DeltaTime, 0.f, MaxStamina);
 }
+
 

@@ -1,4 +1,4 @@
-
+ï»¿
 #include "Breakable/BreakableActor.h"
 #include "GeometryCollection/GeometryCollectionComponent.h"
 #include "Items/Treasure.h"
@@ -7,62 +7,63 @@
 
 ABreakableActor::ABreakableActor()
 {
-	//µ±ÉèÎªfalseÊ±½«Í£Ö¹TickÊÂ¼ş
+	//å½“è®¾ä¸ºfalseæ—¶å°†åœæ­¢Tickäº‹ä»¶
  	PrimaryActorTick.bCanEverTick = false;
 
-	//´´½¨¼¸ºÎ¼¯ºÏ×é¼ş²¢ÉèÖÃÎª¸ù×é¼ş
+	//åˆ›å»ºå‡ ä½•é›†åˆç»„ä»¶å¹¶è®¾ç½®ä¸ºæ ¹ç»„ä»¶
 	GeometryCollection = CreateDefaultSubobject<UGeometryCollectionComponent>(TEXT("GeometryCollection"));
 	SetRootComponent(GeometryCollection);
-	//ÉèÖÃ¼¸ºÎ¼¯ºÏ×é¼şµÄÅö×²ÊôĞÔ
-	GeometryCollection->SetGenerateOverlapEvents(true);//Éú³ÉÖØµşÊÂ¼ş
-	GeometryCollection->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);//ºöÂÔCameraÍ¨µÀ
-	GeometryCollection->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);//ºöÂÔPawnÍ¨µÀ
+	//è®¾ç½®å‡ ä½•é›†åˆç»„ä»¶çš„ç¢°æ’å±æ€§
+	GeometryCollection->SetGenerateOverlapEvents(true);//ç”Ÿæˆé‡å äº‹ä»¶
+	GeometryCollection->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);//å¿½ç•¥Cameraé€šé“
+	GeometryCollection->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);//å¿½ç•¥Pawné€šé“
 
-	//´´½¨½ºÄÒ×é¼ş
+	//åˆ›å»ºèƒ¶å›Šç»„ä»¶
 	Capsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule"));
 	Capsule->SetupAttachment(GetRootComponent());
-	//ÉèÖÃ½ºÄÒ×é¼şµÄÅö×²ÊôĞÔ
-	Capsule->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);//ºöÂÔËùÓĞÍ¨µÀ
-	Capsule->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Block);//×èµ²PawnÍ¨µÀ
+	//è®¾ç½®èƒ¶å›Šç»„ä»¶çš„ç¢°æ’å±æ€§
+	Capsule->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);//å¿½ç•¥æ‰€æœ‰é€šé“
+	Capsule->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Block);//é˜»æŒ¡Pawné€šé“
 
 
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void ABreakableActor::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void ABreakableActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
-//ÃüÖĞº¯Êı
+//å‘½ä¸­å‡½æ•°
 void ABreakableActor::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
 {
-	if (bBroken) return;	//Èç¹ûÒÑÆÆÁÑÔòÖ±½Ó·µ»Ø
-	bBroken = true;	//ÉèÖÃÎªÒÑÆÆÁÑ
-	//»ñÈ¡ÊÀ½ç¶ÔÏó
+	if (bBroken) return;	//å¦‚æœå·²ç ´è£‚åˆ™ç›´æ¥è¿”å›
+	bBroken = true;	//è®¾ç½®ä¸ºå·²ç ´è£‚
+	//è·å–ä¸–ç•Œå¯¹è±¡
 	UWorld* World = GetWorld();
 	if (World && TreasureClasses.Num() > 0)
 	{
-		////²¥·ÅËéÁÑÒôĞ§
+		////æ’­æ”¾ç¢è£‚éŸ³æ•ˆ
 		//if (BreakSound)
 		//{
 		//	UGameplayStatics::PlaySoundAtLocation(this, BreakSound, GetActorLocation());
 		//}
-		//ÉèÖÃµôÂäÎïÎ»ÖÃ
+		//è®¾ç½®æ‰è½ç‰©ä½ç½®
 		FVector Location = GetActorLocation();
-		Location.Z += 75.f;	//ÌáÉıµôÂäÎïÎ»ÖÃ£¬·ÀÖ¹Éú³ÉÊ±ÓëµØÃæÖØµş
-		//Éú³ÉËæ»úÊı
+		Location.Z += 75.f;	//æå‡æ‰è½ç‰©ä½ç½®ï¼Œé˜²æ­¢ç”Ÿæˆæ—¶ä¸åœ°é¢é‡å 
+		//ç”Ÿæˆéšæœºæ•°
 		const int32 Selection = FMath::RandRange(0, TreasureClasses.Num() - 1);
-		//Éú³ÉµôÂäÎï
+		//ç”Ÿæˆæ‰è½ç‰©
 		World->SpawnActor<ATreasure>(TreasureClasses[Selection], Location, GetActorRotation());
 	}
 }
+
 

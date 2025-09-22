@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Items/Treasure.h"
@@ -7,15 +7,16 @@
 
 void ATreasure::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	//³¢ÊÔ½«ÖØµşÎïÌå×ª»»ÎªÊ°È¡½Ó¿Ú
+	//å°è¯•å°†é‡å ç‰©ä½“è½¬æ¢ä¸ºæ‹¾å–æ¥å£
 	IPickupInterface* PickupInterface = Cast<IPickupInterface>(OtherActor);
 	if (PickupInterface)
 	{
-		//µ÷ÓÃ½Ó¿Úº¯Êı£¬Ìí¼Ó»Æ½ğ
+		//è°ƒç”¨æ¥å£å‡½æ•°ï¼Œæ·»åŠ é»„é‡‘
 		PickupInterface->AddGold(this);
-		//²¥·ÅÊ°È¡ÒôĞ§
+		//æ’­æ”¾æ‹¾å–éŸ³æ•ˆ
 		SpawnPickupSound();
-		//Ïú»ÙÊ°È¡Îï
+		//é”€æ¯æ‹¾å–ç‰©
 		Destroy();
 	}
 }
+

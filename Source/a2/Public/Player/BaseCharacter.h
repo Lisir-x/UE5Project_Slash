@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -20,142 +20,143 @@ class A2_API ABaseCharacter : public ACharacter, public IHitInterface
 public:
 	ABaseCharacter();
 
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void Tick(float DeltaTime) override;
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
-	/*----------Õ½¶·Ïà¹Ø----------*/
-	//ÃüÖĞº¯Êı£¬ÊÜµ½ÉËº¦Ê±µ÷ÓÃ
+	/*----------æˆ˜æ–—ç›¸å…³----------*/
+	//å‘½ä¸­å‡½æ•°ï¼Œå—åˆ°ä¼¤å®³æ—¶è°ƒç”¨
 	virtual void GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter) override;
-	//¹¥»÷
+	//æ”»å‡»
 	virtual void Attack();
 
-	//ËÀÍöÂß¼­
+	//æ­»äº¡é€»è¾‘
 	UFUNCTION(BlueprintNativeEvent)
 	void Die();
 
-	//·½ÏòĞÔÊÜ»÷·´Ó¦
+	//æ–¹å‘æ€§å—å‡»ååº”
 	void DirectionalHitReact(const FVector& ImpactPoint);
-	//´¦ÀíÉËº¦
+	//å¤„ç†ä¼¤å®³
 	virtual void HandleDamage(float DamageAmount);
-	//²¥·ÅÊÜ»÷ÒôĞ§
+	//æ’­æ”¾å—å‡»éŸ³æ•ˆ
 	void PlayHitSound(const FVector& ImpactPoint);
-	//²¥·ÅÊÜ»÷Á£×ÓĞ§¹û
+	//æ’­æ”¾å—å‡»ç²’å­æ•ˆæœ
 	void SpawnHitParticles(const FVector& ImpactPoint);
-	//½ûÓÃ½ºÄÒÌåÅö×²
+	//ç¦ç”¨èƒ¶å›Šä½“ç¢°æ’
 	void DisableCapsule();
-	//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ¹¥»÷
+	//åˆ¤æ–­æ˜¯å¦å¯ä»¥æ”»å‡»
 	virtual bool CanAttack();
-	//ÅĞ¶ÏÊÇ·ñ´æ»î
+	//åˆ¤æ–­æ˜¯å¦å­˜æ´»
 	bool IsAlive();
-	//½ûÓÃÍø¸ñÌåÅö×²
+	//ç¦ç”¨ç½‘æ ¼ä½“ç¢°æ’
 	void DisableMeshCollision();
 	/*----------------------------*/
 
-	/*----------ÃÉÌ«ÆæÏà¹Ø----------*/
-	//²¥·ÅÊÜ»÷ÃÉÌ«Ææ
+	/*----------è’™å¤ªå¥‡ç›¸å…³----------*/
+	//æ’­æ”¾å—å‡»è’™å¤ªå¥‡
 	void PlayHitReactMontage(const FName& SectionName);
-	//²¥·Å¹¥»÷ÃÉÌ«Ææ
+	//æ’­æ”¾æ”»å‡»è’™å¤ªå¥‡
 	virtual int32 PlayAttackMontage();
-	//²¥·ÅËÀÍöÃÉÌ«Ææ
+	//æ’­æ”¾æ­»äº¡è’™å¤ªå¥‡
 	virtual int32 PlayDeathMontage();
-	//ÖĞ¶Ï¹¥»÷ÃÉÌ«Ææ
+	//ä¸­æ–­æ”»å‡»è’™å¤ªå¥‡
 	void StopAttackMontage();
-	//²¥·ÅÉÁ±ÜÃÉÌ«Ææ
+	//æ’­æ”¾é—ªé¿è’™å¤ªå¥‡
 	virtual void PlayDodgeMontage();
 	/*------------------------------*/
 
-	//»ñÈ¡Å¤ÇúÄ¿±êÎ»ÒÆ
+	//è·å–æ‰­æ›²ç›®æ ‡ä½ç§»
 	UFUNCTION(BlueprintCallable)
 	FVector GetTranslationWarpTarget();
 
-	//»ñÈ¡Å¤ÇúÄ¿±êĞı×ª
+	//è·å–æ‰­æ›²ç›®æ ‡æ—‹è½¬
 	UFUNCTION(BlueprintCallable)
 	FVector GetRotationWarpTarget();
 
-	//¹¥»÷½áÊø
+	//æ”»å‡»ç»“æŸ
 	UFUNCTION(BlueprintCallable)
 	virtual void AttackEnd();
 
-	//ÉÁ±Ü½áÊø
+	//é—ªé¿ç»“æŸ
 	UFUNCTION(BlueprintCallable)
 	virtual void DodgeEnd();
 
-	//ÉèÖÃÎäÆ÷Åö×²ÀàĞÍ
+	//è®¾ç½®æ­¦å™¨ç¢°æ’ç±»å‹
 	UFUNCTION(BlueprintCallable)
 	void SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnable);
 
-	//ÉèÖÃ¹Ç÷ÀÍø¸ñÌåÅö×²ÊôĞÔ
+	//è®¾ç½®éª¨éª¼ç½‘æ ¼ä½“ç¢°æ’å±æ€§
 	UFUNCTION(BlueprintCallable)
 	void SetMeshCollisionResponses(
 		const TMap<TEnumAsByte<ECollisionChannel>, TEnumAsByte<ECollisionResponse>>& Responses);
 
-	//ÒÑ×°±¸µÄÎäÆ÷
+	//å·²è£…å¤‡çš„æ­¦å™¨
 	UPROPERTY(VisibleAnywhere, Category = "Weapon")
 	TObjectPtr<ABaseWeapon> EquippedWeapon;
 
-	//ÊôĞÔ×é¼ş
+	//å±æ€§ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAttributeComponent> Attributes;
 
-	//µ±Ç°Õ½¶·Ä¿±ê
+	//å½“å‰æˆ˜æ–—ç›®æ ‡
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
 	TObjectPtr<AActor> CombatTarget;
 
-	//Å¤ÇúÄ¿±ê·¶Î§
+	//æ‰­æ›²ç›®æ ‡èŒƒå›´
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	double WarpTargetDistance = 75.f;
 
-	//ËÀÍö×ËÊÆ
+	//æ­»äº¡å§¿åŠ¿
 	UPROPERTY(BlueprintReadOnly)
 	TEnumAsByte<EDeathPose> DeathPose;
 
 private:
 
-	//²¥·ÅÖ¸¶¨ÃÉÌ«ÆæµÄÖ¸¶¨¶Î
+	//æ’­æ”¾æŒ‡å®šè’™å¤ªå¥‡çš„æŒ‡å®šæ®µ
 	void PlayMontageSection(UAnimMontage* Montage, const FName& SectionName);
 
-	//Ëæ»ú²¥·ÅÃÉÌ«Ææ¶Î
+	//éšæœºæ’­æ”¾è’™å¤ªå¥‡æ®µ
 	int32 PlayRandomMontageSection(UAnimMontage* Montage, const TArray<FName>& SectionNames);
 
-	//ÊÜ»÷ÒôĞ§
+	//å—å‡»éŸ³æ•ˆ
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USoundBase> HitSound;
 
-	//Á£×ÓÏµÍ³
+	//ç²’å­ç³»ç»Ÿ
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<UParticleSystem> HitParticles;
 
-	/*----------¶¯»­ÃÉÌ«Ææ----------*/
-	//¹¥»÷ÃÉÌ«Ææ
+	/*----------åŠ¨ç”»è’™å¤ªå¥‡----------*/
+	//æ”»å‡»è’™å¤ªå¥‡
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TObjectPtr<UAnimMontage> AttackMontage;
 
-	//ÊÜ»÷ÃÉÌ«Ææ
+	//å—å‡»è’™å¤ªå¥‡
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TObjectPtr<UAnimMontage> HitReactMontage;
 
-	//ËÀÍöÃÉÌ«Ææ
+	//æ­»äº¡è’™å¤ªå¥‡
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TObjectPtr<UAnimMontage> DeathMontage;
 
-	//ÉÁ±ÜÃÉÌ«Ææ
+	//é—ªé¿è’™å¤ªå¥‡
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	TObjectPtr<UAnimMontage> DodgeMontage;
 
-	//¹¥»÷ÃÉÌ«Ææ¶ÎÃû³Æ
+	//æ”»å‡»è’™å¤ªå¥‡æ®µåç§°
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TArray<FName> AttackMontageSections;
 
-	//ËÀÍöÃÉÌ«Ææ¶ÎÃû³Æ
+	//æ­»äº¡è’™å¤ªå¥‡æ®µåç§°
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TArray<FName> DeathMontageSections;
 	/*------------------------------*/
 
 public:
-	//»ñÈ¡ËÀÍö×ËÊÆ
+	//è·å–æ­»äº¡å§¿åŠ¿
 	FORCEINLINE TEnumAsByte<EDeathPose> GetDeathPose() const { return DeathPose; }
 };
+

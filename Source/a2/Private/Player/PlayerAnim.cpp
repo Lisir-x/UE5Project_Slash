@@ -1,15 +1,15 @@
-
+ï»¿
 
 #include "Player/PlayerAnim.h"
 #include "Player/PlayerCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
-//³õÊ¼»¯¶¯»­ÊµÀı
+//åˆå§‹åŒ–åŠ¨ç”»å®ä¾‹
 void UPlayerAnim::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
 
-	//»ñÈ¡½ÇÉ«ºÍÒÆ¶¯×é¼ş
+	//è·å–è§’è‰²å’Œç§»åŠ¨ç»„ä»¶
 	PlayerCharacter = Cast<APlayerCharacter>(TryGetPawnOwner());
 	if (PlayerCharacter)
 	{
@@ -18,24 +18,25 @@ void UPlayerAnim::NativeInitializeAnimation()
 	
 }
 
-//¸üĞÂ¶¯»­ÊµÀı
+//æ›´æ–°åŠ¨ç”»å®ä¾‹
 void UPlayerAnim::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
 	
-	//È·±£½ÇÉ«ºÍÒÆ¶¯×é¼şÓĞĞ§
+	//ç¡®ä¿è§’è‰²å’Œç§»åŠ¨ç»„ä»¶æœ‰æ•ˆ
 	if (PlayerCharacter && CharacterMovement)
 	{
-		//¸üĞÂËÙ¶È
+		//æ›´æ–°é€Ÿåº¦
 		Speed = CharacterMovement->Velocity.Size();
-		//¸üĞÂÊÇ·ñÔÚ¿ÕÖĞ
+		//æ›´æ–°æ˜¯å¦åœ¨ç©ºä¸­
 		IsFalling = CharacterMovement->IsFalling();
-		//¸üĞÂ½ÇÉ«×´Ì¬
+		//æ›´æ–°è§’è‰²çŠ¶æ€
 		CharacterState = PlayerCharacter->GetCharacterState();
-		//¸üĞÂ¶¯×÷×´Ì¬
+		//æ›´æ–°åŠ¨ä½œçŠ¶æ€
 		ActionState = PlayerCharacter->GetActionState();
-		//¸üĞÂËÀÍö×ËÊÆ
+		//æ›´æ–°æ­»äº¡å§¿åŠ¿
 		DeathPose = PlayerCharacter->GetDeathPose();
 	}
 
 }
+

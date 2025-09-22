@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,23 +15,23 @@ class A2_API ASoul : public AItem
 	GENERATED_BODY()
 	
 public:
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void Tick(float DeltaTime) override;
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
-	//ÖØµşÊÂ¼ş
+	//é‡å äº‹ä»¶
 	virtual void OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 		bool bFromSweep, const FHitResult& SweepResult) override;
 
 private:
-	//Áé»êÊıÁ¿
+	//çµé­‚æ•°é‡
 	UPROPERTY(EditAnywhere, Category = "Soul Properties")
 	int32 Souls;
 
-	//Ä¿±ê¸ß¶È
+	//ç›®æ ‡é«˜åº¦
 	double DesiredZ;
 
 	//
@@ -39,9 +39,10 @@ private:
 	float DriftRate = -15.f;
 
 public:
-	//»ñÈ¡Áé»êÊıÁ¿
+	//è·å–çµé­‚æ•°é‡
 	FORCEINLINE int32 GetSouls() const { return Souls; }
 
-	//ÉèÖÃÁé»êÊıÁ¿
+	//è®¾ç½®çµé­‚æ•°é‡
 	FORCEINLINE void SetSouls(int32 NumberOfSouls) { Souls = NumberOfSouls; }
 };
+

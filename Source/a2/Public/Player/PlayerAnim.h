@@ -1,4 +1,4 @@
-
+ï»¿
 #pragma once
 
 #include "CoreMinimal.h"
@@ -15,37 +15,38 @@ class A2_API UPlayerAnim : public UAnimInstance
 	GENERATED_BODY()
 	
 public:
-	//³õÊ¼»¯¶¯»­ÊµÀı
+	//åˆå§‹åŒ–åŠ¨ç”»å®ä¾‹
 	virtual void NativeInitializeAnimation() override;
-	//¸üĞÂ¶¯»­ÊµÀı
+	//æ›´æ–°åŠ¨ç”»å®ä¾‹
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 
-	//½ÇÉ«
+	//è§’è‰²
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<APlayerCharacter> PlayerCharacter;
 
-	//½ÇÉ«ÒÆ¶¯×é¼ş
+	//è§’è‰²ç§»åŠ¨ç»„ä»¶
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	TObjectPtr<UCharacterMovementComponent> CharacterMovement;
 
-	//ËÙ¶È
+	//é€Ÿåº¦
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	float Speed;
 
-	//ÊÇ·ñÔÚ¿ÕÖĞ
+	//æ˜¯å¦åœ¨ç©ºä¸­
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	bool IsFalling;
 
-	//½ÇÉ«×´Ì¬
+	//è§’è‰²çŠ¶æ€
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	ECharacterState CharacterState;
 
-	//¶¯×÷×´Ì¬
+	//åŠ¨ä½œçŠ¶æ€
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	EActionState ActionState;
 
-	//ËÀÍö×ËÊÆ
+	//æ­»äº¡å§¿åŠ¿
 	UPROPERTY(BlueprintReadOnly, Category = "Movement")
 	TEnumAsByte<EDeathPose> DeathPose;
 
 };
+

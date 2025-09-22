@@ -1,4 +1,4 @@
-
+ï»¿
 
 #include "Weapon/BaseWeapon.h"
 #include "Player/PlayerCharacter.h"
@@ -12,44 +12,44 @@
 
 ABaseWeapon::ABaseWeapon()
 {
-	//´´½¨Åö×²ºĞ×é¼şÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºç¢°æ’ç›’ç»„ä»¶é»˜è®¤å­å¯¹è±¡
 	WeaponBox = CreateDefaultSubobject<UBoxComponent>(TEXT("WeaponBox"));
 	WeaponBox->SetupAttachment(ItemMesh);
-	//ÉèÖÃÅö×²ºĞ×é¼şµÄÅö×²ÊôĞÔ
-	WeaponBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);//ÎŞÅö×²
-	WeaponBox->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);//ÊÀ½ç¶¯Ì¬ÎïÌå
-	WeaponBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);//ÓëËùÓĞÍ¨µÀÖØµş
-	WeaponBox->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);//ºöÂÔPawnÍ¨µÀ
+	//è®¾ç½®ç¢°æ’ç›’ç»„ä»¶çš„ç¢°æ’å±æ€§
+	WeaponBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);//æ— ç¢°æ’
+	WeaponBox->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);//ä¸–ç•ŒåŠ¨æ€ç‰©ä½“
+	WeaponBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);//ä¸æ‰€æœ‰é€šé“é‡å 
+	WeaponBox->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);//å¿½ç•¥Pawné€šé“
 
-	//´´½¨BoxTraceStart×é¼şÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºBoxTraceStartç»„ä»¶é»˜è®¤å­å¯¹è±¡
 	BoxTraceStart = CreateDefaultSubobject<USceneComponent>(TEXT("BoxTraceStart"));
 	BoxTraceStart->SetupAttachment(ItemMesh);
 
-	//´´½¨BoxTraceEnd×é¼şÄ¬ÈÏ×Ó¶ÔÏó
+	//åˆ›å»ºBoxTraceEndç»„ä»¶é»˜è®¤å­å¯¹è±¡
 	BoxTraceEnd = CreateDefaultSubobject<USceneComponent>(TEXT("BoxTraceEnd"));
 	BoxTraceEnd->SetupAttachment(ItemMesh);
 }
 
-//×°±¸ÎäÆ÷
+//è£…å¤‡æ­¦å™¨
 void ABaseWeapon::Equip(USceneComponent* InParent, FName InSocketName, AActor* NewOwner, APawn* NewInstigetor)
 {
 
-	//ÉèÖÃÎïÆ·×´Ì¬Îª×°±¸
+	//è®¾ç½®ç‰©å“çŠ¶æ€ä¸ºè£…å¤‡
 	ItemState = EItemState::EIS_Equipped;
-	//ÉèÖÃÎäÆ÷µÄÓµÓĞÕßºÍÖ´ĞĞÕß
+	//è®¾ç½®æ­¦å™¨çš„æ‹¥æœ‰è€…å’Œæ‰§è¡Œè€…
 	SetOwner(NewOwner);
 	SetInstigator(NewInstigetor);
-	//½«ÎäÆ÷Íø¸ñ¸½¼Óµ½Ö¸¶¨×é¼şµÄÖ¸¶¨²å²Û
+	//å°†æ­¦å™¨ç½‘æ ¼é™„åŠ åˆ°æŒ‡å®šç»„ä»¶çš„æŒ‡å®šæ’æ§½
 	AttachMeshToSocket(InParent, InSocketName);
-	//½ûÓÃÅö×²ÇòÌå
+	//ç¦ç”¨ç¢°æ’çƒä½“
 	DisableSphereCollision();
-	//²¥·Å×°±¸ÒôĞ§
+	//æ’­æ”¾è£…å¤‡éŸ³æ•ˆ
 	PlayEquipSound();
-	//½ûÓÃÁ£×ÓÏµÍ³×é¼ş
+	//ç¦ç”¨ç²’å­ç³»ç»Ÿç»„ä»¶
 	DeactivateEmbers();
 }
 
-//½ûÓÃÅö×²ÇòÌå
+//ç¦ç”¨ç¢°æ’çƒä½“
 void ABaseWeapon::DisableSphereCollision()
 {
 	if (Sphere)
@@ -58,7 +58,7 @@ void ABaseWeapon::DisableSphereCollision()
 	}
 }
 
-//²¥·Å×°±¸ÒôĞ§
+//æ’­æ”¾è£…å¤‡éŸ³æ•ˆ
 void ABaseWeapon::PlayEquipSound()
 {
 	if (EquipSound)
@@ -67,7 +67,7 @@ void ABaseWeapon::PlayEquipSound()
 	}
 }
 
-//½ûÓÃÁ£×ÓÏµÍ³×é¼ş
+//ç¦ç”¨ç²’å­ç³»ç»Ÿç»„ä»¶
 void ABaseWeapon::DeactivateEmbers()
 {
 	if (ItemEffect)
@@ -76,108 +76,109 @@ void ABaseWeapon::DeactivateEmbers()
 	}
 }
 
-//½«ÎäÆ÷Íø¸ñ¸½¼Óµ½Ö¸¶¨×é¼şµÄÖ¸¶¨²å²Û
+//å°†æ­¦å™¨ç½‘æ ¼é™„åŠ åˆ°æŒ‡å®šç»„ä»¶çš„æŒ‡å®šæ’æ§½
 void ABaseWeapon::AttachMeshToSocket(USceneComponent* InParent, const FName& InSocketName)
 {
-	//¶¨Òå¸½¼Ó¹æÔò£º
-	//²ÎÊı1£º½«ÎäÆ÷Íø¸ñµÄÎ»ÖÃºÍĞı×ªÉèÖÃÎª²å²ÛµÄÎ»ÖÃºÍĞı×ª£¬Ëõ·Å±£³Ö²»±ä
-	//²ÎÊı2£ºÊÇ·ñ±£³ÖÏà¶ÔÎ»ÖÃ£¨º¸½ÓÎïÀíÌå£©
+	//å®šä¹‰é™„åŠ è§„åˆ™ï¼š
+	//å‚æ•°1ï¼šå°†æ­¦å™¨ç½‘æ ¼çš„ä½ç½®å’Œæ—‹è½¬è®¾ç½®ä¸ºæ’æ§½çš„ä½ç½®å’Œæ—‹è½¬ï¼Œç¼©æ”¾ä¿æŒä¸å˜
+	//å‚æ•°2ï¼šæ˜¯å¦ä¿æŒç›¸å¯¹ä½ç½®ï¼ˆç„Šæ¥ç‰©ç†ä½“ï¼‰
 	FAttachmentTransformRules TransformRule(EAttachmentRule::SnapToTarget, true);
-	//½«ÎäÆ÷Íø¸ñ¸½¼Óµ½Íæ¼Ò¹Ç÷ÀÍø¸ñÌå
-	//FAttachmentTransformRules::SnapToTargetIncludingScaleÌæ»»TransformRule£º
-	//½«ÎäÆ÷Íø¸ñµÄÎ»ÖÃ¡¢Ğı×ªºÍËõ·Å¶¼ÉèÖÃÎª²å²ÛµÄÎ»ÖÃ¡¢Ğı×ªºÍËõ·Å£¬²»º¸½ÓÎïÀíÌå
+	//å°†æ­¦å™¨ç½‘æ ¼é™„åŠ åˆ°ç©å®¶éª¨éª¼ç½‘æ ¼ä½“
+	//FAttachmentTransformRules::SnapToTargetIncludingScaleæ›¿æ¢TransformRuleï¼š
+	//å°†æ­¦å™¨ç½‘æ ¼çš„ä½ç½®ã€æ—‹è½¬å’Œç¼©æ”¾éƒ½è®¾ç½®ä¸ºæ’æ§½çš„ä½ç½®ã€æ—‹è½¬å’Œç¼©æ”¾ï¼Œä¸ç„Šæ¥ç‰©ç†ä½“
 	ItemMesh->AttachToComponent(InParent, TransformRule, InSocketName);
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void ABaseWeapon::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//°ó¶¨»Øµ÷º¯Êıµ½»ù±¾×é¼şÎ¯ÍĞ
-	//ÎäÆ÷Åö×²ºĞÖØµşÊÂ¼ş
+	//ç»‘å®šå›è°ƒå‡½æ•°åˆ°åŸºæœ¬ç»„ä»¶å§”æ‰˜
+	//æ­¦å™¨ç¢°æ’ç›’é‡å äº‹ä»¶
 	WeaponBox->OnComponentBeginOverlap.AddDynamic(this, &ABaseWeapon::OnBoxOverlap);
 }
 
-//ÎäÆ÷Åö×²ºĞÖØµşÊÂ¼ş
+//æ­¦å™¨ç¢°æ’ç›’é‡å äº‹ä»¶
 void ABaseWeapon::OnBoxOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, 
 	bool bFromSweep, const FHitResult& SweepResult)
 {
-	//Èç¹ûÖØµşµÄActorÊÇÍ¬Àà£¬ÔòÖ±½Ó·µ»Ø
+	//å¦‚æœé‡å çš„Actoræ˜¯åŒç±»ï¼Œåˆ™ç›´æ¥è¿”å›
 	if (ActorIsSameType(OtherActor)) return;
 
-	//´æ´¢Åö×²¼ì²â½á¹ûµÄ½á¹¹Ìå
+	//å­˜å‚¨ç¢°æ’æ£€æµ‹ç»“æœçš„ç»“æ„ä½“
 	FHitResult BoxHit;
-	//ºĞĞÎ×·×Ù
+	//ç›’å½¢è¿½è¸ª
 	BoxTrace(BoxHit);
 
-	if (BoxHit.GetActor())	//Èç¹ûÓĞÅö×²
+	if (BoxHit.GetActor())	//å¦‚æœæœ‰ç¢°æ’
 	{
-		//Èç¹ûÅö×²µ½µÄActorÊÇÍ¬Àà£¬ÔòÖ±½Ó·µ»Ø
+		//å¦‚æœç¢°æ’åˆ°çš„Actoræ˜¯åŒç±»ï¼Œåˆ™ç›´æ¥è¿”å›
 		if (ActorIsSameType(BoxHit.GetActor())) return;
-		//Ó¦ÓÃÉËº¦
+		//åº”ç”¨ä¼¤å®³
 		UGameplayStatics::ApplyDamage(
-			BoxHit.GetActor(),	//ÊÜ»÷Actor
-			Damage,				//ÉËº¦Öµ
-			GetInstigator()->GetController(),//Ôì³ÉÉËº¦µÄ¿ØÖÆÆ÷
-			this,				//Ôì³ÉÉËº¦µÄActor
-			UDamageType::StaticClass()	//ÉËº¦ÀàĞÍ
+			BoxHit.GetActor(),	//å—å‡»Actor
+			Damage,				//ä¼¤å®³å€¼
+			GetInstigator()->GetController(),//é€ æˆä¼¤å®³çš„æ§åˆ¶å™¨
+			this,				//é€ æˆä¼¤å®³çš„Actor
+			UDamageType::StaticClass()	//ä¼¤å®³ç±»å‹
 		);
-		//Ö´ĞĞÃüÖĞ¼ì²â
+		//æ‰§è¡Œå‘½ä¸­æ£€æµ‹
 		ExecuteGetHit(BoxHit);
-		//µ÷ÓÃ´´½¨Á¦³¡º¯Êı
+		//è°ƒç”¨åˆ›å»ºåŠ›åœºå‡½æ•°
 		CreateFields(BoxHit.ImpactPoint);
 
 	}
 }
 
-//ÅĞ¶ÏÊÇ·ñÎªÏàÍ¬ÀàĞÍµÄActor
+//åˆ¤æ–­æ˜¯å¦ä¸ºç›¸åŒç±»å‹çš„Actor
 bool ABaseWeapon::ActorIsSameType(AActor* OtherActor)
 {
 	return GetOwner()->ActorHasTag(TEXT("Enemy")) && OtherActor->ActorHasTag(TEXT("Enemy"));
 }
 
-//Ö´ĞĞÃüÖĞ¼ì²â
+//æ‰§è¡Œå‘½ä¸­æ£€æµ‹
 void ABaseWeapon::ExecuteGetHit(FHitResult& BoxHit)
 {
-	//³¢ÊÔ½«Åö×²µ½µÄActor×ª»»ÎªÃüÖĞ½Ó¿Ú£¨ÅĞ¶ÏÄ¿±êÊÇ·ñÊµÏÖÁËÊÜ»÷Âß¼­£©
+	//å°è¯•å°†ç¢°æ’åˆ°çš„Actorè½¬æ¢ä¸ºå‘½ä¸­æ¥å£ï¼ˆåˆ¤æ–­ç›®æ ‡æ˜¯å¦å®ç°äº†å—å‡»é€»è¾‘ï¼‰
 	IHitInterface* HitInterface = Cast<IHitInterface>(BoxHit.GetActor());
-	if (HitInterface)	//Èç¹ûÊµÏÖÁËÊÜ»÷½Ó¿Ú
+	if (HitInterface)	//å¦‚æœå®ç°äº†å—å‡»æ¥å£
 	{
-		//µ÷ÓÃÊÜ»÷½Ó¿ÚµÄÊÜ»÷º¯Êı
+		//è°ƒç”¨å—å‡»æ¥å£çš„å—å‡»å‡½æ•°
 		HitInterface->Execute_GetHit(BoxHit.GetActor(), BoxHit.ImpactPoint, GetOwner());
 	}
 }
 
-//ºĞĞÎ×·×Ù
+//ç›’å½¢è¿½è¸ª
 void ABaseWeapon::BoxTrace(FHitResult& BoxHit)
 {
-	//»ñÈ¡×·×Ù×é¼şÎ»ÖÃ
+	//è·å–è¿½è¸ªç»„ä»¶ä½ç½®
 	const FVector Start = BoxTraceStart->GetComponentLocation();
 	const FVector End = BoxTraceEnd->GetComponentLocation();
 
-	//´´½¨ĞèÒªºöÂÔµÄActorÊı×é£¨±ÜÃâ¼ì²â×ÔÉí£©
+	//åˆ›å»ºéœ€è¦å¿½ç•¥çš„Actoræ•°ç»„ï¼ˆé¿å…æ£€æµ‹è‡ªèº«ï¼‰
 	TArray<AActor*> ActorsToIgnore;
-	ActorsToIgnore.Add(this);//½«µ±Ç°ÎäÆ÷×ÔÉí¼ÓÈëºöÂÔÁĞ±í
-	ActorsToIgnore.Add(GetOwner());//½«ÎäÆ÷µÄÓµÓĞÕß¼ÓÈëºöÂÔÁĞ±í
+	ActorsToIgnore.Add(this);//å°†å½“å‰æ­¦å™¨è‡ªèº«åŠ å…¥å¿½ç•¥åˆ—è¡¨
+	ActorsToIgnore.Add(GetOwner());//å°†æ­¦å™¨çš„æ‹¥æœ‰è€…åŠ å…¥å¿½ç•¥åˆ—è¡¨
 	for (AActor* Actor : IgnoreActors)
 	{
-		ActorsToIgnore.AddUnique(Actor);//½«ºöÂÔÁĞ±íÖĞµÄActor¼ÓÈëºöÂÔÁĞ±í
+		ActorsToIgnore.AddUnique(Actor);//å°†å¿½ç•¥åˆ—è¡¨ä¸­çš„ActoråŠ å…¥å¿½ç•¥åˆ—è¡¨
 	}
 
-	//Ö´ĞĞºĞÌåÅö×²¼ì²â
+	//æ‰§è¡Œç›’ä½“ç¢°æ’æ£€æµ‹
 	UKismetSystemLibrary::BoxTraceSingle(
-		this, Start, End,	//¶ÔÏó¡¢Æğµã¡¢ÖÕµã
-		BoxTraceExtent,		//ºĞÌå°ë³ß´ç£¨ÈıÎ¬ÏòÁ¿£©
-		BoxTraceStart->GetComponentRotation(), //Ê¹ÓÃÖ¸¶¨×é¼şµÄĞı×ª·½Ïò
-		ETraceTypeQuery::TraceTypeQuery1, //Ê¹ÓÃµÄÅö×²Í¨µÀÀàĞÍ
-		false,	//²»¼ì²â¸´ÔÓÅö×²£¨ÉèÎªtrue¿É¼ì²âÈı½ÇĞÎ¼¶±ğµÄÅö×²£©
-		ActorsToIgnore, //ĞèÒªºöÂÔµÄActorÊı×é
-		bShowBoxDebug ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,//µ÷ÊÔ»æÖÆÄ£Ê½
-		BoxHit,	//Êä³ö²ÎÊı£¬½ÓÊÕÅö×²½á¹û
-		true	//ÊÇ·ñºöÂÔ×ÔÉí£¨ÓëActorToIgnoreÅäºÏÊ¹ÓÃ£©
+		this, Start, End,	//å¯¹è±¡ã€èµ·ç‚¹ã€ç»ˆç‚¹
+		BoxTraceExtent,		//ç›’ä½“åŠå°ºå¯¸ï¼ˆä¸‰ç»´å‘é‡ï¼‰
+		BoxTraceStart->GetComponentRotation(), //ä½¿ç”¨æŒ‡å®šç»„ä»¶çš„æ—‹è½¬æ–¹å‘
+		ETraceTypeQuery::TraceTypeQuery1, //ä½¿ç”¨çš„ç¢°æ’é€šé“ç±»å‹
+		false,	//ä¸æ£€æµ‹å¤æ‚ç¢°æ’ï¼ˆè®¾ä¸ºtrueå¯æ£€æµ‹ä¸‰è§’å½¢çº§åˆ«çš„ç¢°æ’ï¼‰
+		ActorsToIgnore, //éœ€è¦å¿½ç•¥çš„Actoræ•°ç»„
+		bShowBoxDebug ? EDrawDebugTrace::ForDuration : EDrawDebugTrace::None,//è°ƒè¯•ç»˜åˆ¶æ¨¡å¼
+		BoxHit,	//è¾“å‡ºå‚æ•°ï¼Œæ¥æ”¶ç¢°æ’ç»“æœ
+		true	//æ˜¯å¦å¿½ç•¥è‡ªèº«ï¼ˆä¸ActorToIgnoreé…åˆä½¿ç”¨ï¼‰
 	);
-	//½«Åö×²µ½µÄActor¼ÓÈëºöÂÔÁĞ±í
+	//å°†ç¢°æ’åˆ°çš„ActoråŠ å…¥å¿½ç•¥åˆ—è¡¨
 	IgnoreActors.AddUnique(BoxHit.GetActor());
 }
+

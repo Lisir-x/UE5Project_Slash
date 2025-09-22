@@ -1,21 +1,22 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Interfaces/PickupInterface.h"
 
 // Add default functionality here for any IPickupInterface functions that are not pure virtual.
 
-//ÉèÖÃµ±Ç°ÖØµşµÄÎïÆ·
+//è®¾ç½®å½“å‰é‡å çš„ç‰©å“
 void IPickupInterface::SetOverlappingItem(AItem* Item)
 {
 }
 
-//Ìí¼ÓÁé»ê
+//æ·»åŠ çµé­‚
 void IPickupInterface::AddSouls(ASoul* Soul)
 {
 }
 
-//Ìí¼Ó»Æ½ğ
+//æ·»åŠ é»„é‡‘
 void IPickupInterface::AddGold(ATreasure* Treasure)
 {
 }
+

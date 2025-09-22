@@ -1,26 +1,27 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "HUD/PlayerHUD.h"
 #include "HUD/PlayerOverlay.h"
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void APlayerHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//»ñÈ¡ÊÀ½ç
+	//è·å–ä¸–ç•Œ
 	UWorld* World = GetWorld();
 	if (World)
 	{
-		//»ñÈ¡Íæ¼Ò¿ØÖÆÆ÷
+		//è·å–ç©å®¶æ§åˆ¶å™¨
 		APlayerController* Controller = World->GetFirstPlayerController();
 		if (Controller && PlayerOverlayClass)
 		{
-			//´´½¨ÑªÌõ¶ÔÏó
+			//åˆ›å»ºè¡€æ¡å¯¹è±¡
 			PlayerOverlay = CreateWidget<UPlayerOverlay>(Controller, PlayerOverlayClass);
-			//Ìí¼Óµ½ÊÓ¿Ú
+			//æ·»åŠ åˆ°è§†å£
 			PlayerOverlay->AddToViewport();
 		}
 	}
 }
+

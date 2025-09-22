@@ -1,4 +1,4 @@
-
+ï»¿
 #pragma once
 
 #include "CoreMinimal.h"
@@ -16,26 +16,26 @@ class A2_API ABaseWeapon : public AItem
 public:
 	ABaseWeapon();
 
-	//×°±¸ÎäÆ÷
+	//è£…å¤‡æ­¦å™¨
 	void Equip(USceneComponent* InParent, FName InSocketName, AActor* NewOwner, APawn* NewInstigetor);
-	//½ûÓÃÅö×²ÇòÌå
+	//ç¦ç”¨ç¢°æ’çƒä½“
 	void DisableSphereCollision();
-	//²¥·Å×°±¸ÒôĞ§
+	//æ’­æ”¾è£…å¤‡éŸ³æ•ˆ
 	void PlayEquipSound();
-	//½ûÓÃÁ£×ÓÏµÍ³×é¼ş
+	//ç¦ç”¨ç²’å­ç³»ç»Ÿç»„ä»¶
 	void DeactivateEmbers();
 
-	//½«ÎäÆ÷Íø¸ñ¸½¼Óµ½Ö¸¶¨×é¼şµÄÖ¸¶¨²å²Û
+	//å°†æ­¦å™¨ç½‘æ ¼é™„åŠ åˆ°æŒ‡å®šç»„ä»¶çš„æŒ‡å®šæ’æ§½
 	void AttachMeshToSocket(USceneComponent* InParent, const FName& InSocketName);
 
-	//ĞèÒªºöÂÔµÄÅö×²Ìå
+	//éœ€è¦å¿½ç•¥çš„ç¢°æ’ä½“
 	TArray<AActor*> IgnoreActors;
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
-	//ÎäÆ÷Åö×²ºĞÖØµşÊÂ¼ş
+	//æ­¦å™¨ç¢°æ’ç›’é‡å äº‹ä»¶
 	UFUNCTION()
 	void OnBoxOverlap(
 		UPrimitiveComponent* OverlappedComponent,
@@ -46,48 +46,49 @@ protected:
 		const FHitResult& SweepResult
 	);
 
-	//ÅĞ¶ÏÊÇ·ñÎªÏàÍ¬ÀàĞÍµÄActor
+	//åˆ¤æ–­æ˜¯å¦ä¸ºç›¸åŒç±»å‹çš„Actor
 	bool ActorIsSameType(AActor* OtherActor);
 
-	//Ö´ĞĞÃüÖĞ¼ì²â
+	//æ‰§è¡Œå‘½ä¸­æ£€æµ‹
 	void ExecuteGetHit(FHitResult& BoxHit);
 
-	//´´½¨Á¦³¡
-	UFUNCTION(BlueprintImplementableEvent)	//À¶Í¼ÊµÏÖÊÂ¼ş
+	//åˆ›å»ºåŠ›åœº
+	UFUNCTION(BlueprintImplementableEvent)	//è“å›¾å®ç°äº‹ä»¶
 	void CreateFields(const FVector& FieldLocation);
 
 private:
-	//ºĞĞÎ×·×Ù
+	//ç›’å½¢è¿½è¸ª
 	void BoxTrace(FHitResult& BoxHit);
 
-	//ºĞĞÎ×·×Ù·¶Î§
+	//ç›’å½¢è¿½è¸ªèŒƒå›´
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 	FVector BoxTraceExtent = FVector(5.f);
 
-	//ÊÇ·ñÏÔÊ¾ºĞĞÎ×·×Ùµ÷ÊÔÏß
+	//æ˜¯å¦æ˜¾ç¤ºç›’å½¢è¿½è¸ªè°ƒè¯•çº¿
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 	bool bShowBoxDebug = false;
 
-	//×°±¸ÒôĞ§
+	//è£…å¤‡éŸ³æ•ˆ
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 	TObjectPtr<USoundBase> EquipSound;
 
-	//Åö×²ºĞ×é¼ş
+	//ç¢°æ’ç›’ç»„ä»¶
 	UPROPERTY(VisibleAnywhere, Category = "Weapon")
 	TObjectPtr<UBoxComponent> WeaponBox;
 
-	//ºĞĞÎ×·×ÙÆğµã×é¼ş
+	//ç›’å½¢è¿½è¸ªèµ·ç‚¹ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USceneComponent> BoxTraceStart;
 
-	//ºĞĞÎ×·×ÙÖÕµã×é¼ş
+	//ç›’å½¢è¿½è¸ªç»ˆç‚¹ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USceneComponent> BoxTraceEnd;
 
-	//ÎäÆ÷ÉËº¦
+	//æ­¦å™¨ä¼¤å®³
 	UPROPERTY(EditAnywhere, Category = "Weapon")
 	float Damage = 20.f;
 
 public:
 	FORCEINLINE UBoxComponent* GetWeaponBox() const { return WeaponBox; }
 };
+

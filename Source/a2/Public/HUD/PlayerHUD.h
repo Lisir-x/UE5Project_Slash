@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -14,19 +14,20 @@ class A2_API APlayerHUD : public AHUD
 	GENERATED_BODY()
 
 protected:
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 
 private:
-	//ÑªÌõÀà
+	//è¡€æ¡ç±»
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
 	TSubclassOf<UPlayerOverlay> PlayerOverlayClass;
 
-	//ÑªÌõ¶ÔÏó
+	//è¡€æ¡å¯¹è±¡
 	UPROPERTY()
 	TObjectPtr<UPlayerOverlay> PlayerOverlay;
 
 public:
-	//»ñÈ¡ÑªÌõ¶ÔÏó
+	//è·å–è¡€æ¡å¯¹è±¡
 	FORCEINLINE UPlayerOverlay* GetPlayerOverlay() const { return PlayerOverlay; }
 };
+

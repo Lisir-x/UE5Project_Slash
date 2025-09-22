@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -15,29 +15,30 @@ class A2_API UPlayerOverlay : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	//ÉèÖÃÑªÌõ°Ù·Ö±È
+	//è®¾ç½®è¡€æ¡ç™¾åˆ†æ¯”
 	void SetHealthBarPercent(float Percent);
-	//ÉèÖÃÌåÁ¦Ìõ°Ù·Ö±È
+	//è®¾ç½®ä½“åŠ›æ¡ç™¾åˆ†æ¯”
 	void SetStaminaBarPercent(float Percent);
-	//ÉèÖÃ½ğ±ÒÊıÁ¿
+	//è®¾ç½®é‡‘å¸æ•°é‡
 	void SetGold(int32 Gold);
-	//ÉèÖÃÁé»êÊıÁ¿
+	//è®¾ç½®çµé­‚æ•°é‡
 	void SetSouls(int32 Souls);
 
 private:
-	//°ó¶¨À¶Í¼¿Ø¼şµÄHealthBar(ÑªÌõ)
+	//ç»‘å®šè“å›¾æ§ä»¶çš„HealthBar(è¡€æ¡)
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UProgressBar> HealthBar;
 
-	//°ó¶¨À¶Í¼¿Ø¼şµÄStaminaBar(ÌåÁ¦Ìõ)
+	//ç»‘å®šè“å›¾æ§ä»¶çš„StaminaBar(ä½“åŠ›æ¡)
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UProgressBar> StaminaBar;
 
-	//°ó¶¨À¶Í¼¿Ø¼şµÄGoldText(½ğ±Ò)
+	//ç»‘å®šè“å›¾æ§ä»¶çš„GoldText(é‡‘å¸)
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> GoldText;
 
-	//°ó¶¨À¶Í¼¿Ø¼şµÄSoulsText(Áé»ê)
+	//ç»‘å®šè“å›¾æ§ä»¶çš„SoulsText(çµé­‚)
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> SoulsText;
 };
+

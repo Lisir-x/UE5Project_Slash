@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Enemy/EnemyCharacter.h"
@@ -18,120 +18,120 @@
 
 AEnemyCharacter::AEnemyCharacter()
 {
- 	//µ±ÉèÎªfalseÊ±½«Í£Ö¹TickÊÂ¼ş
+ 	//å½“è®¾ä¸ºfalseæ—¶å°†åœæ­¢Tickäº‹ä»¶
 	PrimaryActorTick.bCanEverTick = true;
 
-	//ÉèÖÃÍø¸ñÌåÅö×²ÊôĞÔ
+	//è®¾ç½®ç½‘æ ¼ä½“ç¢°æ’å±æ€§
 	GetMesh()->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
-	GetMesh()->SetGenerateOverlapEvents(true);	//¿ÉÉú³ÉÖØµşÊÂ¼ş
+	GetMesh()->SetGenerateOverlapEvents(true);	//å¯ç”Ÿæˆé‡å äº‹ä»¶
 
-	//ÉèÖÃÒÆ¶¯×é¼şÊôĞÔ
-	GetCharacterMovement()->bOrientRotationToMovement = true;	//³¯ÏòÒÆ¶¯·½Ïò
-	//½ÇÉ«²»¸úËæ¿ØÖÆÆ÷Ğı×ª
+	//è®¾ç½®ç§»åŠ¨ç»„ä»¶å±æ€§
+	GetCharacterMovement()->bOrientRotationToMovement = true;	//æœå‘ç§»åŠ¨æ–¹å‘
+	//è§’è‰²ä¸è·Ÿéšæ§åˆ¶å™¨æ—‹è½¬
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 
-	//´´½¨ÑªÌõ×é¼ş
+	//åˆ›å»ºè¡€æ¡ç»„ä»¶
 	HealthBarWidget = CreateDefaultSubobject<UHealthbarComponent>(TEXT("HealthBar"));
 	HealthBarWidget->SetupAttachment(RootComponent);
 
-	//´´½¨Pawn¸ĞÖª×é¼ş
+	//åˆ›å»ºPawnæ„ŸçŸ¥ç»„ä»¶
 	PawnSensing = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensing"));
-	//ÉèÖÃPawn¸ĞÖª×é¼şÊôĞÔ
-	PawnSensing->HearingThreshold = 600.f;		//Ìı¾õãĞÖµ
-	PawnSensing->LOSHearingThreshold = 1200.f;	//ÊÓÏßÌı¾õãĞÖµ
-	PawnSensing->SightRadius = 3000.f;			//ÊÓ¾à
-	PawnSensing->SetPeripheralVisionAngle(60.f);//ÊÓÒ°½Ç¶È
-	PawnSensing->SensingInterval = 0.1f;		//¸ĞÖª¼ä¸ô
-	PawnSensing->bOnlySensePlayers = true;		//Ö»¸ĞÖªÍæ¼Ò
+	//è®¾ç½®Pawnæ„ŸçŸ¥ç»„ä»¶å±æ€§
+	PawnSensing->HearingThreshold = 600.f;		//å¬è§‰é˜ˆå€¼
+	PawnSensing->LOSHearingThreshold = 1200.f;	//è§†çº¿å¬è§‰é˜ˆå€¼
+	PawnSensing->SightRadius = 3000.f;			//è§†è·
+	PawnSensing->SetPeripheralVisionAngle(60.f);//è§†é‡è§’åº¦
+	PawnSensing->SensingInterval = 0.1f;		//æ„ŸçŸ¥é—´éš”
+	PawnSensing->bOnlySensePlayers = true;		//åªæ„ŸçŸ¥ç©å®¶
 
-	////´´½¨AI¸ĞÖª×é¼ş
+	////åˆ›å»ºAIæ„ŸçŸ¥ç»„ä»¶
 	//PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
-	////ÊÓ¾õ¸ĞÖªÅäÖÃ
+	////è§†è§‰æ„ŸçŸ¥é…ç½®
 	//SightConfig = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
-	//SightConfig->SightRadius = 3000.f;                //ÊÓ¾à
-	//SightConfig->PeripheralVisionAngleDegrees = 60.f; //ÊÓÒ°½Ç¶È
-	//SightConfig->SetMaxAge(0.5f);					  //¸ĞÖª¼ä¸ô
-	//SightConfig->DetectionByAffiliation.bDetectEnemies = true;//Ö»¸ĞÖªÍæ¼Ò
-	////Ìı¾õ¸ĞÖªÅäÖÃ
+	//SightConfig->SightRadius = 3000.f;                //è§†è·
+	//SightConfig->PeripheralVisionAngleDegrees = 60.f; //è§†é‡è§’åº¦
+	//SightConfig->SetMaxAge(0.5f);					  //æ„ŸçŸ¥é—´éš”
+	//SightConfig->DetectionByAffiliation.bDetectEnemies = true;//åªæ„ŸçŸ¥ç©å®¶
+	////å¬è§‰æ„ŸçŸ¥é…ç½®
 	//HearingConfig = CreateDefaultSubobject<UAISenseConfig_Hearing>(TEXT("HearingConfig"));
-	//HearingConfig->HearingRange = 600.f;          //Ìı¾õ·¶Î§
-	//HearingConfig->SetMaxAge(0.5f);               //¸ĞÖª¼ä¸ô
-	//HearingConfig->DetectionByAffiliation.bDetectEnemies = true;//Ö»¸ĞÖªÍæ¼Ò
-	////½«¸ĞÖªÅäÖÃ°ó¶¨µ½¸ĞÖª×é¼ş
+	//HearingConfig->HearingRange = 600.f;          //å¬è§‰èŒƒå›´
+	//HearingConfig->SetMaxAge(0.5f);               //æ„ŸçŸ¥é—´éš”
+	//HearingConfig->DetectionByAffiliation.bDetectEnemies = true;//åªæ„ŸçŸ¥ç©å®¶
+	////å°†æ„ŸçŸ¥é…ç½®ç»‘å®šåˆ°æ„ŸçŸ¥ç»„ä»¶
 	//PerceptionComponent->ConfigureSense(*SightConfig);
 	//PerceptionComponent->ConfigureSense(*HearingConfig);
-	////ÉèÖÃÖ÷µ¼¸ĞÖªÀàĞÍÎªÊÓ¾õ
+	////è®¾ç½®ä¸»å¯¼æ„ŸçŸ¥ç±»å‹ä¸ºè§†è§‰
 	//PerceptionComponent->SetDominantSense(SightConfig->GetSenseImplementation());
 }
 
-//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 void AEnemyCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//Èç¹ûËÀÍöÔòÖ±½Ó·µ»Ø
+	//å¦‚æœæ­»äº¡åˆ™ç›´æ¥è¿”å›
 	if (IsDead()) return;
-	if (EnemyState > EEnemyState::EES_Patrolling)//Èç¹û´¦ÓÚ×·Öğ»ò¹¥»÷×´Ì¬
+	if (EnemyState > EEnemyState::EES_Patrolling)//å¦‚æœå¤„äºè¿½é€æˆ–æ”»å‡»çŠ¶æ€
 	{
-		//Ñ¡ÔñÕ½¶·Ä¿±ê
+		//é€‰æ‹©æˆ˜æ–—ç›®æ ‡
 		CheckCombatTarget();
 	}
-	else //Èç¹û´¦ÓÚÑ²Âß×´Ì¬
+	else //å¦‚æœå¤„äºå·¡é€»çŠ¶æ€
 	{
-		//Ñ¡ÔñÑ²ÂßÄ¿±ê
+		//é€‰æ‹©å·¡é€»ç›®æ ‡
 		CheckPatrolTarget();
 	}
 }
 
-//ÊÜÉËº¯Êı
+//å—ä¼¤å‡½æ•°
 float AEnemyCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent,
 	AController* EventInstigator, AActor* DamageCauser)
 {
-	//´¦ÀíÉËº¦
+	//å¤„ç†ä¼¤å®³
 	HandleDamage(DamageAmount);
-	//ÉèÖÃµ±Ç°Õ½¶·Ä¿±êÎªÉËº¦Ö´ĞĞÕß
+	//è®¾ç½®å½“å‰æˆ˜æ–—ç›®æ ‡ä¸ºä¼¤å®³æ‰§è¡Œè€…
 	CombatTarget = EventInstigator->GetPawn();
 
-	if (IsInsideAttackRadius())	//Èç¹ûÔÚ¹¥»÷·¶Î§ÄÚ
+	if (IsInsideAttackRadius())	//å¦‚æœåœ¨æ”»å‡»èŒƒå›´å†…
 	{
-		//ÉèÖÃµĞÈË×´Ì¬Îª¹¥»÷
+		//è®¾ç½®æ•ŒäººçŠ¶æ€ä¸ºæ”»å‡»
 		EnemyState = EEnemyState::EES_Attacking;
 	}
-	else if (IsOutsideAttackRadius()) //Èç¹ûÔÚ¹¥»÷·¶Î§Íâ
+	else if (IsOutsideAttackRadius()) //å¦‚æœåœ¨æ”»å‡»èŒƒå›´å¤–
 	{
-		//×·ÖğÄ¿±ê
+		//è¿½é€ç›®æ ‡
 		ChaseTarget();
 	}
 
 	return DamageAmount;
 }
 
-//Ïú»ÙÊ±µ÷ÓÃ
+//é”€æ¯æ—¶è°ƒç”¨
 void AEnemyCharacter::Destroyed()
 {
 	if (EquippedWeapon)
 	{
-		//Ïú»ÙÒÑ×°±¸µÄÎäÆ÷
+		//é”€æ¯å·²è£…å¤‡çš„æ­¦å™¨
 		EquippedWeapon->Destroy();
 	}
 }
 
-//ÃüÖĞº¯Êı£¬ÊÜµ½ÉËº¦Ê±µ÷ÓÃ
+//å‘½ä¸­å‡½æ•°ï¼Œå—åˆ°ä¼¤å®³æ—¶è°ƒç”¨
 void AEnemyCharacter::GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter)
 {
 	Super::GetHit_Implementation(ImpactPoint, Hitter);
-	//ÈôµĞÈËÎ´ËÀÍöÔòÏÔÊ¾ÑªÌõ
+	//è‹¥æ•Œäººæœªæ­»äº¡åˆ™æ˜¾ç¤ºè¡€æ¡
 	if (!IsDead()) ShowHealthBar();
-	//Çå³ıÑ²Âß¼ÆÊ±Æ÷
+	//æ¸…é™¤å·¡é€»è®¡æ—¶å™¨
 	ClearPatrolTimer();
-	//Çå³ı¹¥»÷¼ÆÊ±Æ÷
+	//æ¸…é™¤æ”»å‡»è®¡æ—¶å™¨
 	ClearAttackTimer();
-	//½ûÓÃÎäÆ÷Åö×²
+	//ç¦ç”¨æ­¦å™¨ç¢°æ’
 	SetWeaponCollisionEnabled(ECollisionEnabled::NoCollision);
-	//ÖĞ¶Ï¹¥»÷¶¯»­
+	//ä¸­æ–­æ”»å‡»åŠ¨ç”»
 	StopAttackMontage();
 
 	if (IsInsideAttackRadius())
@@ -140,95 +140,95 @@ void AEnemyCharacter::GetHit_Implementation(const FVector& ImpactPoint, AActor* 
 	}
 }
 
-//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//°ó¶¨Pawn¸ĞÖª×é¼şµÄÊÂ¼ş
+	//ç»‘å®šPawnæ„ŸçŸ¥ç»„ä»¶çš„äº‹ä»¶
 	if (PawnSensing) PawnSensing->OnSeePawn.AddDynamic(this, &AEnemyCharacter::PawnSeen);
 
-	////°ó¶¨AI¸ĞÖª×é¼şµÄÊÂ¼ş
+	////ç»‘å®šAIæ„ŸçŸ¥ç»„ä»¶çš„äº‹ä»¶
 	//if (PerceptionComponent)
 	//{
 	//	PerceptionComponent->OnPerceptionUpdated.AddDynamic(this, &AEnemyCharacter::OnPerceptionUpdated);
 	//}
 
-	//³õÊ¼»¯µĞÈË
+	//åˆå§‹åŒ–æ•Œäºº
 	InitializeEnemy();
 
-	//Ìí¼ÓµĞÈË±êÇ©
+	//æ·»åŠ æ•Œäººæ ‡ç­¾
 	Tags.Add(FName("Enemy"));
 }
 
-//ËÀÍöÂß¼­
+//æ­»äº¡é€»è¾‘
 void AEnemyCharacter::Die_Implementation()
 {
 	Super::Die_Implementation();
 
 	if (EnemyController)
 	{
-		EnemyController->StopMovement();   //Í£Ö¹ PathFollowing
-		EnemyController->ClearFocus(EAIFocusPriority::Gameplay); //ÇåÀí Focus
+		EnemyController->StopMovement();   //åœæ­¢ PathFollowing
+		EnemyController->ClearFocus(EAIFocusPriority::Gameplay); //æ¸…ç† Focus
 	}
-	//Çå³ıËùÓĞ¶¨Ê±Æ÷
+	//æ¸…é™¤æ‰€æœ‰å®šæ—¶å™¨
 	GetWorldTimerManager().ClearAllTimersForObject(this);
 	if (PawnSensing)
 	{
-		//½â°óPawn¸ĞÖª×é¼şµÄÊÂ¼ş
+		//è§£ç»‘Pawnæ„ŸçŸ¥ç»„ä»¶çš„äº‹ä»¶
 		PawnSensing->OnSeePawn.RemoveDynamic(this, &AEnemyCharacter::PawnSeen);
 	}
-	//Á¢¼´Çå¿ÕÄ¿±ê£¬±ÜÃâ MoveTo ÔÙÓÃ
+	//ç«‹å³æ¸…ç©ºç›®æ ‡ï¼Œé¿å… MoveTo å†ç”¨
 	CombatTarget = nullptr;
 
-	//ÉèÖÃµĞÈË×´Ì¬ÎªËÀÍö
+	//è®¾ç½®æ•ŒäººçŠ¶æ€ä¸ºæ­»äº¡
 	EnemyState = EEnemyState::EES_Dead;
-	//Òş²ØÑªÌõ
+	//éšè—è¡€æ¡
 	HideHealthBar();
-	//½ûÓÃ½ºÄÒÌåÅö×²
+	//ç¦ç”¨èƒ¶å›Šä½“ç¢°æ’
 	DisableCapsule();
-	//½ûÓÃÍø¸ñÌåÅö×²
+	//ç¦ç”¨ç½‘æ ¼ä½“ç¢°æ’
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	//½ûÓÃÎäÆ÷Åö×²
+	//ç¦ç”¨æ­¦å™¨ç¢°æ’
 	SetWeaponCollisionEnabled(ECollisionEnabled::NoCollision);
-	//Ïú»Ù½ÇÉ«
+	//é”€æ¯è§’è‰²
 	SetLifeSpan(DeathLifeSpan);
-	//Éú³ÉÁé»ê
+	//ç”Ÿæˆçµé­‚
 	SpawnSoul();
 }
 
-//Éú³ÉÁé»ê
+//ç”Ÿæˆçµé­‚
 void AEnemyCharacter::SpawnSoul()
 {
-	//»ñÈ¡ÊÀ½çÉÏÏÂÎÄ
+	//è·å–ä¸–ç•Œä¸Šä¸‹æ–‡
 	UWorld* World = GetWorld();
 	if (World && SoulClass && Attributes)
 	{
-		//Ö¸¶¨Éú³ÉÎ»ÖÃ
+		//æŒ‡å®šç”Ÿæˆä½ç½®
 		const FVector SpawnLocation = GetActorLocation() + FVector(0.f, 0.f, 125.f);
-		//ÔÚÖ¸¶¨Î»ÖÃÉú³ÉÁé»ê
+		//åœ¨æŒ‡å®šä½ç½®ç”Ÿæˆçµé­‚
 		ASoul* SpawnedSoul = World->SpawnActor<ASoul>(SoulClass, SpawnLocation, GetActorRotation());
 		if (SpawnedSoul)
 		{
-			//»ñÈ¡²¢ÉèÖÃÁé»êÊıÁ¿
+			//è·å–å¹¶è®¾ç½®çµé­‚æ•°é‡
 			SpawnedSoul->SetSouls(Attributes->GetSouls());
 		}
 	}
 }
 
-//¹¥»÷º¯Êı
+//æ”»å‡»å‡½æ•°
 void AEnemyCharacter::Attack()
 {
 	Super::Attack();
-	//Èç¹ûÃ»ÓĞÕ½¶·Ä¿±êÔòÖ±½Ó·µ»Ø
+	//å¦‚æœæ²¡æœ‰æˆ˜æ–—ç›®æ ‡åˆ™ç›´æ¥è¿”å›
 	if (!CombatTarget) return;
-	//ÉèÖÃµĞÈË×´Ì¬ÎªÃ¦Âµ
+	//è®¾ç½®æ•ŒäººçŠ¶æ€ä¸ºå¿™ç¢Œ
 	EnemyState = EEnemyState::EES_Engaged;
-	//²¥·ÅµĞÈË¹¥»÷ÃÉÌ«Ææ
+	//æ’­æ”¾æ•Œäººæ”»å‡»è’™å¤ªå¥‡
 	PlayAttackMontage();
 }
 
-//ÊÇ·ñ¿ÉÒÔ¹¥»÷
+//æ˜¯å¦å¯ä»¥æ”»å‡»
 bool AEnemyCharacter::CanAttack()
 {
 	return IsInsideAttackRadius()
@@ -237,89 +237,89 @@ bool AEnemyCharacter::CanAttack()
 		&& !IsDead();
 }
 
-//¹¥»÷½áÊø
+//æ”»å‡»ç»“æŸ
 void AEnemyCharacter::AttackEnd()
 {
-	//µĞÈË×´Ì¬ÖØÖÃÎªÎŞ×´Ì¬
+	//æ•ŒäººçŠ¶æ€é‡ç½®ä¸ºæ— çŠ¶æ€
 	EnemyState = EEnemyState::EES_NoState;
-	//Ñ¡ÔñÕ½¶·Ä¿±ê
+	//é€‰æ‹©æˆ˜æ–—ç›®æ ‡
 	CheckCombatTarget();
 }
 
-//´¦ÀíÉËº¦
+//å¤„ç†ä¼¤å®³
 void AEnemyCharacter::HandleDamage(float DamageAmount)
 {
 	Super::HandleDamage(DamageAmount);
 	if (Attributes && HealthBarWidget)
 	{
-		//¸üĞÂÑªÌõ×é¼şµÄÑªÁ¿°Ù·Ö±È
+		//æ›´æ–°è¡€æ¡ç»„ä»¶çš„è¡€é‡ç™¾åˆ†æ¯”
 		HealthBarWidget->SetHealthPercent(Attributes->GetHealthPercent());
 	}
 }
 
-//³õÊ¼»¯µĞÈË
+//åˆå§‹åŒ–æ•Œäºº
 void AEnemyCharacter::InitializeEnemy()
 {
-	//»ñÈ¡AI¿ØÖÆÆ÷
+	//è·å–AIæ§åˆ¶å™¨
 	EnemyController = Cast<AAIController>(GetController());
-	//AIÒÆ¶¯µ½Ä¿±êÑ²Âßµã
+	//AIç§»åŠ¨åˆ°ç›®æ ‡å·¡é€»ç‚¹
 	MoveToTarget(PatrolTarget);
-	//³õÊ¼»¯ÑªÌõ×é¼şµÄÑªÁ¿°Ù·Ö±È
+	//åˆå§‹åŒ–è¡€æ¡ç»„ä»¶çš„è¡€é‡ç™¾åˆ†æ¯”
 	HealthBarWidget->SetHealthPercent(Attributes->GetHealthPercent());
-	//³õÊ¼Ê±Òş²ØÑªÌõ
+	//åˆå§‹æ—¶éšè—è¡€æ¡
 	HideHealthBar();
-	//Éú³ÉÄ¬ÈÏÎäÆ÷
+	//ç”Ÿæˆé»˜è®¤æ­¦å™¨
 	SpawnDefaultWeapon();
 }
 
-//Ñ¡ÔñÑ²ÂßÄ¿±ê
+//é€‰æ‹©å·¡é€»ç›®æ ‡
 void AEnemyCharacter::CheckPatrolTarget()
 {
-	if (InTargetRange(PatrolTarget, PatrolRadius)) //Èç¹ûÔÚÑ²Âß·¶Î§ÄÚ
+	if (InTargetRange(PatrolTarget, PatrolRadius)) //å¦‚æœåœ¨å·¡é€»èŒƒå›´å†…
 	{
-		//Ñ¡ÔñĞÂµÄÑ²Âßµã
+		//é€‰æ‹©æ–°çš„å·¡é€»ç‚¹
 		PatrolTarget = ChoosePatrolTarget();
-		//Ëæ»úµÈ´ıÊ±¼ä
+		//éšæœºç­‰å¾…æ—¶é—´
 		const float WaitTime = FMath::RandRange(PatrolWaitMin, PatrolWaitMax);
-		//ÉèÖÃÑ²Âß¼ÆÊ±Æ÷
+		//è®¾ç½®å·¡é€»è®¡æ—¶å™¨
 		GetWorldTimerManager().SetTimer(PatrolTimer, this, &AEnemyCharacter::PatrolTimerFinished, WaitTime);
 	}
 }
 
-//Ñ¡ÔñÕ½¶·Ä¿±ê
+//é€‰æ‹©æˆ˜æ–—ç›®æ ‡
 void AEnemyCharacter::CheckCombatTarget()
 {
-	if (IsOutsideCombatRadius()) //Èç¹û²»ÔÚÕ½¶··¶Î§ÄÚ
+	if (IsOutsideCombatRadius()) //å¦‚æœä¸åœ¨æˆ˜æ–—èŒƒå›´å†…
 	{
-		//Çå³ı¹¥»÷¼ÆÊ±Æ÷
+		//æ¸…é™¤æ”»å‡»è®¡æ—¶å™¨
 		ClearAttackTimer();
-		//Ê§È¥ĞËÈ¤
+		//å¤±å»å…´è¶£
 		LoseInterest();
-		//Èç¹û²»´¦ÓÚÃ¦Âµ×´Ì¬£¬¿ªÊ¼Ñ²Âß
+		//å¦‚æœä¸å¤„äºå¿™ç¢ŒçŠ¶æ€ï¼Œå¼€å§‹å·¡é€»
 		if (!IsEngaged()) StartPatrolling();
 	}
-	else if (IsOutsideAttackRadius() && !IsChasing()) //ÔÚ¹¥»÷·¶Î§Íâ
+	else if (IsOutsideAttackRadius() && !IsChasing()) //åœ¨æ”»å‡»èŒƒå›´å¤–
 	{
-		//Çå³ı¹¥»÷¼ÆÊ±Æ÷
+		//æ¸…é™¤æ”»å‡»è®¡æ—¶å™¨
 		ClearAttackTimer();
-		//Èç¹û²»´¦ÓÚÃ¦Âµ×´Ì¬£¬×·ÖğÄ¿±ê
+		//å¦‚æœä¸å¤„äºå¿™ç¢ŒçŠ¶æ€ï¼Œè¿½é€ç›®æ ‡
 		if (!IsEngaged()) ChaseTarget();
 	}
-	else if (CanAttack())	//¿É¹¥»÷
+	else if (CanAttack())	//å¯æ”»å‡»
 	{
-		//ÆôÓÃ¹¥»÷¼ÆÊ±Æ÷
+		//å¯ç”¨æ”»å‡»è®¡æ—¶å™¨
 		StartAttackTimer();
 	}
 }
 
-//Ñ²ÂßµÈ´ıÊ±¼ä»Øµ÷º¯Êı
+//å·¡é€»ç­‰å¾…æ—¶é—´å›è°ƒå‡½æ•°
 void AEnemyCharacter::PatrolTimerFinished()
 {
-	//AIÒÆ¶¯µ½Ä¿±êÑ²Âßµã
+	//AIç§»åŠ¨åˆ°ç›®æ ‡å·¡é€»ç‚¹
 	MoveToTarget(PatrolTarget);
 }
 
-//Òş²ØÑªÌõ
+//éšè—è¡€æ¡
 void AEnemyCharacter::HideHealthBar()
 {
 	if (HealthBarWidget)
@@ -328,7 +328,7 @@ void AEnemyCharacter::HideHealthBar()
 	}
 }
 
-//ÏÔÊ¾ÑªÌõ
+//æ˜¾ç¤ºè¡€æ¡
 void AEnemyCharacter::ShowHealthBar()
 {
 	if (HealthBarWidget)
@@ -337,102 +337,102 @@ void AEnemyCharacter::ShowHealthBar()
 	}
 }
 
-//Ê§È¥ĞËÈ¤
+//å¤±å»å…´è¶£
 void AEnemyCharacter::LoseInterest()
 {
-	//Çå³ıÕ½¶·Ä¿±ê
+	//æ¸…é™¤æˆ˜æ–—ç›®æ ‡
 	CombatTarget = nullptr;
-	//Òş²ØÑªÌõ
+	//éšè—è¡€æ¡
 	HideHealthBar();
 }
 
-//¿ªÊ¼Ñ²Âß
+//å¼€å§‹å·¡é€»
 void AEnemyCharacter::StartPatrolling()
 {
-	//ÉèÖÃµĞÈË×´Ì¬ÎªÑ²Âß
+	//è®¾ç½®æ•ŒäººçŠ¶æ€ä¸ºå·¡é€»
 	EnemyState = EEnemyState::EES_Patrolling;
-	//ÉèÖÃÑ²ÂßÊ±µÄÒÆ¶¯ËÙ¶È
+	//è®¾ç½®å·¡é€»æ—¶çš„ç§»åŠ¨é€Ÿåº¦
 	GetCharacterMovement()->MaxWalkSpeed = PatrollingSpeed;
-	//Ñ¡ÔñĞÂµÄÑ²Âßµã
+	//é€‰æ‹©æ–°çš„å·¡é€»ç‚¹
 	PatrolTarget = ChoosePatrolTarget();
-	//AIÒÆ¶¯µ½Ä¿±êÑ²Âßµã
+	//AIç§»åŠ¨åˆ°ç›®æ ‡å·¡é€»ç‚¹
 	MoveToTarget(PatrolTarget);
 }
 
-//×·ÖğÄ¿±ê
+//è¿½é€ç›®æ ‡
 void AEnemyCharacter::ChaseTarget()
 {
-	//ÉèÖÃµĞÈË×´Ì¬Îª×·Öğ
+	//è®¾ç½®æ•ŒäººçŠ¶æ€ä¸ºè¿½é€
 	EnemyState = EEnemyState::EES_Chasing;
-	//ÉèÖÃ×·ÖğÊ±µÄÒÆ¶¯ËÙ¶È
+	//è®¾ç½®è¿½é€æ—¶çš„ç§»åŠ¨é€Ÿåº¦
 	GetCharacterMovement()->MaxWalkSpeed = ChasingSpeed;
-	//AIÒÆ¶¯µ½Õ½¶·Ä¿±ê
+	//AIç§»åŠ¨åˆ°æˆ˜æ–—ç›®æ ‡
 	MoveToTarget(CombatTarget);
 }
 
-//ÊÇ·ñ³¬³öÕ½¶··¶Î§
+//æ˜¯å¦è¶…å‡ºæˆ˜æ–—èŒƒå›´
 bool AEnemyCharacter::IsOutsideCombatRadius()
 {
 	return !InTargetRange(CombatTarget, CombatRadius);
 }
-//ÊÇ·ñ³¬³ö¹¥»÷·¶Î§
+//æ˜¯å¦è¶…å‡ºæ”»å‡»èŒƒå›´
 bool AEnemyCharacter::IsOutsideAttackRadius()
 {
 	return !InTargetRange(CombatTarget, AttackRadius);
 }
-//ÊÇ·ñÔÚ¹¥»÷·¶Î§ÄÚ
+//æ˜¯å¦åœ¨æ”»å‡»èŒƒå›´å†…
 bool AEnemyCharacter::IsInsideAttackRadius()
 {
 	return InTargetRange(CombatTarget, AttackRadius);
 }
-//ÊÇ·ñ´¦ÓÚÑ²Âß×´Ì¬
+//æ˜¯å¦å¤„äºå·¡é€»çŠ¶æ€
 bool AEnemyCharacter::IsChasing()
 {
 	return EnemyState == EEnemyState::EES_Chasing;
 }
-//ÊÇ·ñ´¦ÓÚ¹¥»÷×´Ì¬
+//æ˜¯å¦å¤„äºæ”»å‡»çŠ¶æ€
 bool AEnemyCharacter::IsAttacking()
 {
 	return EnemyState == EEnemyState::EES_Attacking;
 }
-//ÊÇ·ñ´¦ÓÚËÀÍö×´Ì¬
+//æ˜¯å¦å¤„äºæ­»äº¡çŠ¶æ€
 bool AEnemyCharacter::IsDead()
 {
 	return EnemyState == EEnemyState::EES_Dead;
 }
-//ÊÇ·ñ´¦ÓÚÃ¦Âµ×´Ì¬£¨¹¥»÷»ò±»»÷£©
+//æ˜¯å¦å¤„äºå¿™ç¢ŒçŠ¶æ€ï¼ˆæ”»å‡»æˆ–è¢«å‡»ï¼‰
 bool AEnemyCharacter::IsEngaged()
 {
 	return EnemyState == EEnemyState::EES_Engaged;
 }
 
-//Çå³ıÑ²Âß¼ÆÊ±Æ÷
+//æ¸…é™¤å·¡é€»è®¡æ—¶å™¨
 void AEnemyCharacter::ClearPatrolTimer()
 {
 	GetWorldTimerManager().ClearTimer(PatrolTimer);
 }
 
-//ÆôÓÃ¹¥»÷¼ÆÊ±Æ÷
+//å¯ç”¨æ”»å‡»è®¡æ—¶å™¨
 void AEnemyCharacter::StartAttackTimer()
 {
-	//ÉèÖÃµĞÈË×´Ì¬Îª¹¥»÷
+	//è®¾ç½®æ•ŒäººçŠ¶æ€ä¸ºæ”»å‡»
 	EnemyState = EEnemyState::EES_Attacking;
-	//Ëæ»úÉú³É¹¥»÷¼ä¸ôÊ±¼ä
+	//éšæœºç”Ÿæˆæ”»å‡»é—´éš”æ—¶é—´
 	const float AttackTime = FMath::RandRange(AttackMin, AttackMax);
-	//ÉèÖÃ¹¥»÷¼ÆÊ±Æ÷
+	//è®¾ç½®æ”»å‡»è®¡æ—¶å™¨
 	GetWorldTimerManager().SetTimer(AttackTimer, this, &AEnemyCharacter::Attack, AttackTime);
 }
-//Çå³ı¹¥»÷¼ÆÊ±Æ÷
+//æ¸…é™¤æ”»å‡»è®¡æ—¶å™¨
 void AEnemyCharacter::ClearAttackTimer()
 {
 	GetWorldTimerManager().ClearTimer(AttackTimer);
 }
 
-//¼ì²éÄ¿±êÊÇ·ñÔÚÕ½¶··¶Î§ÄÚ
+//æ£€æŸ¥ç›®æ ‡æ˜¯å¦åœ¨æˆ˜æ–—èŒƒå›´å†…
 bool AEnemyCharacter::InTargetRange(AActor* Target, double Radius)
 {
 	if (!Target) return false;
-	////»æÖÆµ÷ÊÔÇò
+	////ç»˜åˆ¶è°ƒè¯•çƒ
 	//DRAW_SPHERE_SingleFrame(GetActorLocation());
 	//DRAW_SPHERE_SingleFrame(Target->GetActorLocation());
 	//const float Distance = FVector::Distance(Target->GetActorLocation(), GetActorLocation());
@@ -440,60 +440,60 @@ bool AEnemyCharacter::InTargetRange(AActor* Target, double Radius)
 	return FVector::Distance(Target->GetActorLocation(), GetActorLocation()) <= Radius;
 }
 
-//ÒÆ¶¯µ½Ä¿±ê
+//ç§»åŠ¨åˆ°ç›®æ ‡
 void AEnemyCharacter::MoveToTarget(AActor* Target)
 {
 	if (!EnemyController || !Target) return;
-	//´´½¨AIÒÆ¶¯ÇëÇó
+	//åˆ›å»ºAIç§»åŠ¨è¯·æ±‚
 	FAIMoveRequest MoveRequest;
-	MoveRequest.SetGoalActor(Target);	  //ÉèÖÃÄ¿±ê
-	MoveRequest.SetAcceptanceRadius(AcceptanceRadius);//ÉèÖÃ½ÓÊÜ°ë¾¶
-	//Ö´ĞĞÒÆ¶¯ÃüÁî
+	MoveRequest.SetGoalActor(Target);	  //è®¾ç½®ç›®æ ‡
+	MoveRequest.SetAcceptanceRadius(AcceptanceRadius);//è®¾ç½®æ¥å—åŠå¾„
+	//æ‰§è¡Œç§»åŠ¨å‘½ä»¤
 	EnemyController->MoveTo(MoveRequest);
 }
 
-//Ñ¡ÔñĞÂµÄÑ²Âßµã
+//é€‰æ‹©æ–°çš„å·¡é€»ç‚¹
 AActor* AEnemyCharacter::ChoosePatrolTarget()
 {
-	//ÓĞĞ§Ñ²Âßµã¼ì²â
-	TArray<AActor*> ValidTargets; //´æ´¢ËùÓĞÓĞĞ§Ñ²Âßµã
+	//æœ‰æ•ˆå·¡é€»ç‚¹æ£€æµ‹
+	TArray<AActor*> ValidTargets; //å­˜å‚¨æ‰€æœ‰æœ‰æ•ˆå·¡é€»ç‚¹
 	for (AActor* Target : PatrolTargets)
 	{
-		if (Target && Target != PatrolTarget) //ÅÅ³ı¿ÕÖ¸ÕëºÍµ±Ç°Ñ²Âßµã
+		if (Target && Target != PatrolTarget) //æ’é™¤ç©ºæŒ‡é’ˆå’Œå½“å‰å·¡é€»ç‚¹
 		{
 			ValidTargets.AddUnique(Target);
 		}
 	}
 
-	const int32 NumTargets = ValidTargets.Num(); //»ñÈ¡Ñ²ÂßµãÊıÁ¿
+	const int32 NumTargets = ValidTargets.Num(); //è·å–å·¡é€»ç‚¹æ•°é‡
 	if (NumTargets > 0)
 	{
-		const int32 Selection = FMath::RandRange(0, NumTargets - 1); //Ëæ»úÑ¡ÔñÒ»¸öÑ²ÂßµãË÷Òı
-		return ValidTargets[Selection];		//·µ»ØĞÂµÄÑ²Âßµã
+		const int32 Selection = FMath::RandRange(0, NumTargets - 1); //éšæœºé€‰æ‹©ä¸€ä¸ªå·¡é€»ç‚¹ç´¢å¼•
+		return ValidTargets[Selection];		//è¿”å›æ–°çš„å·¡é€»ç‚¹
 	}
-	//Ã»ÓĞÓĞĞ§Ñ²ÂßµãÔò·µ»Ø¿ÕÖ¸Õë
+	//æ²¡æœ‰æœ‰æ•ˆå·¡é€»ç‚¹åˆ™è¿”å›ç©ºæŒ‡é’ˆ
 	return nullptr;
 }
 
-//Éú³ÉÄ¬ÈÏÎäÆ÷
+//ç”Ÿæˆé»˜è®¤æ­¦å™¨
 void AEnemyCharacter::SpawnDefaultWeapon()
 {
 	UWorld* World = GetWorld();
 	if (World && WeaponClass)
 	{
-		//Éú³ÉÎäÆ÷
+		//ç”Ÿæˆæ­¦å™¨
 		ABaseWeapon* DefaultWeapon = World->SpawnActor<ABaseWeapon>(WeaponClass);
-		//×°±¸ÎäÆ÷
+		//è£…å¤‡æ­¦å™¨
 		DefaultWeapon->Equip(GetMesh(), FName("WeaponSocket"), this, this);
 		EquippedWeapon = DefaultWeapon;
 
 	}
 }
 
-//Pawn¸ĞÖª×é¼ş¿´µ½PawnÊ±µ÷ÓÃ
+//Pawnæ„ŸçŸ¥ç»„ä»¶çœ‹åˆ°Pawnæ—¶è°ƒç”¨
 void AEnemyCharacter::PawnSeen(APawn* SeenPawn)
 {
-	//ÅĞ¶ÏÊÇ·ñÓ¦¸Ã×·ÖğÄ¿±ê
+	//åˆ¤æ–­æ˜¯å¦åº”è¯¥è¿½é€ç›®æ ‡
 	const bool bShouldChaseTarget =
 		//EnemyState != EEnemyState::EES_Dead &&
 		//EnemyState != EEnemyState::EES_Chasing &&
@@ -503,14 +503,15 @@ void AEnemyCharacter::PawnSeen(APawn* SeenPawn)
 	
 	if (bShouldChaseTarget)
 	{
-		//ÏÔÊ¾ÑªÌõ
+		//æ˜¾ç¤ºè¡€æ¡
 		ShowHealthBar();
-		//ÉèÖÃÕ½¶·Ä¿±ê
+		//è®¾ç½®æˆ˜æ–—ç›®æ ‡
 		CombatTarget = SeenPawn;
-		//Çå³ıÑ²Âß¶¨Ê±Æ÷
+		//æ¸…é™¤å·¡é€»å®šæ—¶å™¨
 		ClearPatrolTimer();
-		//×·ÖğÄ¿±ê
+		//è¿½é€ç›®æ ‡
 		ChaseTarget();
 	}
 
 }
+

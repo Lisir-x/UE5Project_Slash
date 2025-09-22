@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 //#include "DrawDebugHelpers.h"
 
-//»æÖÆµ÷ÊÔÇò
+//ç»˜åˆ¶è°ƒè¯•çƒ
 #define DRAW_SPHERE(Location) \
 	if (GetWorld()) { \
 		DrawDebugSphere(GetWorld(), Location, 20.f, 12, FColor::Red, true); \
@@ -15,7 +15,7 @@
 		DrawDebugSphere(GetWorld(), Location, 20.f, 12, FColor::Red, false, -1.f); \
 	}
 
-//»æÖÆµ÷ÊÔÏß
+//ç»˜åˆ¶è°ƒè¯•çº¿
 #define DRAW_LINE(Start, End) \
 	if (GetWorld()) { \
 		DrawDebugLine(GetWorld(), Start, End, FColor::Red, true, -1.f, 0, 1.f); \
@@ -25,7 +25,7 @@
 		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, -1.f, 0, 1.f); \
 	}
 
-//»æÖÆµ÷ÊÔµã
+//ç»˜åˆ¶è°ƒè¯•ç‚¹
 #define DRAW_POINT(Location) \
 	if (GetWorld()) { \
 		DrawDebugPoint(GetWorld(), Location, 10.f, FColor::Red, true); \
@@ -35,7 +35,7 @@
 		DrawDebugPoint(GetWorld(), Location, 10.f, FColor::Red, false); \
 	}
 
-//»æÖÆµ÷ÊÔÏòÁ¿
+//ç»˜åˆ¶è°ƒè¯•å‘é‡
 #define DRAW_VECTOR(Start, End) \
 	if (GetWorld()) { \
 		DrawDebugDirectionalArrow(GetWorld(), Start, End, 50.f, FColor::Red, true, -1.f, 0, 1.f); \

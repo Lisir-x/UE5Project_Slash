@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-//½ÇÉ«×´Ì¬
+//è§’è‰²çŠ¶æ€
 UENUM(BlueprintType)
 enum class ECharacterState : uint8
 {
@@ -9,7 +9,7 @@ enum class ECharacterState : uint8
 	ECS_EquippedTwoHanded UMETA(DisplayName = "EquippedTwoHanded")
 };
 
-//¶¯×÷×´Ì¬
+//åŠ¨ä½œçŠ¶æ€
 UENUM(BlueprintType)
 enum class EActionState : uint8
 {
@@ -21,7 +21,7 @@ enum class EActionState : uint8
 	EAS_Dead UMETA(DisplayName = "Dead")
 };
 
-//ËÀÍö×ËÊÆ
+//æ­»äº¡å§¿åŠ¿
 UENUM(BlueprintType)
 enum  EDeathPose
 {
@@ -35,7 +35,7 @@ enum  EDeathPose
 	EDP_MAX UMETA(DisplayName = "DefaultMAX")
 };
 
-//µĞÈËAI×´Ì¬
+//æ•ŒäººAIçŠ¶æ€
 UENUM(BlueprintType)
 enum class EEnemyState : uint8
 {
@@ -48,3 +48,4 @@ enum class EEnemyState : uint8
 	EES_Engaged UMETA(DisplayName = "Engaged")
 
 };
+

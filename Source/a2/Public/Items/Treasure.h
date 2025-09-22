@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -18,7 +18,7 @@ public:
 	//ATreasure();
 
 protected:
-	//ÖØµşÊÂ¼ş
+	//é‡å äº‹ä»¶
 	virtual void OnSphereOverlap(
 		UPrimitiveComponent* OverlappedComponent,
 		AActor* OtherActor,
@@ -29,11 +29,12 @@ protected:
 	) override;
 
 private:
-	//»Æ½ğÊıÁ¿
+	//é»„é‡‘æ•°é‡
 	UPROPERTY(EditAnywhere, Category = "Treasure Properties")
 	int32 Gold;
 
 public:
-	//»ñÈ¡»Æ½ğÊıÁ¿
+	//è·å–é»„é‡‘æ•°é‡
 	FORCEINLINE int32 GetGold() const { return Gold; }
 };
+

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -6,7 +6,7 @@
 #include "UObject/Interface.h"
 #include "HitInterface.generated.h"
 
-//´ËUInterfaceÅÉÉúÀàÎŞĞèĞŞ¸Ä£¨ÒıÇæ×Ô¶¯´¦Àí£©
+//æ­¤UInterfaceæ´¾ç”Ÿç±»æ— éœ€ä¿®æ”¹ï¼ˆå¼•æ“è‡ªåŠ¨å¤„ç†ï¼‰
 UINTERFACE(MinimalAPI)
 class UHitInterface : public UInterface
 {
@@ -20,9 +20,10 @@ class A2_API IHitInterface
 {
 	GENERATED_BODY()
 
-	//½«½Ó¿Úº¯ÊıÉùÃ÷ÔÚ´Ë´¦£¬¼Ì³Ğ¸Ã½Ó¿ÚµÄÀàĞèÒªÔÚ´ËÊµÏÖ¾ßÌåÂß¼­
+	//å°†æ¥å£å‡½æ•°å£°æ˜åœ¨æ­¤å¤„ï¼Œç»§æ‰¿è¯¥æ¥å£çš„ç±»éœ€è¦åœ¨æ­¤å®ç°å…·ä½“é€»è¾‘
 public:
-	//ÃüÖĞº¯Êı
-	UFUNCTION(BlueprintNativeEvent)//ÔÊĞíÔÚÀ¶Í¼ÖĞÖØĞ´
+	//å‘½ä¸­å‡½æ•°
+	UFUNCTION(BlueprintNativeEvent)//å…è®¸åœ¨è“å›¾ä¸­é‡å†™
 	void GetHit(const FVector& ImpactPoint, AActor* Hitter);
 };
+

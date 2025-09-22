@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -23,115 +23,115 @@ public:
 	AEnemyCharacter();
 
 	/** <AActor> */
-	//Ã¿Ò»Ö¡¶¼µ÷ÓÃ
+	//æ¯ä¸€å¸§éƒ½è°ƒç”¨
 	virtual void Tick(float DeltaTime) override;
-	//ÊÜÉËº¯Êı
+	//å—ä¼¤å‡½æ•°
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 		class AController* EventInstigator, AActor* DamageCauser) override;
-	//Ïú»ÙÊ±µ÷ÓÃ
+	//é”€æ¯æ—¶è°ƒç”¨
 	virtual void Destroyed() override;
 	/** </AActor> */
 
 	/** <IHitInterface> */
-	//ÃüÖĞº¯Êı£¬ÊÜµ½ÉËº¦Ê±µ÷ÓÃ
+	//å‘½ä¸­å‡½æ•°ï¼Œå—åˆ°ä¼¤å®³æ—¶è°ƒç”¨
 	virtual void GetHit_Implementation(const FVector& ImpactPoint, AActor* Hitter) override;
 	/** </IHitInterface> */
 
 protected:
 	/** <AActor> */
-	//ÓÎÏ·¿ªÊ¼»òÉú³ÉÊ±µ÷ÓÃ
+	//æ¸¸æˆå¼€å§‹æˆ–ç”Ÿæˆæ—¶è°ƒç”¨
 	virtual void BeginPlay() override;
 	/** </AActor> */
 
 	/** <ABaseCharacter> */
-	//ËÀÍöÂß¼­
+	//æ­»äº¡é€»è¾‘
 	virtual void Die_Implementation() override;
-	//Éú³ÉÁé»ê
+	//ç”Ÿæˆçµé­‚
 	void SpawnSoul();
-	//µĞÈË¹¥»÷
+	//æ•Œäººæ”»å‡»
 	virtual void Attack() override;
-	//ÅĞ¶ÏÊÇ·ñ¿ÉÒÔ¹¥»÷
+	//åˆ¤æ–­æ˜¯å¦å¯ä»¥æ”»å‡»
 	virtual bool CanAttack() override;
-	//¹¥»÷½áÊø
+	//æ”»å‡»ç»“æŸ
 	virtual void AttackEnd() override;
-	//´¦ÀíÉËº¦
+	//å¤„ç†ä¼¤å®³
 	virtual void HandleDamage(float DamageAmount) override;
 	/** </ABaseCharacter> */
 
-	//µĞÈËµ±Ç°×´Ì¬
+	//æ•Œäººå½“å‰çŠ¶æ€
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	EEnemyState EnemyState = EEnemyState::EES_Patrolling;
 
 private:
-	/*----------AIĞĞÎªÏà¹Ø----------*/
-	//³õÊ¼»¯µĞÈË
+	/*----------AIè¡Œä¸ºç›¸å…³----------*/
+	//åˆå§‹åŒ–æ•Œäºº
 	void InitializeEnemy();
-	//Ñ¡ÔñÑ²ÂßÄ¿±ê
+	//é€‰æ‹©å·¡é€»ç›®æ ‡
 	void CheckPatrolTarget();
-	//Ñ¡ÔñÕ½¶·Ä¿±ê
+	//é€‰æ‹©æˆ˜æ–—ç›®æ ‡
 	void CheckCombatTarget();
-	//Ñ²ÂßµÈ´ıÊ±¼ä»Øµ÷º¯Êı
+	//å·¡é€»ç­‰å¾…æ—¶é—´å›è°ƒå‡½æ•°
 	void PatrolTimerFinished();
-	//Òş²ØÑªÌõ
+	//éšè—è¡€æ¡
 	void HideHealthBar();
-	//ÏÔÊ¾ÑªÌõ
+	//æ˜¾ç¤ºè¡€æ¡
 	void ShowHealthBar();
-	//Ê§È¥ĞËÈ¤
+	//å¤±å»å…´è¶£
 	void LoseInterest();
-	//¿ªÊ¼Ñ²Âß
+	//å¼€å§‹å·¡é€»
 	void StartPatrolling();
-	//×·ÖğÄ¿±ê
+	//è¿½é€ç›®æ ‡
 	void ChaseTarget();
-	//ÊÇ·ñ³¬³öÕ½¶··¶Î§
+	//æ˜¯å¦è¶…å‡ºæˆ˜æ–—èŒƒå›´
 	bool IsOutsideCombatRadius();
-	//ÊÇ·ñ³¬³ö¹¥»÷·¶Î§
+	//æ˜¯å¦è¶…å‡ºæ”»å‡»èŒƒå›´
 	bool IsOutsideAttackRadius();
-	//ÊÇ·ñÔÚ¹¥»÷·¶Î§ÄÚ
+	//æ˜¯å¦åœ¨æ”»å‡»èŒƒå›´å†…
 	bool IsInsideAttackRadius();
-	//ÊÇ·ñ´¦ÓÚÑ²Âß×´Ì¬
+	//æ˜¯å¦å¤„äºå·¡é€»çŠ¶æ€
 	bool IsChasing();
-	//ÊÇ·ñ´¦ÓÚ¹¥»÷×´Ì¬
+	//æ˜¯å¦å¤„äºæ”»å‡»çŠ¶æ€
 	bool IsAttacking();
-	//ÊÇ·ñ´¦ÓÚËÀÍö×´Ì¬
+	//æ˜¯å¦å¤„äºæ­»äº¡çŠ¶æ€
 	bool IsDead();
-	//ÊÇ·ñ´¦ÓÚÃ¦Âµ×´Ì¬
+	//æ˜¯å¦å¤„äºå¿™ç¢ŒçŠ¶æ€
 	bool IsEngaged();
-	//Çå³ıÑ²Âß¼ÆÊ±Æ÷
+	//æ¸…é™¤å·¡é€»è®¡æ—¶å™¨
 	void ClearPatrolTimer();
-	//ÆôÓÃ¹¥»÷¼ÆÊ±Æ÷
+	//å¯ç”¨æ”»å‡»è®¡æ—¶å™¨
 	void StartAttackTimer();
-	//Çå³ı¹¥»÷¼ÆÊ±Æ÷
+	//æ¸…é™¤æ”»å‡»è®¡æ—¶å™¨
 	void ClearAttackTimer();
-	//¼ì²éÄ¿±êÊÇ·ñÔÚÕ½¶··¶Î§ÄÚ
+	//æ£€æŸ¥ç›®æ ‡æ˜¯å¦åœ¨æˆ˜æ–—èŒƒå›´å†…
 	bool InTargetRange(AActor* Target, double Radius);
-	//ÒÆ¶¯µ½Ä¿±ê
+	//ç§»åŠ¨åˆ°ç›®æ ‡
 	void MoveToTarget(AActor* Target);
-	//Ñ¡ÔñĞÂµÄÑ²Âßµã
+	//é€‰æ‹©æ–°çš„å·¡é€»ç‚¹
 	AActor* ChoosePatrolTarget();
-	//Éú³ÉÄ¬ÈÏÎäÆ÷
+	//ç”Ÿæˆé»˜è®¤æ­¦å™¨
 	void SpawnDefaultWeapon();
 	/*------------------------------*/
 
-	/*----------»Øµ÷º¯Êı----------*/
-	//Pawn¸ĞÖª»Øµ÷º¯Êı
+	/*----------å›è°ƒå‡½æ•°----------*/
+	//Pawnæ„ŸçŸ¥å›è°ƒå‡½æ•°
 	UFUNCTION()
 	void PawnSeen(APawn* SeenPawn);
 
-	////AI¸ĞÖª»Øµ÷º¯Êı
+	////AIæ„ŸçŸ¥å›è°ƒå‡½æ•°
 	//UFUNCTION()
 	//void OnPerceptionUpdated(const TArray<AActor*>& UpdatedActors);
 	/*----------------------------*/
 
-	/*----------×é¼ş----------*/
-	//ÑªÌõ×é¼ş
+	/*----------ç»„ä»¶----------*/
+	//è¡€æ¡ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UHealthbarComponent> HealthBarWidget;
 
-	//Pawn¸ĞÖª×é¼ş
+	//Pawnæ„ŸçŸ¥ç»„ä»¶
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UPawnSensingComponent> PawnSensing;
 
-	////AI¸ĞÖª×é¼ş
+	////AIæ„ŸçŸ¥ç»„ä»¶
 	//UPROPERTY(VisibleAnywhere, Category = "AI")
 	//TObjectPtr<UAIPerceptionComponent> PerceptionComponent;
 
@@ -142,75 +142,76 @@ private:
 	//TObjectPtr<UAISenseConfig_Hearing> HearingConfig;
 	/*------------------------*/
 
-	/*----------µ¼º½Ïà¹Ø----------*/
-	//AI¿ØÖÆÆ÷
+	/*----------å¯¼èˆªç›¸å…³----------*/
+	//AIæ§åˆ¶å™¨
 	UPROPERTY()
 	TObjectPtr<AAIController> EnemyController;
 
-	//µ±Ç°Ñ²Âßµã
+	//å½“å‰å·¡é€»ç‚¹
 	UPROPERTY(EditInstanceOnly, Category = "AI Navigation")
 	TObjectPtr<AActor> PatrolTarget;
 
-	//Ñ²ÂßµãË÷Òı
+	//å·¡é€»ç‚¹ç´¢å¼•
 	UPROPERTY(EditInstanceOnly, Category = "AI Navigation")
 	TArray<TObjectPtr<AActor>> PatrolTargets;
 
-	//Ñ²Âß°ë¾¶
+	//å·¡é€»åŠå¾„
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float PatrolRadius = 200.f;
 
-	//Ñ²ÂßµÈ´ıÊ±¼ä
+	//å·¡é€»ç­‰å¾…æ—¶é—´
 	FTimerHandle PatrolTimer;
 
-	//×îĞ¡ºÍ×î´óµÈ´ıÊ±¼ä
+	//æœ€å°å’Œæœ€å¤§ç­‰å¾…æ—¶é—´
 	UPROPERTY(EditAnywhere, Category = "AI Navigation")
 	float PatrolWaitMin = 5.f;
 
 	UPROPERTY(EditAnywhere, Category = "AI Navigation")
 	float PatrolWaitMax = 10.f;
 
-	//Ñ²ÂßËÙ¶È
+	//å·¡é€»é€Ÿåº¦
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float PatrollingSpeed = 125.f;
 	/*----------------------------*/
 
-	/*----------Õ½¶·Ïà¹Ø----------*/
-	//µĞÈËÎäÆ÷
+	/*----------æˆ˜æ–—ç›¸å…³----------*/
+	//æ•Œäººæ­¦å™¨
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TSubclassOf<ABaseWeapon> WeaponClass;
 
-	//Õ½¶·°ë¾¶
+	//æˆ˜æ–—åŠå¾„
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float CombatRadius = 1500.f;
 
-	//¹¥»÷·¶Î§
+	//æ”»å‡»èŒƒå›´
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float AttackRadius = 200.f;
 
-	//½ÓÊÜ°ë¾¶	
+	//æ¥å—åŠå¾„	
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	double AcceptanceRadius = 100.f;
 
-	//¹¥»÷¼ÆÊ±Æ÷
+	//æ”»å‡»è®¡æ—¶å™¨
 	FTimerHandle AttackTimer;
 
-	//×îĞ¡ºÍ×î´ó¹¥»÷¼ä¸ôÊ±¼ä
+	//æœ€å°å’Œæœ€å¤§æ”»å‡»é—´éš”æ—¶é—´
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float AttackMin = 0.5f;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float AttackMax = 1.f;
 
-	//×·ÖğËÙ¶È
+	//è¿½é€é€Ÿåº¦
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float ChasingSpeed = 300.f;
 
-	//ËÀÍöÑÓ³ÙÏú»ÙÊ±¼ä
+	//æ­»äº¡å»¶è¿Ÿé”€æ¯æ—¶é—´
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float DeathLifeSpan = 8.f;
 
-	//Áé»êÀà
+	//çµé­‚ç±»
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TSubclassOf<class ASoul> SoulClass;
 	/*----------------------------*/
 };
+
